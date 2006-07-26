@@ -1,0 +1,20 @@
+AddNav			Add an item to the navigation list
+EndHTML			End an HTML file
+Mode			Find the modal value
+R2html			A more refined version of htmlize
+StartList		Initialize the HTML listing file for htmlize
+StartNav		Initialize the HTML navigation file for htmlize
+brkdn			Calculate mean, variance & valid n by factor groups
+calculate.xtab		Get a table and calculate the marginals and names
+describe		Display descriptive stats
+describe.factor		Display descriptive stats for a factor object
+describe.logical	Display descriptive stats for a logical object
+describe.numeric	Display descriptive stats for a numeric object
+dstats			Calculate mean, variance & valid n
+freq			Calculate a frequency table
+htmlize			Convert R output into HTML
+print.freq		Print a frequency table
+print.xtab		Print a conventional crosstabulation
+toNA			Recode one or more values as NA
+valid.n			Calculate the number of valid (NOT NA) values
+xtab			Build and display crosstabulations
