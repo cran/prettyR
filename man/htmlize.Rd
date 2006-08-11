@@ -3,7 +3,7 @@
 \title{Read an R script and write HTML output}
 \description{Produces HTML output from an R script.}
 \usage{htmlize(Rfile,HTMLbase,HTMLdir,title="R listing",
- bgcolor="#dddddd",echo=TRUE,...)}
+ bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,...)}
 \arguments{
  \item{Rfile}{The R script file from which to read the commands.}
  \item{HTMLbase}{The base name for the HTML files (see Details).}
@@ -12,6 +12,7 @@
   frames.}
  \item{bgcolor}{The background color for the frames.}
  \item{echo}{Whether to include ("echo") the commands in the listing.}
+ \item{do.nav}{Whether to have a navigation window.}
  \item{...}{Additional arguments - currently ignored.}
 }
 \details{
@@ -26,8 +27,9 @@
  for more details. The graphic files will be linked to the HTML listing
  page so that they should be interleaved with text output and commands.
  
- Three files will be output. The first will be named \code{HTMLbase.html}
- where \code{HTMLbase} is whatever string has been passed as that argument.
+ If \code{do.nav} is TRUE, three files will be output. The first will
+ be named \code{HTMLbase.html}, where \code{HTMLbase} is whatever string
+ has been passed as that argument.
  If that argument is missing, the function will attempt to munge the
  \code{Rfile} argument into a base name. This file is an "index" file
  that sets up the HTML frameset. The second file will be named
@@ -37,6 +39,10 @@
  \code{HTMLbase_list.html}, contains the program listing. All three 
  files will be written in \code{HTMLdir}. If this is missing, the path of
  \code{Rfile} will be used.
+ 
+ If \code{do.nav} is FALSE, only one file will be written. It will have
+ the same content as the \code{HTMLbase_list.html} file except without
+ the name tags for navigation and it will be named \code{HTMLbase.html}.
  
  Commands that create or alter connections, such as \code{sink} are
  "forbidden", not evaluated and marked as comments in the listing.

@@ -49,6 +49,16 @@
 \value{nil}
 \author{Phillipe Grosjean}
 \examples{
-
+ rcon<-file("testR2html.R","w")
+ cat("test.df<-data.frame(a=factor(sample(LETTERS[1:4],100,TRUE)),\n",
+  file=rcon)
+ cat(" b=sample(1:4,100,TRUE),c=rnorm(100),d=rnorm(100))\n",file=rcon)
+ cat("describe(test.df)\n",file=rcon)
+ cat("print(freq(test.df$a))\n",file=rcon)
+ cat("xtab(a~b,test.df)\n",file=rcon)
+ cat("brkdn(c~b,test.df)\n",file=rcon)
+ cat("hist(test.df$b)#--FIG:hista.pgn--\n",file=rcon)
+ cat("plot(test.df$c,test.df$d)#--FIG:plotcd.png--\n",file=rcon)
+ close(rcon)
 }
 \keyword{misc}

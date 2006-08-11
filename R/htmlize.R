@@ -39,7 +39,7 @@ EndHTML<-function(con,ending=NULL) {
 }
 
 htmlize<-function(Rfile,HTMLbase,HTMLdir,title="R listing",
- bgcolor="#dddddd",echo=TRUE,...) {
+ bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,...) {
 
  if(missing(Rfile)) stop("Minimal usage: HTMLlist(Rfile,...)")
  # Is Rfile there?
@@ -59,20 +59,24 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title="R listing",
   HTMLdir<-
   ifelse(length(HTMLdir)==1,".",file.path(HTMLdir[-length(HTMLdir)]))
  }
- print(HTMLbase)
- print(HTMLdir)
- CreateIndexFile(HTMLbase,HTMLdir,title)
- navcon<-file(paste(HTMLdir,"/",HTMLbase,"_nav.html",sep="",collapse=""),"w")
- StartNav(navcon,bgcolor=bgcolor)
- navname<-paste(HTMLbase,"_nav.html",sep="",collapse="")
- listcon<-file(paste(HTMLdir,"/",HTMLbase,"_list.html",sep="",collapse=""),"w")
+ if(do.nav) {
+  CreateIndexFile(HTMLbase,HTMLdir,title)
+  navcon<-file(paste(HTMLdir,"/",HTMLbase,"_nav.html",sep="",collapse=""),"w")
+  StartNav(navcon,bgcolor=bgcolor)
+  #navname<-paste(HTMLbase,"_nav.html",sep="",collapse="")
+  listname<-paste(HTMLdir,"/",HTMLbase,"_list.html",sep="",collapse="")
+ }
+ else {
+ listname<-paste(HTMLbase,".html",sep="",collapse="")
+ }
+ listcon<-file(listname,"w")
  StartList(listcon,title=title,bgcolor=bgcolor,)
  listname<-paste(HTMLbase,"_list.html",sep="",collapse="")
  sink(listcon)
  on.exit({
   sink(NULL,type="output");
   sink(NULL,type="message");
-  close(navcon);
+  if(do.nav) close(navcon);
   close(listcon)
  })
  Rcon<-file(Rfile,"r")
@@ -93,8 +97,10 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title="R listing",
   commexp<-try(parse(text=thiscommand),silent=TRUE)
   # If try doesn't yield an expression, it must be an incomplete line
   if(is.expression(commexp)) {
-   nametag<-AddNav(thiscommand,navcon,listname,navindex)
-   cat("<a name=\"",nametag,"\">\n",file=listcon,sep="")
+   if(do.nav) {
+    nametag<-AddNav(thiscommand,navcon,listname,navindex)
+    cat("<a name=\"",nametag,"\">\n",file=listcon,sep="")
+   }
    fname<-strsplit(thiscommand,"\\(")[[1]][1]
    dont<-fname %in% forbidden
    if(dont) thiscommand<-paste("#",thiscommand,sep="",collapse=" ")
@@ -119,5 +125,5 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title="R listing",
   }
  }
  EndHTML(listcon)
- EndHTML(navcon)
+ if(do.nav) EndHTML(navcon)
 }
