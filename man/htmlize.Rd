@@ -2,7 +2,7 @@
 \alias{htmlize}
 \title{Read an R script and write HTML output}
 \description{Produces HTML output from an R script.}
-\usage{htmlize(Rfile,HTMLbase,HTMLdir,title="R listing",
+\usage{htmlize(Rfile,HTMLbase,HTMLdir,title,
  bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,...)}
 \arguments{
  \item{Rfile}{The R script file from which to read the commands.}

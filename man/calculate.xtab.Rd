@@ -17,5 +17,5 @@
  A list containing the value of \code{table}, the row and column marginals
  and the names of the variables.}
 \author{Jim Lemon}
-\seealso{\code{\link{table}}, \code{link{print.xtab}}}
+\seealso{\code{\link{table}}, \code{\link{print.xtab}}}
 \keyword{misc}

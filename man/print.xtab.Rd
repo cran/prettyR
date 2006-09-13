@@ -18,5 +18,5 @@
 }
 \value{nil}
 \author{Jim Lemon}
-\seealso{\code{\link{calculate.xtab}}, \code{link{xtab}}}
+\seealso{\code{\link{calculate.xtab}}, \code{\link{xtab}}}
 \keyword{misc}

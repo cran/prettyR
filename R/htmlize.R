@@ -38,7 +38,7 @@ EndHTML<-function(con,ending=NULL) {
  cat(" </body>\n</html>\n",file=con)
 }
 
-htmlize<-function(Rfile,HTMLbase,HTMLdir,title="R listing",
+htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
  bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,...) {
 
  if(missing(Rfile)) stop("Minimal usage: HTMLlist(Rfile,...)")
@@ -51,6 +51,7 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title="R listing",
  if(missing(HTMLbase)) {
   HTMLbase<-unlist(strsplit(basename(Rfile),"\\."))
   HTMLbase<-HTMLbase[1]
+  if(missing(title)) title<-paste("Listing of",HTMLbase)
  }
  # If there is no HTML directory, use the path on the Rfile
  if(missing(HTMLdir)) {
@@ -67,10 +68,10 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title="R listing",
   listname<-paste(HTMLdir,"/",HTMLbase,"_list.html",sep="",collapse="")
  }
  else {
- listname<-paste(HTMLbase,".html",sep="",collapse="")
+ listname<-paste(HTMLdir,"/",HTMLbase,".html",sep="",collapse="")
  }
  listcon<-file(listname,"w")
- StartList(listcon,title=title,bgcolor=bgcolor,)
+ StartList(listcon,title=title,bgcolor=bgcolor)
  listname<-paste(HTMLbase,"_list.html",sep="",collapse="")
  sink(listcon)
  on.exit({
@@ -116,9 +117,9 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title="R listing",
    }
    # If it's not forbidden, evaluate the command
    if(!dont) {
-    cat("<pre>\n",file=listcon)
+    if(echo) cat("<pre>\n",file=listcon)
     eval(parse(text=thiscommand))
-    cat("</pre>\n",file=listcon)
+    if(echo) cat("</pre>\n",file=listcon)
    }
    # Get ready for a new command
    thiscommand<-""

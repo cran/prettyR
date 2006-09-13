@@ -46,7 +46,7 @@ xtab<-function(formula,data,varnames=NULL,chisq=FALSE,phi=FALSE) {
   if(missing(data)) xt<-calculate.xtab(get(ft[1]),get(ft[2]),varnames=ft)
   else xt<-calculate.xtab(data[[ft[1]]],data[[ft[2]]],varnames=ft)
   print.xtab(xt,chisq=chisq,phi=phi)
-  return(xt)
+  invisible(xt)
  }
 }
 

@@ -22,7 +22,9 @@
  The result of \code{calculate.xtab} if there is only one table to display, 
  otherwise nil.}
 \author{Jim Lemon}
-\seealso{\code{\link{table}}, \code{\link{calculate.xtab}}, \code{link{print.xtab}}}
+\seealso{
+ \code{\link{table}}, \code{\link{calculate.xtab}}, \code{\link{print.xtab}}
+}
 \examples{
  test.df<-data.frame(sex=sample(c("MALE","FEMALE"),1000,TRUE),
  suburb=sample(1:4,1000,TRUE),social.type=sample(LETTERS[1:4],1000,TRUE))
