@@ -100,7 +100,7 @@ function(Rfile, HTMLfile, echo = TRUE, split = FALSE, browse = TRUE,
 		stop("You must specify an existing 'Rfile'!")
 	
 	# Make sure that HTMLfile has .htm[l] extension
-	if (length(grep("\.[hH][tT][mM][lL]?$", HTMLfile)) == 0)
+	if (length(grep("\\.[hH][tT][mM][lL]?$", HTMLfile)) == 0)
 		stop("'HTMLfile' must be a filename with .htm[l] extension!")
 	
 	# Make sure one has the full path to HTMLfile
@@ -110,9 +110,9 @@ function(Rfile, HTMLfile, echo = TRUE, split = FALSE, browse = TRUE,
 	# Create names and connections for nav and list files
 	baseHTMLfile <- basename(HTMLfile)	# Only the file name witrhout path
 	HTMLdir <- dirname(HTMLfile)
-	basenavfile <- sub("\.[hH][tT][mM][lL]?", "_nav.html", baseHTMLfile)
+	basenavfile <- sub("\\.[hH][tT][mM][lL]?", "_nav.html", baseHTMLfile)
 	navfile <- file.path(HTMLdir, basenavfile)
-	baselistfile <- sub("\.[hH][tT][mM][lL]?", "_list.html", baseHTMLfile)
+	baselistfile <- sub("\\.[hH][tT][mM][lL]?", "_list.html", baseHTMLfile)
 	listfile <- file.path(HTMLdir, baselistfile)
 	
 	# Create the file defining frames

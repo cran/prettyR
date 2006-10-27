@@ -117,9 +117,9 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
    }
    # If it's not forbidden, evaluate the command
    if(!dont) {
-    if(echo) cat("<pre>\n",file=listcon)
+    cat("<pre>\n",file=listcon)
     eval(parse(text=thiscommand))
-    if(echo) cat("</pre>\n",file=listcon)
+    cat("</pre>\n",file=listcon)
    }
    # Get ready for a new command
    thiscommand<-""

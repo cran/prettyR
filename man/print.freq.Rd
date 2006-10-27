@@ -5,7 +5,7 @@
  Displays one or more frequency tables produced by \code{freq}.
 }
 \usage{
- print.freq(x,show.pc=TRUE,...)
+ \method{print}{freq}(x,show.pc=TRUE,...)
 }
 \arguments{
   \item{x}{a frequency table produced by \code{\link{freq}}}

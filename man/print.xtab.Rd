@@ -3,7 +3,7 @@
 \title{Display a 2D crosstabulation}
 \description{Displays a 2D crosstabulation with optional chi-squared test and phi coefficient.}
 \usage{
- print.xtab(x,col.width=8,chisq=FALSE,phi=FALSE,...)
+ \method{print}{xtab}(x,col.width=8,chisq=FALSE,phi=FALSE,...)
 }
 \arguments{
  \item{x}{The list returned by \code{calculate.xtab}.}
