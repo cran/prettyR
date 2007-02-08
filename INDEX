@@ -12,6 +12,7 @@ describe.logical	Display descriptive stats for a logical object
 describe.numeric	Display descriptive stats for a numeric object
 dstats			Calculate mean, variance & valid n
 freq			Calculate a frequency table
+integer.frequency	Calculate frequencies of numeric values in specified bins
 htmlize			Convert R output into HTML
 print.freq		Print a frequency table
 print.xtab		Print a conventional crosstabulation

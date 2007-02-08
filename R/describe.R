@@ -43,7 +43,7 @@ describe.logical<-function(x,varname="",vname.space=10) {
  cat(formatC(c(as.numeric(table(x)),sum(is.na(x))),width=10),"\n")
 }
 
-describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),show.num.fac=FALSE,
+describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
  xname=NA) {
 
  if(missing(x)) stop("Usage: describe(x,...)\n\twhere x is a vector, data frame or matrix")
@@ -65,22 +65,6 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),show.num.f
    for(col in 1:length(num.index))
     describe.numeric(x[[num.index[col]]],num.desc=num.desc,
      varname=varnames[num.index[col]],vname.space=vname.space,fname.space=fname.space)
-  }
-  if(show.num.fac) {
-   options(warn=-1)
-   numfac.index<-which(sapply(x,is.numeric.factor))
-   options(warn=0)
-   if(length(numfac.index)) {
-    vname.space<-max(nchar(varnames[numfac.index]))+1
-    if(vname.space<8) vname.space<-8
-    fname.space<-max(nchar(num.desc))+1
-    if(fname.space<8) fname.space<-8
-    cat("\nNumeric factor\n",paste(rep(" ",vname.space),sep="",collapse=""),
-     formatC(num.desc,width=fname.space),"\n",sep="")
-    for(col in 1:length(numfac.index))
-     describe.numeric(as.numeric(x[[numfac.index[col]]]),num.desc=num.desc,
-      varname=varnames[numfac.index[col]],vname.space=vname.space,fname.space=fname.space)
-   }
   }
   fac.index<-which(sapply(x,is.factor))
   if(length(fac.index)) {

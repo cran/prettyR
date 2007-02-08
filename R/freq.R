@@ -19,15 +19,17 @@ freq<-function(x,variable.labels=NULL,display.na=TRUE,bin.range=NULL,
  xdim<-dim(x)
  # get the variable label here or it might be clobbered
  if(is.null(xdim)) {
-  if(is.null(variable.labels)) variable.labels<-deparse(substitute(x))
+  if(is.null(variable.labels))
+   variable.labels<-deparse(substitute(x))
   x<-list(x)
   nfreq<-1
  }
  else {
   nfreq<-xdim[2]
-  if(is.null(variable.labels)) variable.labels<-names(x)
   if(is.null(variable.labels))
-   variable.labels<-paste("V",1:xdim[2],sep="")
+   variable.labels<-names(x)
+  if(is.null(variable.labels))
+   variable.labels<-paste("V",1:xdim[2],sep="",collapse="")
  }
  freq.list<-rep(list(0),nfreq)
  for(i in 1:nfreq) {
@@ -46,7 +48,7 @@ freq<-function(x,variable.labels=NULL,display.na=TRUE,bin.range=NULL,
    }
    else freqs<-integer.frequency(xt)
   }
-  else freqs<-table(xt)
+  else freqs<-as.numeric(table(xt))
   # if NAs present, tack on a label
   if(nna) categories<-c(categories,"NA")
   # tack on the NA count
