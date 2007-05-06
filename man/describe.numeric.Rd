@@ -18,8 +18,10 @@
   \item{fname.space}{The width of the descriptive columns.}
 }
 \details{
- \code{describe.numeric} displays the name of the vector and the results of the
- functions whose names are passed in \code{num.desc}.
+ \code{describe.numeric} displays the name of the vector and the
+ results of the functions whose names are passed in \code{num.desc}.
+ Note that any functions that are called by \code{describe.numeric}
+ must have an \code{na.rm} argument, even if it is a dummy.
 }
 \value{nil}
 \author{Jim Lemon}

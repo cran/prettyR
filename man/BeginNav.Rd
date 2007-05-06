@@ -1,17 +1,16 @@
-\name{StartNav}
-\alias{StartNav}
+\name{BeginNav}
+\alias{BeginNav}
 \title{Write the header for the HTML navigation file}
 \description{Initiate the navigation file for an R listing in HTML format.}
-\usage{StartNav(navcon,title="R listing",bgcolor="#dddddd")}
+\usage{BeginNav(navcon,bgcolor="#dddddd")}
 \arguments{
  \item{navcon}{The connection for writing to the navigation file.}
- \item{title}{Title for the navigation window.}
  \item{bgcolor}{The background color for the navigation frame.}
 }
 \details{
- \code{StartNav} sets up the file with the navigation
- frame information for the HTML listing for \code{R2html}.
+ \code{BeginNav} sets up the file with the navigation
+ frame information for the HTML listing for the \code{htmlize} function.
 }
 \value{nil}
-\author{Phillippe Grosjean}
+\author{Jim Lemon}
 \keyword{misc}

@@ -14,19 +14,17 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
 
  desclen<-length(num.desc)
  desc.vector<-rep(0,desclen)
- cat(formatC(varname,width=-vname.space))
- for(i in 1:desclen) {
-  desc.vector<-do.call(num.desc[i],list(x,na.rm=TRUE))
-  cat(formatC(desc.vector,width=fname.space))
- }
- cat("\n")
+ if(vname.space) cat(formatC(varname,width=-vname.space))
+ for(i in 1:desclen)
+  desc.vector[i]<-do.call(num.desc[i],list(x,na.rm=TRUE))
+ if(fname.space) cat(formatC(desc.vector,width=fname.space),"\n")
  return(desc.vector)
 }
 
-describe.factor<-function(x,varname="",vname.space=10) {
+describe.factor<-function(x,varname="",vname.space=10,maxfac=8) {
  factab<-table(x)
  tablen<-length(factab)
- maxtab<-ifelse(tablen>8,8,tablen)
+ maxtab<-ifelse(tablen>maxfac,maxfac,tablen)
  fname.space<-max(nchar(names(factab)[1:maxtab]))+1
  if(fname.space<8) fname.space<-8
  cat(paste(rep(" ",vname.space),sep="",collapse=""),
@@ -34,7 +32,7 @@ describe.factor<-function(x,varname="",vname.space=10) {
  cat(formatC(varname,width=-vname.space),sep="")
  cat(formatC(factab[1:maxtab],width=fname.space),"\nmode = ",Mode(x),"  Valid n = ",
   valid.n(x),sep="")
- if(maxtab<tablen) cat("  ",tablen,"categories - only first 8 shown")
+ if(maxtab<tablen) cat("  ",tablen,"categories - only first",maxfac,"shown")
  cat("\n\n")
 }
 
@@ -44,7 +42,7 @@ describe.logical<-function(x,varname="",vname.space=10) {
 }
 
 describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
- xname=NA) {
+ xname=NA,maxfac=8) {
 
  if(missing(x)) stop("Usage: describe(x,...)\n\twhere x is a vector, data frame or matrix")
  if(!is.data.frame(x)) x<-as.data.frame(x)
@@ -54,7 +52,10 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
   if(is.na(xname)) xname<-deparse(substitute(x))
   cat("Description of",xname,"\n")
   num.index<-which(sapply(x,is.numeric))
-  if(length(num.index)) {
+  nnum<-length(num.index)
+  if(nnum) {
+   num.result<-matrix(NA,ncol=nnum,nrow=length(num.desc),
+    dimnames=list(num.desc,varnames[num.index]))
    vname.space<-max(nchar(varnames[num.index]))+1
    if(vname.space<8) vname.space<-8
    fname.space<-max(nchar(num.desc))+1
@@ -63,9 +64,12 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
    cat("\nNumeric\n",paste(rep(" ",vname.space),sep="",collapse=""),
     formatC(num.desc,width=fname.space),"\n",sep="")
    for(col in 1:length(num.index))
-    describe.numeric(x[[num.index[col]]],num.desc=num.desc,
-     varname=varnames[num.index[col]],vname.space=vname.space,fname.space=fname.space)
+    num.result[,col]<-describe.numeric(x[[num.index[col]]],num.desc=num.desc,
+     varname=varnames[num.index[col]],vname.space=vname.space,
+     fname.space=fname.space)
+   class(num.result)<-"dstat"
   }
+  else num.result<-NULL
   fac.index<-which(sapply(x,is.factor))
   if(length(fac.index)) {
    vname.space<-max(nchar(varnames[fac.index]))+1
@@ -73,7 +77,7 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
    cat("\nFactor\n")
    for(col in 1:length(fac.index))
     describe.factor(x[[fac.index[col]]],varname=varnames[fac.index[col]],
-     vname.space=vname.space)
+     vname.space=vname.space,maxfac=maxfac)
   }
   log.index<-which(sapply(x,is.logical))
   if(length(log.index)) {
@@ -85,6 +89,7 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
     describe.logical(x[[log.index[col]]],varname=varnames[log.index[col]],
      vname.space=vname.space)
   }
+  return(num.result)
  }
  else cat("describe: x must be a vector, matrix or data frame\n")
 }

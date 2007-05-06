@@ -7,19 +7,20 @@
  Describes a factor variable.
 }
 \usage{
- describe.factor(x,varname="",vname.space=10)
+ describe.factor(x,varname="",vname.space=10,maxfac=8)
 }
 \arguments{
  \item{x}{A factor.}
  \item{varname}{A name for the variable. \code{describe} always passes
   the name.}
  \item{vname.space}{The width of the variable name display.}
+ \item{maxfac}{The maximum number of factors to display.}
 }
 \details{
  \code{describe.factor} displays the name of the factor, a table of its 
- values with up to eight entries, the modal value of the factor, the 
+ values with up to \code{maxfac} entries, the modal value of the factor, the 
  number of valid (not NA) values and the number of values not displayed 
- if it contained more than eight levels.
+ if it contained more than \code{maxfac} levels.
 }
 \value{nil}
 \author{Jim Lemon}

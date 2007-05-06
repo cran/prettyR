@@ -16,14 +16,6 @@ function(HTMLfile, navfile, listfile, title = "R listing") {
 	close(basecon)
 }
 
-StartList <- 
-function(listcon, title = "R listing", bgcolor = "#dddddd") {
-	# Beginning of the list file
-	cat("<html>\n <head>\n  <title>", title, "</title>\n </head>\n", sep = "", file = listcon)
-	cat(" <body bgcolor=\"", bgcolor, "\">\n", sep = "", file = listcon)
-	cat("  <center><h1>", title, "</h1></center>\n", file = listcon)
-}
-
 StartNav <-
 function(navcon, title = "R listing", bgcolor = "#dddddd") {
 	# Beginning of the nav file
@@ -41,15 +33,6 @@ function(navcon, Rcommand, listname) {
 		sep = "", file = navcon)
 	cat("  ", Rcommand, "</a>\n<br>\n", sep = "", file = navcon)
 	return(nametag)
-}
-
-EndHTML <- 
-function(con, ending = NULL) {
-	# Do we need to add something here
-	if(!is.null(ending)) cat(ending, file = con)
-	
-	# Finalize the body and html sections
-	cat(" </body>\n</html>\n", file = con)
 }
 
 HTMLgraph <-

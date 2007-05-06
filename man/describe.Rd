@@ -3,13 +3,17 @@
 \title{Description of variables}
 \description{Describes a vector or the columns in a matrix or data frame.}
 \usage{
- describe(x,num.desc=c("mean","median","var","sd","valid.n"),xname=NA)
+ describe(x,num.desc=c("mean","median","var","sd","valid.n"),xname=NA,
+  maxfac=8)
 }
 \arguments{
  \item{x}{A vector, matrix or data frame.}
  \item{num.desc}{The names of the functions to apply to numeric data.}
- \item{xname}{A name for the object \code{x}, mostly where this would be a very long string
-  describing its structure (e.g. if it was extracted by name from a data frame).}
+ \item{xname}{A name for the object \code{x}, mostly where this would be
+  a very long string describing its structure (e.g. if it was extracted
+  by name from a data frame).}
+ \item{maxfac}{The maximum number of factors for \code{describe.factor} to
+  display.}
 }
 \details{
  \code{describe} displays a table of descriptive statistics for numeric and

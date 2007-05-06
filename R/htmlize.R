@@ -11,7 +11,7 @@ CreateIndexFile<-function(HTMLbase,HTMLdir,title="R listing") {
  close(basecon)
 }
 
-AddNav<-function(Rcommand,navcon,listname,navindex) {
+AddNavItem<-function(Rcommand,navcon,listname,navindex) {
  navitem<-ifelse(nchar(Rcommand)>20,
   paste(paste(unlist(strsplit(Rcommand,""))[1:18],sep="",collapse=""),
    "...",sep="",collapse=""),
@@ -23,7 +23,7 @@ AddNav<-function(Rcommand,navcon,listname,navindex) {
  return(nametag)
 }
 
-StartNav<-function(navcon,bgcolor="#dddddd") {
+BeginNav<-function(navcon,bgcolor="#dddddd") {
  cat("<html>\n <body bgcolor=\"",bgcolor,"\">\n",file=navcon,sep="")
 }
 
@@ -63,7 +63,7 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
  if(do.nav) {
   CreateIndexFile(HTMLbase,HTMLdir,title)
   navcon<-file(paste(HTMLdir,"/",HTMLbase,"_nav.html",sep="",collapse=""),"w")
-  StartNav(navcon,bgcolor=bgcolor)
+  BeginNav(navcon,bgcolor=bgcolor)
   #navname<-paste(HTMLbase,"_nav.html",sep="",collapse="")
   listname<-paste(HTMLdir,"/",HTMLbase,"_list.html",sep="",collapse="")
  }
@@ -99,7 +99,7 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
   # If try doesn't yield an expression, it must be an incomplete line
   if(is.expression(commexp)) {
    if(do.nav) {
-    nametag<-AddNav(thiscommand,navcon,listname,navindex)
+    nametag<-AddNavItem(thiscommand,navcon,listname,navindex)
     cat("<a name=\"",nametag,"\">\n",file=listcon,sep="")
    }
    fname<-strsplit(thiscommand,"\\(")[[1]][1]
