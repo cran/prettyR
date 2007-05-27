@@ -22,16 +22,24 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
 }
 
 describe.factor<-function(x,varname="",vname.space=10,maxfac=8) {
+ lenx<-length(x)
  factab<-table(x)
  tablen<-length(factab)
+ vnx<-valid.n(x)
  maxtab<-ifelse(tablen>maxfac,maxfac,tablen)
+ if(lenx > vnx) {
+  NAtab<-lenx-vnx
+  names(NAtab)<-"NA"
+  factab<-c(factab,NAtab)
+  maxtab<-maxtab+1
+ }
  fname.space<-max(nchar(names(factab)[1:maxtab]))+1
  if(fname.space<8) fname.space<-8
  cat(paste(rep(" ",vname.space),sep="",collapse=""),
   formatC(names(factab)[1:maxtab],width=fname.space),"\n",sep="")
  cat(formatC(varname,width=-vname.space),sep="")
- cat(formatC(factab[1:maxtab],width=fname.space),"\nmode = ",Mode(x),"  Valid n = ",
-  valid.n(x),sep="")
+ cat(formatC(factab[1:maxtab],width=fname.space),
+  "\nmode = ",Mode(x),"  Valid n = ",vnx,sep="")
  if(maxtab<tablen) cat("  ",tablen,"categories - only first",maxfac,"shown")
  cat("\n\n")
 }

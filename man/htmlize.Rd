@@ -3,7 +3,7 @@
 \title{Read an R script and write HTML output}
 \description{Produces HTML output from an R script.}
 \usage{htmlize(Rfile,HTMLbase,HTMLdir,title,
- bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,...)}
+ bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,useCSS=NULL,...)}
 \arguments{
  \item{Rfile}{The R script file from which to read the commands.}
  \item{HTMLbase}{The base name for the HTML files (see Details).}
@@ -13,6 +13,9 @@
  \item{bgcolor}{The background color for the frames.}
  \item{echo}{Whether to include ("echo") the commands in the listing.}
  \item{do.nav}{Whether to have a navigation window.}
+ \item{useCSS}{The name of a CSS stylesheet that will define the
+  appearance of components of the HTML display. If this is not NULL,
+  the CSS file should exist.}
  \item{...}{Additional arguments - currently ignored.}
 }
 \details{
@@ -48,6 +51,9 @@
  "forbidden", not evaluated and marked as comments in the listing.
  This prevents such commands from altering the connections necessary
  to write the HTML files. 
+ 
+ The ability to define a CSS stylesheet allows the user to customize the
+ appearance of the HTML output.
 }
 \note{
  The major differences between \code{htmlize} and \code{R2html} are:

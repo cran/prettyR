@@ -27,8 +27,12 @@ BeginNav<-function(navcon,bgcolor="#dddddd") {
  cat("<html>\n <body bgcolor=\"",bgcolor,"\">\n",file=navcon,sep="")
 }
 
-StartList<-function(listcon,title="R listing",bgcolor="#dddddd") {
- cat("<html><head><title>",title,"</title></head>\n",file=listcon)
+StartList<-function(listcon,title="R listing",bgcolor="#dddddd",useCSS=NULL) {
+ cat("<html>\n <head>\n  <title>",title,"  </title>\n",file=listcon)
+ if(!is.null(useCSS))
+  cat(" <link rel=\"stylesheet\" type=\"text/css\" href=\"",
+   useCSS,"\">\n",sep="",file=listcon)
+ cat(" </head>\n",file=listcon)
  cat(" <body bgcolor=\"",bgcolor,"\">\n",file=listcon,sep="")
  cat("  <center><h1>",title,"</h1></center>\n",file=listcon)
 }
@@ -39,7 +43,7 @@ EndHTML<-function(con,ending=NULL) {
 }
 
 htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
- bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,...) {
+ bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,useCSS=NULL,...) {
 
  if(missing(Rfile)) stop("Minimal usage: HTMLlist(Rfile,...)")
  # Is Rfile there?
@@ -50,7 +54,7 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
  # if there is no HTML base name, use the Rfile name
  if(missing(HTMLbase)) {
   HTMLbase<-unlist(strsplit(basename(Rfile),"\\."))
-  HTMLbase<-HTMLbase[1]
+  HTMLbase<-HTMLbase[1:(length(HTMLbase)-1)]
   if(missing(title)) title<-paste("Listing of",HTMLbase)
  }
  # If there is no HTML directory, use the path on the Rfile
@@ -71,7 +75,7 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
  listname<-paste(HTMLdir,"/",HTMLbase,".html",sep="",collapse="")
  }
  listcon<-file(listname,"w")
- StartList(listcon,title=title,bgcolor=bgcolor)
+ StartList(listcon,title=title,bgcolor=bgcolor,useCSS=useCSS)
  listname<-paste(HTMLbase,"_list.html",sep="",collapse="")
  sink(listcon)
  on.exit({

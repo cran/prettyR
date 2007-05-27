@@ -7,8 +7,8 @@
 # objects if there are two breakdown variables, and so on.)
 # A "dstat" object is a matrix that looks like:
 #                       vname1  vname2  ...
-#       Mean            mean1   mean2   ...
-#       Variance        var1    var2    ...
+#       mean            mean1   mean2   ...
+#       variance        var1    var2    ...
 #       Valid n         n1      n2      ...
 
 brkdn<-function(formula,data,maxlevels=10,
@@ -30,7 +30,7 @@ brkdn<-function(formula,data,maxlevels=10,
     cat("Too many levels - only using first",maxlevels,"\n")
    }
    brkstats<-vector("list",nlevels)
-   names(brkstats)<-factor.levels
+   names(brkstats)<-factor.levels[1:nlevels]
    # calculate the mean for this level
    for(i in 1:nlevels) {
     currentdata<-subset(data,by.factor == factor.levels[i])
@@ -41,7 +41,8 @@ brkdn<-function(formula,data,maxlevels=10,
     next.formula<-
      as.formula(paste(paste(bn[1],"~"),paste(bn[2:(nbn-1)],collapse="+")))
     # and call yourself for the next level down
-    brkstats[[i]]<-brkdn(next.formula,currentdata,num.desc=num.desc)
+    brkstats[[i]]<-brkdn(next.formula,currentdata,maxlevels=maxlevels,
+     num.desc=num.desc)
     class(brkstats[[i]])<-"dstat"
    }
    class(brkstats)<-"dstat"
@@ -55,7 +56,7 @@ brkdn<-function(formula,data,maxlevels=10,
     nlevels<-maxlevels
     cat("Too many levels - only using first",maxlevels,"\n")
    }
-   gstats<-matrix(NA,ncol=nlevels,nrow=3)
+   gstats<-matrix(NA,ncol=nlevels,nrow=length(num.desc))
    colnames(gstats)<-factor.levels[1:nlevels]
    rownames(gstats)<-num.desc
    # calculate the basic descriptive stats
