@@ -25,7 +25,15 @@
  that call \code{quantile} with the appropriate type or probabilities and use
  the names of the wrapper functions in \code{num.desc}.
 }
-\value{nil}
+\value{
+ A list with three components:
+ \item{Numeric}{A matrix of the values returned from \code{describe.numeric}
+  for each column described.}
+ \item{Factor}{A matrix of the modal value and number of missing values for
+  each column described.}
+ \item{Logical}{A matrix of the counts of FALSE, TRUE and missing values for
+  each column described.}
+}
 \author{Jim Lemon}
 \seealso{\code{\link{Mode}}, \code{\link{valid.n}},
  \code{\link{describe.numeric}}, \code{\link{describe.factor}}}

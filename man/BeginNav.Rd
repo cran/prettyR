@@ -1,6 +1,6 @@
 \name{BeginNav}
 \alias{BeginNav}
-\title{Write the header for the HTML navigation file}
+\title{Write the header for the HTML navigation file (htmlize).}
 \description{Initiate the navigation file for an R listing in HTML format.}
 \usage{BeginNav(navcon,bgcolor="#dddddd")}
 \arguments{

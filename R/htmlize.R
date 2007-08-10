@@ -43,7 +43,7 @@ EndHTML<-function(con,ending=NULL) {
 }
 
 htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
- bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,useCSS=NULL,...) {
+ bgcolor="#dddddd",echo=FALSE,do.nav=FALSE,useCSS=NULL,...) {
 
  if(missing(Rfile)) stop("Minimal usage: HTMLlist(Rfile,...)")
  # Is Rfile there?

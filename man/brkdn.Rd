@@ -21,7 +21,7 @@
  It calls \code{dstats} for the calculations and displays a table of results.
 }
 \value{
- The results of \code{dstats}, or a multi-level list if more than 
+ The results of \code{describe.numeric}, or a multi-level list if more than 
  one grouping variable is specified.}
 \author{Jim Lemon}
 \seealso{\code{\link{describe.numeric}}}

@@ -38,15 +38,19 @@ describe.factor<-function(x,varname="",vname.space=10,maxfac=8) {
  cat(paste(rep(" ",vname.space),sep="",collapse=""),
   formatC(names(factab)[1:maxtab],width=fname.space),"\n",sep="")
  cat(formatC(varname,width=-vname.space),sep="")
+ modex<-Mode(x)
  cat(formatC(factab[1:maxtab],width=fname.space),
-  "\nmode = ",Mode(x),"  Valid n = ",vnx,sep="")
+  "\nmode = ",modex,"  Valid n = ",vnx,sep="")
  if(maxtab<tablen) cat("  ",tablen,"categories - only first",maxfac,"shown")
  cat("\n\n")
+ return(c(modex,vnx))
 }
 
 describe.logical<-function(x,varname="",vname.space=10) {
  cat(formatC(varname,width=-vname.space),sep="")
- cat(formatC(c(as.numeric(table(x)),sum(is.na(x))),width=10),"\n")
+ logjam<-c(as.numeric(table(x)),sum(is.na(x)))
+ cat(formatC(logjam,width=10),"\n")
+ return(logjam)
 }
 
 describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
@@ -62,8 +66,9 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
   num.index<-which(sapply(x,is.numeric))
   nnum<-length(num.index)
   if(nnum) {
-   num.result<-matrix(NA,ncol=nnum,nrow=length(num.desc),
-    dimnames=list(num.desc,varnames[num.index]))
+   num.result<-matrix(NA,nrow=nnum,ncol=length(num.desc))
+   rownames(num.result)<-varnames[num.index]
+   colnames(num.result)<-num.desc
    vname.space<-max(nchar(varnames[num.index]))+1
    if(vname.space<8) vname.space<-8
    fname.space<-max(nchar(num.desc))+1
@@ -71,33 +76,43 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
    if(fname.space<10) fname.space<-10
    cat("\nNumeric\n",paste(rep(" ",vname.space),sep="",collapse=""),
     formatC(num.desc,width=fname.space),"\n",sep="")
-   for(col in 1:length(num.index))
-    num.result[,col]<-describe.numeric(x[[num.index[col]]],num.desc=num.desc,
+   for(col in 1:nnum)
+    num.result[col,]<-describe.numeric(x[[num.index[col]]],num.desc=num.desc,
      varname=varnames[num.index[col]],vname.space=vname.space,
      fname.space=fname.space)
-   class(num.result)<-"dstat"
   }
   else num.result<-NULL
   fac.index<-which(sapply(x,is.factor))
-  if(length(fac.index)) {
+  nfac<-length(fac.index)
+  if(nfac) {
+   fac.result<-matrix(NA,nrow=nfac,ncol=2)
+   rownames(fac.result)<-varnames[fac.index]
+   colnames(fac.result)<-c("Mode","Missing")
    vname.space<-max(nchar(varnames[fac.index]))+1
    if(vname.space<8) vname.space<-8
    cat("\nFactor\n")
-   for(col in 1:length(fac.index))
-    describe.factor(x[[fac.index[col]]],varname=varnames[fac.index[col]],
+   for(col in 1:nfac)
+    fac.result[col,]<-describe.factor(x[[fac.index[col]]],
+     varname=varnames[fac.index[col]],
      vname.space=vname.space,maxfac=maxfac)
   }
+  else fac.result<-NULL
   log.index<-which(sapply(x,is.logical))
-  if(length(log.index)) {
+  nlog<-length(log.index)
+  if(nlog) {
    vname.space<-max(nchar(varnames[log.index]))+1
    if(vname.space<8) vname.space<-8
    cat("\nLogical\n",paste(rep(" ",vname.space),sep="",collapse=""))
    cat("    FALSE       TRUE         NA\n")
-   for(col in 1:length(log.index))
-    describe.logical(x[[log.index[col]]],varname=varnames[log.index[col]],
-     vname.space=vname.space)
+   log.result<-matrix(NA,nrow=nlog,ncol=3)
+   rownames(log.result)<-varnames[log.index]
+   colnames(log.result)<-c("False","True","Missing")
+   for(col in 1:nlog)
+    log.result[row,]<-describe.logical(x[[log.index[col]]],
+     varname=varnames[log.index[col]],vname.space=vname.space)
   }
-  return(num.result)
+  else log.result<-NULL
+  return(list(Numeric=num.result,Factor=fac.result,Logical=log.result))
  }
  else cat("describe: x must be a vector, matrix or data frame\n")
 }

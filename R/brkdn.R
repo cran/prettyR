@@ -1,5 +1,5 @@
-# brkdn is a function that attempts to calculate and display means, 
-# variances (or standard deviations if do.sd is TRUE) and valid ns 
+# brkdn is a function that attempts to calculate the summary measures 
+# that are included in num.desc
 # for the variable that appears on the left side of the formula.
 # It expects the variables on the right side of the formula to be
 # factors, or at worst integers with a small number of unique values.

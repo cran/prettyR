@@ -23,7 +23,9 @@
  Note that any functions that are called by \code{describe.numeric}
  must have an \code{na.rm} argument, even if it is a dummy.
 }
-\value{nil}
+\value{
+ The vector of values returned from the functions in \code{num.desc}.
+}
 \author{Jim Lemon}
 \seealso{\code{\link{describe}}, \code{\link{valid.n}}}
 \keyword{misc}

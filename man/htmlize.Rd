@@ -3,7 +3,7 @@
 \title{Read an R script and write HTML output}
 \description{Produces HTML output from an R script.}
 \usage{htmlize(Rfile,HTMLbase,HTMLdir,title,
- bgcolor="#dddddd",echo=TRUE,do.nav=TRUE,useCSS=NULL,...)}
+ bgcolor="#dddddd",echo=FALSE,do.nav=FALSE,useCSS=NULL,...)}
 \arguments{
  \item{Rfile}{The R script file from which to read the commands.}
  \item{HTMLbase}{The base name for the HTML files (see Details).}
@@ -52,10 +52,15 @@
  This prevents such commands from altering the connections necessary
  to write the HTML files. 
  
- The ability to define a CSS stylesheet allows the user to customize the
- appearance of the HTML output.
+ The ability to nominate a CSS stylesheet allows the user to customize the
+ appearance of the HTML output. The most likely use of the \code{useCSS}
+ argument is for the user to specify whatever aspects of the HTML display
+ are to be different from the default browser values in a stylesheet.
 }
 \note{
+ As of version 1.1, both \code{echo} and \code{do.nav} are FALSE by default,
+ as these defaults seem to be more popular.
+ 
  The major differences between \code{htmlize} and \code{R2html} are:
  \code{htmlize} will run with a minimum of one argument (\code{Rfile})
  and produces very basic HTML output. It requires the graphic devices to be
