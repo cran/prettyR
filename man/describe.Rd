@@ -23,7 +23,8 @@
  will be displayed at the top of the numeric block with their results beneath
  them. If quantiles are desired, the user will have to write wrapper functions
  that call \code{quantile} with the appropriate type or probabilities and use
- the names of the wrapper functions in \code{num.desc}.
+ the names of the wrapper functions in \code{num.desc}. Remember that any
+ function called by \code{describe} must have an \code{na.rm} argument.
 }
 \value{
  A list with three components:

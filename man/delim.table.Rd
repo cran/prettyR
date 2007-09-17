@@ -19,7 +19,9 @@
   FALSE is to show only those components that look like 2D tables.}
  \item{con}{A connection to which the output will be written. If a filename
   is passed, it will be ignored if \code{con} is not missing.}
- \item{open.con}{A flag for an open connection.}
+ \item{open.con}{A flag for an open connection. This argument is used by
+  the function to keep track of connections in recursive calls and should
+  not be altered by the user.}
 }
 \value{
  nil
