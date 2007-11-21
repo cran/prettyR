@@ -1,19 +1,22 @@
 AddNav			Add an item to the navigation list
+AddNavItem		Add an item to the navigation list
+BeginNav		Write the header for the HTML navigation file (htmlize)
+CreateIndexFile		Write an index file for the current output (htmlize)
+CreateIndxFile		Write an index file for the current output (R2html)
 EndHTML			End an HTML file
+HTMLgraph		Create a graphic in HTML output
 Mode			Find the modal value
 R2html			A more refined version of htmlize
 StartList		Initialize the HTML listing file for htmlize
 StartNav		Initialize the HTML navigation file for htmlize
 brkdn			Calculate mean, variance & valid n by factor groups
 calculate.xtab		Get a table and calculate the marginals and names
-cats2ranks		Calculate mean ranks from ordered category selections
 describe		Display descriptive stats
 describe.factor		Display descriptive stats for a factor object
 describe.logical	Display descriptive stats for a logical object
 describe.numeric	Display descriptive stats for a numeric object
 dstats			Calculate mean, variance & valid n
 freq			Calculate a frequency table
-integer.frequency	Calculate frequencies of numeric values in specified bins
 htmlize			Convert R output into HTML
 print.freq		Print a frequency table
 print.xtab		Print a conventional crosstabulation

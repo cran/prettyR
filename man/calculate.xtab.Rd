@@ -1,6 +1,6 @@
 \name{calculate.xtab}
 \alias{calculate.xtab}
-\title{Calculate a crosstabulatiom}
+\title{Calculate a crosstabulation}
 \description{Calculates the marginal totals and names for a crosstabulation.}
 \usage{
  calculate.xtab(v1,v2,varnames=NULL)

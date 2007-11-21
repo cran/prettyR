@@ -17,7 +17,7 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
  if(vname.space) cat(formatC(varname,width=-vname.space))
  for(i in 1:desclen)
   desc.vector[i]<-do.call(num.desc[i],list(x,na.rm=TRUE))
- if(fname.space) cat(formatC(desc.vector,width=fname.space),"\n")
+ if(fname.space) cat(formatC(desc.vector,width=fname.space),"\n",sep="")
  return(desc.vector)
 }
 
@@ -39,10 +39,11 @@ describe.factor<-function(x,varname="",vname.space=10,maxfac=10,show.pc=TRUE) {
   formatC(names(factab)[1:maxtab],width=fname.space),"\n",sep="")
  cat(formatC(varname,width=-vname.space),sep="")
  modex<-Mode(x)
- cat(formatC(factab[1:maxtab],width=fname.space),"\n")
+ cat(formatC(factab[1:maxtab],width=fname.space),"\n",sep="")
  if(show.pc) {
   cat(formatC("Percent",width=-vname.space),sep="")
-  cat(formatC(round(100*factab[1:maxtab]/length(x),2),width=vname.space),"\n")
+  cat(formatC(round(100*factab[1:maxtab]/length(x),2),width=fname.space),
+   "\n",sep="")
  }
  cat("mode = ",modex,"  Valid n = ",vnx,sep="")
  if(maxtab<tablen) cat("  ",tablen,"categories - only first",maxfac,"shown")
@@ -50,15 +51,18 @@ describe.factor<-function(x,varname="",vname.space=10,maxfac=10,show.pc=TRUE) {
  return(c(modex,vnx))
 }
 
-describe.logical<-function(x,varname="",vname.space=10) {
+describe.logical<-function(x,varname="",vname.space=10,show.pc=TRUE) {
  cat(formatC(varname,width=-vname.space),sep="")
- logjam<-c(as.numeric(table(x)),sum(is.na(x)))
- cat(formatC(logjam,width=10),"\n")
- return(logjam)
+ nmiss<-sum(is.na(x))
+ logjam<-c(as.numeric(table(x)))
+ cat(formatC(logjam,width=10))
+ if(show.pc) cat(formatC(100*logjam[2]/sum(logjam),width=10))
+ cat(formatC(nmiss,width=10),"\n")
+ return(c(logjam,nmiss))
 }
 
 describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
- xname=NA,maxfac=8) {
+ xname=NA,maxfac=8,show.pc=TRUE) {
 
  if(missing(x)) stop("Usage: describe(x,...)\n\twhere x is a vector, data frame or matrix")
  if(!is.data.frame(x)) x<-as.data.frame(x)
@@ -70,6 +74,8 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
   num.index<-which(sapply(x,is.numeric))
   nnum<-length(num.index)
   if(nnum) {
+   nopdigits<-options("digits")$digits
+   options(digits=4)
    num.result<-matrix(NA,nrow=nnum,ncol=length(num.desc))
    rownames(num.result)<-varnames[num.index]
    colnames(num.result)<-num.desc
@@ -84,6 +90,7 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
     num.result[col,]<-describe.numeric(x[[num.index[col]]],num.desc=num.desc,
      varname=varnames[num.index[col]],vname.space=vname.space,
      fname.space=fname.space)
+   options(digits=nopdigits)
   }
   else num.result<-NULL
   fac.index<-which(sapply(x,is.factor))
@@ -98,7 +105,7 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
    for(col in 1:nfac)
     fac.result[col,]<-describe.factor(x[[fac.index[col]]],
      varname=varnames[fac.index[col]],
-     vname.space=vname.space,maxfac=maxfac)
+     vname.space=vname.space,maxfac=maxfac,show.pc=show.pc)
   }
   else fac.result<-NULL
   log.index<-which(sapply(x,is.logical))
@@ -107,13 +114,16 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
    vname.space<-max(nchar(varnames[log.index]))+1
    if(vname.space<8) vname.space<-8
    cat("\nLogical\n",paste(rep(" ",vname.space),sep="",collapse=""))
-   cat("    FALSE       TRUE         NA\n")
+   cat("    FALSE       TRUE")
+   if(show.pc) cat("     %TRUE")
+   cat("        NA\n")
    log.result<-matrix(NA,nrow=nlog,ncol=3)
    rownames(log.result)<-varnames[log.index]
    colnames(log.result)<-c("False","True","Missing")
    for(col in 1:nlog)
     log.result[col,]<-describe.logical(x[[log.index[col]]],
-     varname=varnames[log.index[col]],vname.space=vname.space)
+     varname=varnames[log.index[col]],vname.space=vname.space,
+     show.pc=show.pc)
   }
   else log.result<-NULL
   return(list(Numeric=num.result,Factor=fac.result,Logical=log.result))

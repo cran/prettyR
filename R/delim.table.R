@@ -4,7 +4,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",tablend
  if(missing(con)) {
   if(nchar(filename)) {
    con<-file(filename,"w")
-   # only this invocation knows that con is open
+   # only this invocation knows that it has to close con
    open.con<-TRUE
   }
   else con<-""

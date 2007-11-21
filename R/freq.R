@@ -1,18 +1,8 @@
-integer.frequency<-function(x,bins) {
- if(!is.numeric(x)) stop("x must be numeric")
- if(missing(bins)) bins<-sort(unique(x))
- nbins<-length(bins)
- fx<-rep(0,nbins)
- for(i in 1:nbins) fx[i]<-sum(x == bins[i])
- return(fx)
-}
-
 # freq calculates a simple frequency table for a vector, or steps through
 # the columns of a data frame or matrix and returns a list of the frequency
 # table(s).
 
-freq<-function(x,variable.labels=NULL,display.na=TRUE,bin.range=NULL,
- include.empty=FALSE) {
+freq<-function(x,variable.labels=NULL,display.na=TRUE,levels=NULL) {
  
  if(missing(x))
   stop("A vector, dataframe or matrix must be supplied")
@@ -26,6 +16,8 @@ freq<-function(x,variable.labels=NULL,display.na=TRUE,bin.range=NULL,
  }
  else {
   nfreq<-xdim[2]
+  if(is.matrix(x))
+  x<-as.data.frame(x)
   if(is.null(variable.labels))
    variable.labels<-names(x)
   if(is.null(variable.labels))
@@ -36,19 +28,12 @@ freq<-function(x,variable.labels=NULL,display.na=TRUE,bin.range=NULL,
   # see if there are any NAs and if they should be displayed
   if(display.na) nna<-sum(is.na(x[[i]]))
   else nna<-0
-  # integer.frequency barfs with NAs
+  # tabulate barfs with NAs
   xt<-na.omit(x[[i]])
-  categories<-levels(as.factor(xt))
-  if(is.numeric(x[[i]])) {
-   if(include.empty) {
-    if(is.null(bin.range)) bins<-min(xt):max(xt)
-    else bins<-bin.range[1]:bin.range[2]
-    categories<-as.character(bins)
-    freqs<-integer.frequency(xt,bins)
-   }
-   else freqs<-integer.frequency(xt)
-  }
-  else freqs<-as.numeric(table(xt))
+  if(is.null(levels)) levels<-unique(xt)
+  if(is.numeric(x[[i]])) xt<-factor(xt,levels=levels)
+  freqs<-tabulate(xt)
+  categories<-levels(xt)
   # if NAs present, tack on a label
   if(nna) categories<-c(categories,"NA")
   # tack on the NA count

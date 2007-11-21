@@ -4,7 +4,7 @@
 \description{Describes a vector or the columns in a matrix or data frame.}
 \usage{
  describe(x,num.desc=c("mean","median","var","sd","valid.n"),xname=NA,
-  maxfac=8)
+  maxfac=8,show.pc=TRUE)
 }
 \arguments{
  \item{x}{A vector, matrix or data frame.}
@@ -14,6 +14,7 @@
   by name from a data frame).}
  \item{maxfac}{The maximum number of factors for \code{describe.factor} to
   display.}
+ \item{show.pc}{Whether to show percentages of factor and logical values.}
 }
 \details{
  \code{describe} displays a table of descriptive statistics for numeric and

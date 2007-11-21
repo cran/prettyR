@@ -11,8 +11,8 @@
 #       variance        var1    var2    ...
 #       Valid n         n1      n2      ...
 
-brkdn<-function(formula,data,maxlevels=10,
- num.desc=c("mean","var","valid.n")) {
+brkdn<-function(formula,data,maxlevels=10,num.desc=c("mean","var","valid.n"),
+ vname.width=10,width=10,round.n=2) {
  
  if(!missing(data) && !missing(formula)) {
   bn<-as.character(attr(terms(formula),"variables")[-1])
@@ -37,7 +37,8 @@ brkdn<-function(formula,data,maxlevels=10,
     cat(paste("\nVariable",bn[1],sep=" ",collapse=""),"for",bn[nbn],
      "- level",factor.levels[i],"\n\n")
     cat(formatC(num.desc,width=10),"\n")
-    junk<-describe.numeric(currentdata[bn[1]],num.desc=num.desc,vname.space=0)
+    junk<-describe.numeric(currentdata[bn[1]],num.desc=num.desc,
+     fname.space=width,vname.space=0)
     next.formula<-
      as.formula(paste(paste(bn[1],"~"),paste(bn[2:(nbn-1)],collapse="+")))
     # and call yourself for the next level down
@@ -61,20 +62,21 @@ brkdn<-function(formula,data,maxlevels=10,
    rownames(gstats)<-num.desc
    # calculate the basic descriptive stats
    if(is.numeric(data[[bn[1]]])) {
+    round.ns<-rep(round.n,length(num.desc))
+    npos<-match("valid.n",num.desc)
+    if(!is.na(npos)) round.ns[npos]<-0
+    cat(formatC(c("Level",num.desc),width=width),"\n")
     for(i in 1:nlevels) {
      currentdata<-subset(data[[bn[1]]],by.factor == factor.levels[i])
-     if(length(currentdata))
+     if(length(currentdata)) {
       gstats[,i]<-describe.numeric(currentdata,num.desc=num.desc,
        vname.space=0,fname.space=0)
+      cat(formatC(factor.levels[i],width=vname.width),
+       formatC(round(gstats[,i],round.ns),width=width),"\n")
+     }
     }
     class(gstats)<-"dstat"
-    cat("         ",formatC(colnames(gstats),width=10),"\n")
     rnames<-rownames(gstats)
-    for(i in 1:length(rnames)) {
-     if(rnames[i] == "valid.n")
-      cat(formatC(rnames[i],width=9),formatC(round(gstats[i,],0),width=10),"\n")
-     else cat(formatC(rnames[i],width=9),formatC(gstats[i,],width=10),"\n")
-    }
    }
    invisible(gstats)
   }
