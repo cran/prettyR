@@ -1,6 +1,6 @@
 \name{CreateIndexFile}
 \alias{CreateIndexFile}
-\title{Write an index file for the current output.}
+\title{Write an index file for the current output (htmlize).}
 \description{Write an index file for the current HTML output.}
 \usage{CreateIndexFile(HTMLbase,HTMLdir,title="R listing")}
 \arguments{

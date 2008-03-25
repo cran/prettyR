@@ -1,6 +1,6 @@
 \name{AddNav}
 \alias{AddNav}
-\title{Add a navigation item}
+\title{Add a navigation item (R2html).}
 \description{Add an item to the HTML navigation file.}
 \usage{AddNav(navcon,Rcommand,listname)}
 \arguments{

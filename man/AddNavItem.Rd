@@ -1,6 +1,6 @@
 \name{AddNavItem}
 \alias{AddNavItem}
-\title{Add a navigation item}
+\title{Add a navigation item (htmlize).}
 \description{Add an item to the HTML navigation file.}
 \usage{AddNavItem(Rcommand,navcon,listname,navindex)}
 \arguments{

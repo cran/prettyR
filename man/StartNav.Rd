@@ -1,6 +1,6 @@
 \name{StartNav}
 \alias{StartNav}
-\title{Write the header for the HTML navigation file}
+\title{Write the header for the HTML navigation file (R2html).}
 \description{Initiate the navigation file for an R listing in HTML format.}
 \usage{StartNav(navcon,title="R listing",bgcolor="#dddddd")}
 \arguments{

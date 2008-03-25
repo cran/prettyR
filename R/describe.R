@@ -126,7 +126,7 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
      show.pc=show.pc)
   }
   else log.result<-NULL
-  return(list(Numeric=num.result,Factor=fac.result,Logical=log.result))
+  invisible(list(Numeric=num.result,Factor=fac.result,Logical=log.result))
  }
  else cat("describe: x must be a vector, matrix or data frame\n")
 }

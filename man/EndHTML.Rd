@@ -1,6 +1,6 @@
 \name{EndHTML}
 \alias{EndHTML}
-\title{End an HTML file}
+\title{End an HTML file (htmlize).}
 \description{Append an ending to an HTML file.}
 \usage{EndHTML(con,ending=NULL)}
 \arguments{

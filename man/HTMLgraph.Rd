@@ -1,6 +1,6 @@
 \name{HTMLgraph}
 \alias{HTMLgraph}
-\title{Create a graphic in HTML output}
+\title{Create a graphic in HTML output (R2html).}
 \description{Creates a graphic file and links it to the HTML output.}
 \usage{HTMLgraph(listfile, graphfile = NULL,type = "png",...)}
 \arguments{

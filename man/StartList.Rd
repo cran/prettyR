@@ -1,6 +1,6 @@
 \name{StartList}
 \alias{StartList}
-\title{Write the header for the HTML listing file}
+\title{Write the header for the HTML listing file (htmlize).}
 \description{Initiate the listing file for an R listing in HTML format.}
 \usage{StartList(listcon,title="R listing",bgcolor="#dddddd",useCSS=NULL)}
 \arguments{
