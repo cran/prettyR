@@ -24,7 +24,8 @@
 }
 \details{
  \code{brkdn} will accept a formula referring to columns in a data frame. 
- It calls \code{dstats} for the calculations and displays a table of results.
+ It calls \code{describe.numeric} for the calculations and displays a 
+ table of results.
 }
 \value{
  The results of \code{describe.numeric}, or a multi-level list if more than 

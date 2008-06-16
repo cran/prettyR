@@ -26,19 +26,10 @@ freq<-function(x,variable.labels=NULL,display.na=TRUE,levels=NULL) {
  freq.list<-rep(list(0),nfreq)
  for(i in 1:nfreq) {
   # see if there are any NAs and if they should be displayed
-  if(display.na) nna<-sum(is.na(x[[i]]))
-  else nna<-0
-  # tabulate barfs with NAs
-  xt<-na.omit(x[[i]])
-  if(is.null(levels)) levels<-unique(xt)
-  if(is.numeric(x[[i]])) xt<-factor(xt,levels=levels)
-  freqs<-tabulate(xt)
-  categories<-levels(xt)
-  # if NAs present, tack on a label
-  if(nna) categories<-c(categories,"NA")
-  # tack on the NA count
-  if(nna) freqs<-c(freqs,nna)
-  names(freqs)<-categories
+  nna<-sum(is.na(x[[i]]))
+  names(nna)<-"NA"
+  freqs<-table(x[[i]])
+  if(display.na) freqs<-c(freqs,nna)
   freq.list[[i]]<-freqs
  }
  names(freq.list)<-variable.labels

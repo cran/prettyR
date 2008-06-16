@@ -50,7 +50,12 @@
  Commands that create or alter connections, such as \code{sink} are
  "forbidden", not evaluated and marked as comments in the listing.
  This prevents such commands from altering the connections necessary
- to write the HTML files. 
+ to write the HTML files.
+ 
+ If there is a function defined in the R script, \code{htmlize} will run, but
+ not write any output after the function definition. This has to do with the
+ way that \code{htmlize} reads command lines from the script file. This is a
+ bug, so watch this space for a solution.
  
  The ability to nominate a CSS stylesheet allows the user to customize the
  appearance of the HTML output. The most likely use of the \code{useCSS}
