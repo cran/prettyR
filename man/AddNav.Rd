@@ -17,5 +17,5 @@
 \value{
  The name tag to link the listing to the navigation entry.
 }
-\author{Phillipe Grosjean}
+\author{Philippe Grosjean}
 \keyword{misc}

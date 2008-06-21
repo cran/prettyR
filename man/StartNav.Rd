@@ -13,5 +13,5 @@
  frame information for the HTML listing for \code{R2html}.
 }
 \value{nil}
-\author{Phillippe Grosjean}
+\author{Philippe Grosjean}
 \keyword{misc}

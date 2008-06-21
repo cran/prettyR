@@ -17,5 +17,5 @@
  jpeg} and \code{png} files are currently handled, defaulting to the last.
 }
 \value{nil}
-\author{Phillipe Grosjean}
+\author{Philippe Grosjean}
 \keyword{misc}

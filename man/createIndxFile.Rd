@@ -17,5 +17,5 @@
  file and closes it.
 }
 \value{nil}
-\author{Phillipe Grosjean}
+\author{Philippe Grosjean}
 \keyword{misc}

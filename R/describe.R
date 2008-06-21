@@ -15,8 +15,11 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
  desclen<-length(num.desc)
  desc.vector<-rep(0,desclen)
  if(vname.space) cat(formatC(varname,width=-vname.space))
- for(i in 1:desclen)
-  desc.vector[i]<-do.call(num.desc[i],list(x,na.rm=TRUE))
+ for(i in 1:desclen) {
+  if(valid.n(x))
+   desc.vector[i]<-do.call(num.desc[i],list(x,na.rm=TRUE))
+  else desc.vector[i]<-NA
+ }
  if(fname.space) cat(formatC(desc.vector,width=fname.space),"\n",sep="")
  return(desc.vector)
 }

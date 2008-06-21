@@ -47,7 +47,7 @@
  may be left out, in which case a name will be generated.
 }
 \value{nil}
-\author{Phillipe Grosjean}
+\author{Philippe Grosjean}
 \examples{
  rcon<-file("testR2html.R","w")
  cat("test.df<-data.frame(a=factor(sample(LETTERS[1:4],100,TRUE)),\n",
@@ -60,5 +60,10 @@
  cat("hist(test.df$b)#--FIG:hista.png--\n",file=rcon)
  cat("plot(test.df$c,test.df$d)#--FIG:plotcd.png--\n",file=rcon)
  close(rcon)
+ # R2html("testR2html.R", "testR2html.html")
+ # if you want to see the output, use the following line
+ # system(paste(options("browser")," file:",getwd(),"/testR2html.html",sep="",collapse=""))
+ # to clean up, use the following line
+ # system("rm testR2html.R testR2html.html testR2html_nav.html testR2html_list.html hista.png plotcd.png")
 }
 \keyword{misc}
