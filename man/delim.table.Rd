@@ -4,7 +4,8 @@
 \description{Format a 2D table with delimiters and other formatting commands}
 \usage{
  delim.table(x,filename="",delim=",",tabegin="",bor="",eor="\n",tablend="",
-  label=deparse(substitute(x)),show.all=FALSE,con,open.con=FALSE)
+  label=deparse(substitute(x)),init.delim=FALSE,show.all=FALSE,con,
+  open.con=FALSE)
 }
 \arguments{
  \item{x}{A list, matrix or data frame that is to be formatted.}
@@ -15,6 +16,8 @@
  \item{eor}{The formatting command for the end of a table row.}
  \item{tablend}{Any formatting commands to be placed after the table.}
  \item{label}{A label to be displayed before the table.}
+ \item{init.delim}{Whether to insert a cell delimiter before the first cell
+  entry in a row. For CSV format, this should be FALSE, for HTML, TRUE.}
  \item{show.all}{Whether to show all the components of a list. The default
   FALSE is to show only those components that look like 2D tables.}
  \item{con}{A connection to which the output will be written. If a filename

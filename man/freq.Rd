@@ -17,7 +17,7 @@
    have empty levels displayed.}
 }
 \details{
- \code{freq} calls \code{tabulate} to get the frequency counts and builds a
+ \code{freq} calls \code{table} to get the frequency counts and builds a
  list with one or more components containing the value labels and counts.
 }
 \note{
