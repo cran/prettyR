@@ -17,7 +17,8 @@
  \code{xtab} will accept a formula referring to columns in a data frame or two explicit
  variable names.
  It calls \code{calculate.xtab} for the calculations and displays one or more tables of
- results by calling \code{print.xtab}.}
+ results by calling \code{print.xtab}.
+}
 \value{
  The result of \code{calculate.xtab} if there is only one table to display, 
  otherwise nil.}
@@ -29,5 +30,13 @@
  test.df<-data.frame(sex=sample(c("MALE","FEMALE"),1000,TRUE),
  suburb=sample(1:4,1000,TRUE),social.type=sample(LETTERS[1:4],1000,TRUE))
  xtab(sex~suburb+social.type,test.df,chisq=TRUE)
+ # now add some value labels
+ attr(test.df$suburb,"value.labels")<-1:4
+ names(attr(test.df$suburb,"value.labels"))<-
+  c("Upper","Middle","Working","Slum")
+ attr(test.df$social.type,"value.labels")<-LETTERS[1:4]
+ names(attr(test.df$social.type,"value.labels"))<-
+  c("Gregarious","Mixer","Aloof","Hermit")
+ xtab(sex~suburb+social.type,test.df)
 }
 \keyword{misc}

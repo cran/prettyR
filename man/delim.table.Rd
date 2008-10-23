@@ -3,7 +3,7 @@
 \title{Format a 2D table}
 \description{Format a 2D table with delimiters and other formatting commands}
 \usage{
- delim.table(x,filename="",delim=",",tabegin="",bor="",eor="\n",tablend="",
+ delim.table(x,filename="",delim=",",tabegin="",bor=",",eor="\n",tablend="",
   label=deparse(substitute(x)),init.delim=FALSE,show.all=FALSE,con,
   open.con=FALSE)
 }
@@ -53,7 +53,7 @@
   start and end a row, and a command to start a new cell.
 
  Note that to be consistent with the default CSV arguments, \code{bor} should
- include the extra delimiter required by a markup language such as HTML. When
+ include the extra comma. If you don't want that, set \code{bor} to "". When
  \code{delim.table} is used to format tables for \code{htmlize}, it should
  not attempt to open a new connection.
 }

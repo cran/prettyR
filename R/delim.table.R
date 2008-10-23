@@ -1,4 +1,4 @@
-delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",tablend="",
+delim.table<-function(x,filename="",delim=",",tabegin="",bor=",",eor="\n",tablend="",
  label=deparse(substitute(x)),init.delim=FALSE,show.all=FALSE,con,
  open.con=FALSE) {
 
@@ -46,13 +46,14 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",tablend
    if(is.null(col.names)) col.names<-colnames(x)
    if(!is.null(col.names)) {
     if(nchar(bor)) cat(bor,file=con)
-    for(column in 1:xdim[2]) cat(delim,col.names[column],sep="",file=con)
+    cat(col.names[1],sep="",file=con)
+    for(column in 2:xdim[2]) cat(delim,col.names[column],sep="",file=con)
     cat(eor,file=con)
    }
    for(row in 1:xdim[1]) {
     if(nchar(bor)) cat(bor,file=con)
-    if(!is.null(row.names)) cat(row.names[row],file=con)
-    cat(ifelse(delim == ","," ",delim),x[row,1],sep="",file=con)
+    if(!is.null(row.names)) cat(row.names[row],delim,file=con)
+    cat(x[row,1],sep="",file=con)
     for(column in 2:xdim[2]) cat(delim,x[row,column],sep="",file=con)
     cat(eor,file=con)
    }

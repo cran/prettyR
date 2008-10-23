@@ -5,7 +5,7 @@
  Calculates one or more frequency table(s) from a vector, matrix or data frame.
 }
 \usage{
- freq(x,variable.labels=NULL,display.na=TRUE,levels=NULL)
+ freq(x,variable.labels=NULL,display.na=TRUE)
 }
 \arguments{
   \item{x}{a vector, matrix or data frame.}
@@ -13,8 +13,6 @@
    the name of the variable passed or the \code{names} attribute if the
    variable has more than 1 dimension.}
   \item{display.na}{logical - whether to display counts of NAs.}
-  \item{levels}{An optional vector of levels, mostly if the user wants to
-   have empty levels displayed.}
 }
 \details{
  \code{freq} calls \code{table} to get the frequency counts and builds a
