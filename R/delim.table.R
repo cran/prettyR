@@ -1,6 +1,5 @@
-delim.table<-function(x,filename="",delim=",",tabegin="",bor=",",eor="\n",tablend="",
- label=deparse(substitute(x)),init.delim=FALSE,show.all=FALSE,con,
- open.con=FALSE) {
+delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",tablend="",
+ label=deparse(substitute(x)),show.all=FALSE,con,open.con=FALSE) {
 
  if(missing(con)) {
   if(nchar(filename)) {
@@ -10,7 +9,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor=",",eor="\n",tablen
   }
   else con<-""
  }
- if(is.list(x) && length(x) > 1) {
+ if(is.list(x) && !is.data.frame(x) && length(x) > 1) {
   # break it down into components
   cat(label,eor,file=con)
   # when recursively calling delim.table, make sure that it doesn't try to open
@@ -45,7 +44,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor=",",eor="\n",tablen
    col.names<-names(x)
    if(is.null(col.names)) col.names<-colnames(x)
    if(!is.null(col.names)) {
-    if(nchar(bor)) cat(bor,file=con)
+    if(!is.null(row.names)) cat(delim,file=con)
     cat(col.names[1],sep="",file=con)
     for(column in 2:xdim[2]) cat(delim,col.names[column],sep="",file=con)
     cat(eor,file=con)
