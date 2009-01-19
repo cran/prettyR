@@ -114,10 +114,15 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
    if(!is.na(charmatch("<-",fname))) fname<-strsplit(fname,"-")[[1]][2]
    # does this command open a graphics device?
    if(fname %in% GraphicDevices) {
-    gclist<-unlist(strsplit(thiscommand,"[\"]"))
+    hasquote<-"\"" %in% unlist(strsplit(thiscommand,""))
+    gclist<-unlist(strsplit(thiscommand,ifelse(hasquote,"[\"]","[(,)]")))
+    if(!hasquote) gclist[2]<-get(gclist[2])
     cat("<img src=\"",gclist[2],"\"><p>\n",sep="")
-    thiscommand<-paste(gclist[1],"\"",HTMLdir,"/",gclist[2],"\"",
+    if(hasquote) thiscommand<-paste(gclist[1],"\"",HTMLdir,"/",gclist[2],"\"",
      paste(gclist[3:length(gclist)],sep="",collapse=""),sep="",collapse="")
+    else thiscommand<-paste(gclist[1],"(\"",HTMLdir,"/",gclist[2],"\",",
+     paste(gclist[3:length(gclist)],sep="",collapse=""),")",sep="",collapse="")
+
    }
    # If it's not forbidden, evaluate the command
    if(!dont) {
