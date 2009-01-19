@@ -4,7 +4,8 @@
 \description{Format a 2D table with delimiters and other formatting commands}
 \usage{
  delim.table(x,filename="",delim=",",tabegin="",bor="",eor="\n",tablend="",
-  label=deparse(substitute(x)),show.all=FALSE,con,open.con=FALSE)
+  label=deparse(substitute(x)),header=NULL,trailer=NULL,
+  show.rownames=TRUE,leading.delim=TRUE,show.all=FALSE,con,open.con=FALSE)
 }
 \arguments{
  \item{x}{A list, matrix or data frame that is to be formatted.}
@@ -15,6 +16,13 @@
  \item{eor}{The formatting command for the end of a table row.}
  \item{tablend}{Any formatting commands to be placed after the table.}
  \item{label}{A label to be displayed before the table.}
+ \item{header}{A character string to be written at the beginning of the
+  output file.}
+ \item{trailer}{A character string to be written at the end of the
+  output file.}
+ \item{show.rownames}{Whether to display the rownames of a table.}
+ \item{leading.delim}{Whether to add an extra delimiter at the beginning of
+  the table. See Details.}
  \item{show.all}{Whether to show all the components of a list. The default
   FALSE is to show only those components that look like 2D tables.}
  \item{con}{A connection to which the output will be written. If a filename
@@ -50,9 +58,10 @@
   start and end a row, and a command to start a new cell.
 
  \code{delim.table} is consistent with the default CSV arguments, adding an
- extra comma to the first line if there are row names. When
- \code{delim.table} is used to format tables for \code{htmlize}, it should
- not attempt to open a new connection.
+ extra comma to the first line if there are row names. The user should set
+ \samp{leading.delim} to FALSE for a table without the empty cell at the upper
+ left. When \code{delim.table} is used to format tables for \code{htmlize}, it
+ should not attempt to open a new connection.
 }
 \author{Jim Lemon}
 \seealso{\code{\link{htmlize}}}
@@ -63,7 +72,8 @@
  delim.table(testglm$coefficients,"testglm.csv")
  # now create an HTML file of the three tables in the result
  delim.table(testglm,"testglm.html",delim="<td>",tabegin="<table border=1>",
-  bor="<tr><td>",tablend="</table>")
+  bor="<tr><td>",tablend="</table>",header="<html><body>",
+  trailer="</body></html>")
  # to clean up, delete the files "testglm.csv" and "testglm.html"
 }
 \keyword{misc}

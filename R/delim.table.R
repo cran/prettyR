@@ -1,5 +1,6 @@
 delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
- tablend="",label=deparse(substitute(x)),show.all=FALSE,con,open.con=FALSE) {
+ tablend="",label=deparse(substitute(x)),header=NULL,trailer=NULL,
+ show.rownames=TRUE,leading.delim=TRUE,show.all=FALSE,con,open.con=FALSE) {
 
  if(missing(con)) {
   if(nchar(filename)) {
@@ -8,6 +9,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
    open.con<-TRUE
   }
   else con<-""
+  if(!is.null(header)) cat(header,"\n",file=con)
  }
  if(is.list(x) && !is.data.frame(x) && length(x) > 1) {
   # break it down into components
@@ -40,17 +42,19 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
   }
   else {
    cat(label,eor,tabegin,eor,sep="",file=con)
-   row.names<-rownames(x)
+   if(show.rownames) row.names<-rownames(x)
+   else row.names<-NULL
    col.names<-names(x)
    if(is.null(col.names)) col.names<-colnames(x)
    if(!is.null(col.names)) {
-    if(!is.null(row.names)) cat(delim,file=con)
-    for(column in 1:xdim[2]) cat(delim,col.names[column],sep="",file=con)
+    if(show.rownames) cat(delim,file=con)
+    if(leading.delim) cat(delim,file=con)
+    cat(col.names,sep=delim,file=con)
     cat(eor,file=con)
    }
    for(row in 1:xdim[1]) {
     if(nchar(bor)) cat(bor,file=con)
-    if(!is.null(row.names)) cat(row.names[row],delim,file=con)
+    if(show.rownames) cat(row.names[row],delim,file=con)
     if(!is.na(x[row,1])) cat(x[row,1],sep="",file=con)
     if(xdim[2] > 1) {
      for(column in 2:xdim[2]) {
@@ -67,5 +71,8 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
    cat(tablend,eor,file=con)
   }
  }
- if(open.con) close(con)
+ if(open.con) {
+  if(!is.null(trailer)) cat(trailer,"\n",file=con)
+  close(con)
+ }
 }

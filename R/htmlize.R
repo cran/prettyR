@@ -93,6 +93,10 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
  navindex<-1
  for(i in 1:length(Rcommands)) {
   if(echo) cat(Rcommands[i],"<br>\n",file=listcon)
+  # check for a comment character
+  commentpos<-grep("#",Rcommands[i],fixed=TRUE)
+  # cut out the comment
+  if(length(commentpos)) Rcommands[i]<-strsplit(Rcommands[i],"#")[[1]][1]
   commexp<-try(parse(text=Rcommands[i]),silent=TRUE)
   # if this line is a complete command and thiscommand is not
   if(is.expression(commexp) && nchar(thiscommand) > 0)
