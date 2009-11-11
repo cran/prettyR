@@ -9,7 +9,7 @@
  \item{HTMLbase}{The base name for the HTML files (see Details).}
  \item{HTMLdir}{The directory in which to write the HTML output.}
  \item{title}{The title of the HTML page and the headings for the
-  frames.}
+  frames. See Details for including the title in the R script.}
  \item{bgcolor}{The background color for the frames.}
  \item{echo}{Whether to include ("echo") the commands in the listing.}
  \item{do.nav}{Whether to have a navigation window.}
@@ -21,7 +21,9 @@
 \details{
  \code{htmlize} allows the user to produce a basic HTML listing from
  an existing R script. The script must already run correctly with
- \code{source}.
+ \code{source}. If the first line of the R script is a comment starting
+ with \samp{#title~} and the \samp{title} argument is missing, the rest
+ of the first line will be used as the title of the HTML output.
  
  If there is any graphic output, the script must contain the necessary
  commands to set up the graphic devices. Note that only TIFF, GIF, BMP,
@@ -80,6 +82,7 @@
 \author{Jim Lemon with improvements by Phillipe Grosjean}
 \examples{
  rcon<-file("test.R","w")
+ cat("#title~This is the title\n")
  cat("test.df<-data.frame(a=factor(sample(LETTERS[1:4],100,TRUE)),\n",
   file=rcon)
  cat(" b=sample(1:4,100,TRUE),c=rnorm(100),d=rnorm(100))\n",file=rcon)
@@ -95,6 +98,6 @@
  # if you want to see the output, use the following line
  # system(paste(options("browser")," file:",getwd(),"/test.html",sep="",collapse=""))
  # to clean up, use the following line
- # system("rm test.R test.html test_nav.html test_list.html hista.png plotcd.png")
+ # system("rm test.R test.html hista.png plotcd.png")
 }
 \keyword{misc}

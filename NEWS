@@ -1,0 +1,5 @@
+version 1.7
+
+	added the or (odds ratio) argument to the xtab and print.xtab functions
+	 and the automatic display of relative risk.
+	fixed the integer overflow in print.xtab (thanks to Harold Baize).

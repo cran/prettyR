@@ -1,4 +1,4 @@
-xtab<-function(formula,data,varnames=NULL,chisq=FALSE,phi=FALSE) {
+xtab<-function(formula,data,varnames=NULL,or=TRUE,chisq=FALSE,phi=FALSE) {
  if(missing(formula)) 
   stop("Usage: xtab(formula,data,varnames=NULL,chisq=FALSE,phi=FALSE)\n")
  ft<-as.character(attr(terms(formula),"variables")[-1])

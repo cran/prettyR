@@ -51,11 +51,18 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
   stopstring<-paste("Can't find",Rfile,collapse="")
   stop(stopstring)
  }
+ # read in the commands
+ Rcon<-file(Rfile,"r")
+ Rcommands<-readLines(Rcon)
+ close(Rcon)
  # if there is no HTML base name, use the Rfile name
  if(missing(HTMLbase)) {
   HTMLbase<-unlist(strsplit(basename(Rfile),"\\."))
   HTMLbase<-HTMLbase[1:(length(HTMLbase)-1)]
-  if(missing(title)) title<-paste("Listing of",HTMLbase)
+  if(missing(title)) {
+   if(charmatch("#title~",Rcommands[1],0)) title<-strsplit(Rcommands[1],"~")[[1]][2]
+   else title<-paste("Listing of",HTMLbase)
+  }
  }
  # If there is no HTML directory, use the path on the Rfile
  if(missing(HTMLdir)) {
@@ -84,9 +91,6 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
   if(do.nav) close(navcon);
   close(listcon)
  })
- Rcon<-file(Rfile,"r")
- Rcommands<-readLines(Rcon)
- close(Rcon)
  forbidden <- c("connection","fifo","file","sink")
  GraphicDevices<-c("bitmap","bmp","jpeg","png")
  thiscommand<-""
@@ -126,7 +130,6 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
      paste(gclist[3:length(gclist)],sep="",collapse=""),sep="",collapse="")
     else thiscommand<-paste(gclist[1],"(\"",HTMLdir,"/",gclist[2],"\",",
      paste(gclist[3:length(gclist)],sep="",collapse=""),")",sep="",collapse="")
-
    }
    # If it's not forbidden, evaluate the command
    if(!dont) {

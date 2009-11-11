@@ -3,12 +3,13 @@
 \title{Crosstabulate variables}
 \description{Crosstabulates variables with small numbers of unique values.}
 \usage{
- xtab(formula,data,varnames=NULL,chisq=FALSE,phi=FALSE)
+ xtab(formula,data,varnames=NULL,or=TRUE,chisq=FALSE,phi=FALSE)
 }
 \arguments{
   \item{formula}{a formula containing the variables to be crosstabulated}
   \item{data}{the data frame from which to select the variables}
   \item{varnames}{optional labels for the variables (defaults to \code{names(data))}}
+  \item{or}{whether to calculate the odds ratio (only for 2x2 tables).}
   \item{chisq}{logical - whether to display chi squared test(s) of the table(s)}
   \item{phi}{whether to calculate and display the phi coefficient
    of association - only for 2x2 tables}
