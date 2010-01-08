@@ -13,7 +13,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
  }
  if(is.list(x) && !is.data.frame(x) && length(x) > 1) {
   # break it down into components
-  cat(label,eor,file=con)
+  if(!is.null(label)) cat(label,eor,file=con)
   # when recursively calling delim.table, make sure that it doesn't try to open
   # another connection or close the one that is open
   for(component in 1:length(x))
@@ -47,14 +47,15 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
    col.names<-names(x)
    if(is.null(col.names)) col.names<-colnames(x)
    if(!is.null(col.names)) {
-    if(show.rownames) cat(delim,file=con)
+    if(show.rownames && !is.null(row.names)) cat(delim,file=con)
     if(leading.delim) cat(delim,file=con)
     cat(col.names,sep=delim,file=con)
     cat(eor,file=con)
    }
    for(row in 1:xdim[1]) {
     if(nchar(bor)) cat(bor,file=con)
-    if(show.rownames) cat(row.names[row],delim,file=con)
+    if(show.rownames && !is.null(row.names))
+     cat(row.names[row],delim,file=con)
     if(!is.na(x[row,1])) cat(x[row,1],sep="",file=con)
     if(xdim[2] > 1) {
      for(column in 2:xdim[2]) {
