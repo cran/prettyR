@@ -1,3 +1,13 @@
+version 1.8-1
+
+	removed _all_ the \samp tags
+
+version 1.8
+
+	rewrote xtab to return a nested list when more than one table
+	  is generated.
+	removed \samp tags from \link tags
+
 version 1.7
 
 	added the or (odds ratio) argument to the xtab and print.xtab functions

@@ -9,8 +9,8 @@
  \item{bgcolor}{The background color for the navigation frame.}
 }
 \details{
- \code{StartNav} sets up the file with the navigation
- frame information for the HTML listing for \code{R2html}.
+ \samp{StartNav} sets up the file with the navigation
+ frame information for the HTML listing for \samp{R2html}.
 }
 \value{nil}
 \author{Philippe Grosjean}

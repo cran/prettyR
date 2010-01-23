@@ -10,7 +10,7 @@
  \item{navindex}{The number used to generate the name tag.}
 }
 \details{
- \code{AddNavItem} adds an entry to the navigation file, generates
+ \samp{AddNavItem} adds an entry to the navigation file, generates
  a name tag for that entry and returns it to be inserted into the 
  listing file. If the \R{} command is longer than 20 characters, it
  is truncated to 18 characters and an ellipsis appended.

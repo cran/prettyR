@@ -10,7 +10,7 @@
   \item{value.labels}{The labels.}
 }
 \details{
- \code{add.value.labels} adds value labels like those from an SPSS .sav file.
+ \samp{add.value.labels} adds value labels like those from an SPSS .sav file.
  It makes it a bit easier to stick on value labels that have been lost or were
  not there in the first place.}
 \value{

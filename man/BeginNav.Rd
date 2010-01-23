@@ -8,8 +8,8 @@
  \item{bgcolor}{The background color for the navigation frame.}
 }
 \details{
- \code{BeginNav} sets up the file with the navigation
- frame information for the HTML listing for the \code{htmlize} function.
+ \samp{BeginNav} sets up the file with the navigation
+ frame information for the HTML listing for the \samp{htmlize} function.
 }
 \value{nil}
 \author{Jim Lemon}

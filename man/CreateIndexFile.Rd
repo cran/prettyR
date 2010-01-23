@@ -9,9 +9,9 @@
  \item{title}{The title for the listing.}
 }
 \details{
- \code{CreateIndexFile} opens a new HTML index file. If there is another
+ \samp{CreateIndexFile} opens a new HTML index file. If there is another
  file with the same name, it will be overwritten. This is intentional,
- as the user may want to run \code{htmlize} repeatedly without generating
+ as the user may want to run \samp{htmlize} repeatedly without generating
  multiple sets of files. It then writes the frameset definition into the
  file and closes it.
 }

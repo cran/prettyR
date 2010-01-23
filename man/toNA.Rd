@@ -8,10 +8,10 @@
  \item{values}{One or more values that are to be set to NA.}
 }
 \details{
- \code{toNA} sets all entries in an object in values to NA. Useful for
- converting various missing value codes to NA.
+ \samp{toNA} sets all entries in an object in values to NA. Useful for
+ converting various missing value samps to NA.
 }
 \value{The object with NAs replacing all specified values.}
 \author{Jim Lemon}
-\seealso{\code{\link{\%in\%}}}
+\seealso{\link{\%in\%}}
 \keyword{misc}

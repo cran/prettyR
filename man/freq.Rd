@@ -10,12 +10,12 @@
 \arguments{
   \item{x}{a vector, matrix or data frame.}
   \item{variable.labels}{optional labels for the variables. The default is
-   the name of the variable passed or the \code{names} attribute if the
+   the name of the variable passed or the \samp{names} attribute if the
    variable has more than 1 dimension.}
   \item{display.na}{logical - whether to display counts of NAs.}
 }
 \details{
- \code{freq} calls \code{table} to get the frequency counts and builds a
+ \samp{freq} calls \samp{table} to get the frequency counts and builds a
  list with one or more components containing the value labels and counts.
 }
 \note{
@@ -25,7 +25,7 @@
 \value{A list with one or more components. Each component includes the 
  values of the relevant variable as the names.}
 \author{Jim Lemon}
-\seealso{\code{\link{print.freq}}}
+\seealso{\link{print.freq}}
 \examples{
  A<-sample(1:10,130,TRUE)
  A[sample(1:130,6)]<-NA

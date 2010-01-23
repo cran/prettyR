@@ -11,12 +11,12 @@
 }
 \arguments{
  \item{x}{An object.}
- \item{na.rm}{A dummy argument to make it compatible with calls to \code{mean}, etc.}
+ \item{na.rm}{A dummy argument to make it compatible with calls to \samp{mean}, etc.}
 }
 \details{
- \code{valid.n} finds the number of valid values of the object.
+ \samp{valid.n} finds the number of valid values of the object.
 }
 \value{The number of valid values of the object.}
 \author{Jim Lemon}
-\seealso{\code{\link{describe}}}
+\seealso{\link{describe}}
 \keyword{misc}

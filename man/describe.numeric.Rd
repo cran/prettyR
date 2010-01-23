@@ -18,16 +18,16 @@
   \item{fname.space}{The width of the descriptive columns.}
 }
 \details{
- \code{describe.numeric} displays the name of the vector and the
- results of the functions whose names are passed in \code{num.desc}.
- Note that any functions that are called by \code{describe.numeric}
- must have an \code{na.rm} argument, even if it is a dummy.
+ \samp{describe.numeric} displays the name of the vector and the
+ results of the functions whose names are passed in \samp{num.desc}.
+ Note that any functions that are called by \samp{describe.numeric}
+ must have an \samp{na.rm} argument, even if it is a dummy.
 }
 \value{
- The vector of values returned from the functions in \code{num.desc}.
+ The vector of values returned from the functions in \samp{num.desc}.
 }
 \author{Jim Lemon}
-\seealso{\code{\link{describe}}, \code{\link{valid.n}}}
+\seealso{\link{describe}, \link{valid.n}}
 \examples{
  x<-rnorm(100)
  # include a function that calculates the "smoothness" of a vector

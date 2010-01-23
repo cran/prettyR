@@ -9,7 +9,7 @@
   before closing it.}
 }
 \details{
- \code{EndHTML} appends a brief ending to an HTML file.
+ \samp{EndHTML} appends a brief ending to an HTML file.
 }
 \value{nil}
 \author{Jim Lemon}

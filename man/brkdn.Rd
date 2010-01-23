@@ -23,15 +23,15 @@
  \item{round.n}{The number of decimal places to round the output.}
 }
 \details{
- \code{brkdn} will accept a formula referring to columns in a data frame. 
- It calls \code{describe.numeric} for the calculations and displays a 
+ \samp{brkdn} will accept a formula referring to columns in a data frame. 
+ It calls \samp{describe.numeric} for the calculations and displays a 
  table of results.
 }
 \value{
- The results of \code{describe.numeric}, or a multi-level list if more than 
+ The results of \samp{describe.numeric}, or a multi-level list if more than 
  one grouping variable is specified.}
 \author{Jim Lemon}
-\seealso{\code{\link{describe.numeric}}}
+\seealso{\link{describe.numeric}}
 \examples{
  test.df<-data.frame(Age=rnorm(100)+3*10,Sex=sample(c("M","F"),100,TRUE),
   Employ=sample(c("FT","PT","NO"),100,TRUE))

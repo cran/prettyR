@@ -11,19 +11,19 @@
 }
 \arguments{
  \item{x}{A factor.}
- \item{varname}{A name for the variable. \code{describe} always passes
+ \item{varname}{A name for the variable. \samp{describe} always passes
   the name.}
  \item{vname.space}{The width of the variable name display.}
  \item{maxfac}{The maximum number of factors to display.}
  \item{show.pc}{Whether to show the percentages for each level.}
 }
 \details{
- \code{describe.factor} displays the name of the factor, a table of its 
- values with up to \code{maxfac} entries, the modal value of the factor, the 
+ \samp{describe.factor} displays the name of the factor, a table of its 
+ values with up to \samp{maxfac} entries, the modal value of the factor, the 
  number of valid (not NA) values and the number of values not displayed 
- if it contained more than \code{maxfac} levels.
+ if it contained more than \samp{maxfac} levels.
 }
 \value{nil}
 \author{Jim Lemon}
-\seealso{\code{\link{Mode}}, \code{\link{valid.n}}, \code{\link{table}}}
+\seealso{\link{Mode}, \link{valid.n}, \link{table}}
 \keyword{misc}

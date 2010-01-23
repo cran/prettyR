@@ -1,7 +1,16 @@
 delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
- tablend="",label=deparse(substitute(x)),header=NULL,trailer=NULL,
+ tablend="",label=deparse(substitute(x)),header=NULL,trailer=NULL,html=FALSE,
  show.rownames=TRUE,leading.delim=TRUE,show.all=FALSE,con,open.con=FALSE) {
 
+ if(html) {
+  if(delim == ",") delim="<td>"
+  if(tabegin == "") tabegin="<table border=1>\n"
+  if(bor == "") bor="<tr><td>"
+  if(eor == "\n") eor="</tr>\n"
+  if(tablend == "") tablend="</table>\n"
+  if(is.null(header)) header="<html><body>\n"
+  if(is.null(trailer)) trailer="</body></html>\n"
+ }
  if(missing(con)) {
   if(nchar(filename)) {
    con<-file(filename,"w")
@@ -18,7 +27,8 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
   # another connection or close the one that is open
   for(component in 1:length(x))
    delim.table(x[[component]],filename="",delim=delim,tabegin=tabegin,bor=bor,
-    eor=eor,tablend=tablend,label=names(x[component]),show.all=show.all,con=con)
+    eor=eor,tablend=tablend,label=names(x[component]),html=FALSE,
+    show.all=show.all,con=con)
  }
  else {
   xdim<-dim(x)

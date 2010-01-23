@@ -19,9 +19,9 @@
  \item{...}{Additional arguments - currently ignored.}
 }
 \details{
- \code{htmlize} allows the user to produce a basic HTML listing from
+ \samp{htmlize} allows the user to produce a basic HTML listing from
  an existing R script. The script must already run correctly with
- \code{source}. If the first line of the R script is a comment starting
+ \samp{source}. If the first line of the R script is a comment starting
  with \samp{#title~} and the \samp{title} argument is missing, the rest
  of the first line will be used as the title of the HTML output.
  
@@ -32,50 +32,50 @@
  for more details. The graphic files will be linked to the HTML listing
  page so that they should be interleaved with text output and commands.
  
- If \code{do.nav} is TRUE, three files will be output. The first will
- be named \code{HTMLbase.html}, where \code{HTMLbase} is whatever string
+ If \samp{do.nav} is TRUE, three files will be output. The first will
+ be named \samp{HTMLbase.html}, where \samp{HTMLbase} is whatever string
  has been passed as that argument.
  If that argument is missing, the function will attempt to munge the
- \code{Rfile} argument into a base name. This file is an "index" file
+ \samp{Rfile} argument into a base name. This file is an "index" file
  that sets up the HTML frameset. The second file will be named
- \code{HTMLbase_nav.html} and will be dispayed at the left side of the HTML
+ \samp{HTMLbase_nav.html} and will be dispayed at the left side of the HTML
  output as a "navigation" list using the commands as names. Commands
  longer than 20 characters will be truncated. The third file, named
- \code{HTMLbase_list.html}, contains the program listing. All three 
- files will be written in \code{HTMLdir}. If this is missing, the path of
- \code{Rfile} will be used.
+ \samp{HTMLbase_list.html}, contains the program listing. All three 
+ files will be written in \samp{HTMLdir}. If this is missing, the path of
+ \samp{Rfile} will be used.
  
- If \code{do.nav} is FALSE, only one file will be written. It will have
- the same content as the \code{HTMLbase_list.html} file except without
- the name tags for navigation and it will be named \code{HTMLbase.html}.
+ If \samp{do.nav} is FALSE, only one file will be written. It will have
+ the same content as the \samp{HTMLbase_list.html} file except without
+ the name tags for navigation and it will be named \samp{HTMLbase.html}.
  
- Commands that create or alter connections, such as \code{sink} are
+ Commands that create or alter connections, such as \samp{sink} are
  "forbidden", not evaluated and marked as comments in the listing.
  This prevents such commands from altering the connections necessary
  to write the HTML files.
  
- If there is a function defined in the R script, \code{htmlize} will run, but
+ If there is a function defined in the R script, \samp{htmlize} will run, but
  not write any output after the function definition. This has to do with the
- way that \code{htmlize} reads command lines from the script file. This is a
+ way that \samp{htmlize} reads command lines from the script file. This is a
  bug, so watch this space for a solution.
  
  The ability to nominate a CSS stylesheet allows the user to customize the
- appearance of the HTML output. The most likely use of the \code{useCSS}
+ appearance of the HTML output. The most likely use of the \samp{useCSS}
  argument is for the user to specify whatever aspects of the HTML display
  are to be different from the default browser values in a stylesheet.
 }
 \note{
- As of version 1.1, both \code{echo} and \code{do.nav} are FALSE by default,
+ As of version 1.1, both \samp{echo} and \samp{do.nav} are FALSE by default,
  as these defaults seem to be more popular.
  
- The major differences between \code{htmlize} and \code{R2html} are:
- \code{htmlize} will run with a minimum of one argument (\code{Rfile})
+ The major differences between \samp{htmlize} and \samp{R2html} are:
+ \samp{htmlize} will run with a minimum of one argument (\samp{Rfile})
  and produces very basic HTML output. It requires the graphic devices to be
  set up as commands in the R script.
  
- \code{R2html} does not require commands for graphic devices, just 
+ \samp{R2html} does not require commands for graphic devices, just 
  comments at the end of any line that requires graphic output to the HTML
- file. It color codes commands and output and is more careful about the 
+ file. It color samps commands and output and is more careful about the 
  content of lines it writes.
 }
 \value{nil}

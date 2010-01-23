@@ -10,7 +10,7 @@
  \item{useCSS}{Path and filename of a CSS stylesheet.}
 }
 \details{
- \code{StartList} sets up the file with the listing
+ \samp{StartList} sets up the file with the listing
  frame information for the HTML listing.
 }
 \value{nil}

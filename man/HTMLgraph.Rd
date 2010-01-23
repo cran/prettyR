@@ -10,11 +10,11 @@
  \item{...}{Additional arguments - currently ignored.}
 }
 \details{
- \code{HTMLgraph} sets up a graphic device to allow an R graphic to be
+ \samp{HTMLgraph} sets up a graphic device to allow an R graphic to be
  written to a file and that file linked to the HTML listing. If no
- filename is passed, a name is constructed from \code{fig} and a number
- that does not match any existing \code{fignnn...} file. Only \code{bmp,
- jpeg} and \code{png} files are currently handled, defaulting to the last.
+ filename is passed, a name is constructed from \samp{fig} and a number
+ that does not match any existing \samp{fignnn...} file. Only \samp{bmp,
+ jpeg} and \samp{png} files are currently handled, defaulting to the last.
 }
 \value{nil}
 \author{Philippe Grosjean}
