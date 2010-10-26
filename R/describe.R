@@ -5,8 +5,8 @@ Mode<-function(x,na.rm) {
  return(xmode)
 }
 
-valid.n<-function(x,na.rm) {
- return(sum(!is.na(x)))
+valid.n<-function(x,na.rm=TRUE) {
+ return(ifelse(na.rm,sum(!is.na(x)),length(x)))
 }
 
 describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
@@ -24,7 +24,9 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
  return(desc.vector)
 }
 
-describe.factor<-function(x,varname="",vname.space=10,maxfac=10,show.pc=TRUE) {
+describe.factor<-function(x,varname="",vname.space=10,maxfac=10,show.pc=TRUE,
+ horizontal=FALSE) {
+
  lenx<-length(x)
  factab<-table(x)
  tablen<-length(factab)
@@ -38,34 +40,52 @@ describe.factor<-function(x,varname="",vname.space=10,maxfac=10,show.pc=TRUE) {
  }
  fname.space<-max(nchar(names(factab)[1:maxtab]))+1
  if(fname.space<8) fname.space<-8
- cat(paste(rep(" ",vname.space),sep="",collapse=""),
-  formatC(names(factab)[1:maxtab],width=fname.space),"\n",sep="")
- cat(formatC(varname,width=-vname.space),sep="")
- modex<-Mode(x)
- cat(formatC(factab[1:maxtab],width=fname.space),"\n",sep="")
- if(show.pc) {
-  cat(formatC("Percent",width=-vname.space),sep="")
-  cat(formatC(round(100*factab[1:maxtab]/length(x),2),width=fname.space),
-   "\n",sep="")
+ modex <- Mode(x)
+ if(horizontal) {
+  cat(paste(rep(" ",vname.space),sep="",collapse=""), 
+   formatC(names(factab)[1:maxtab],width=fname.space),"\n",sep="")
+  cat(formatC(varname,width=-vname.space),sep="")
+  cat(formatC(factab[1:maxtab],width=fname.space),"\n",sep="")
+  if(show.pc) {
+   cat(formatC("Percent",width=-vname.space),sep="")
+   cat(formatC(round(100*factab[1:maxtab]/length(x),2),width=fname.space),"\n",sep="")
+  }
+ }
+ else {
+  facorder<-order(factab,decreasing=TRUE)
+  faclabels<-format(names(factab))[facorder]
+  cat("\n",varname,"\nValue",rep(" ",nchar(faclabels[1])),"   Count Percent\n",sep="")
+  faccounts<-formatC(factab,width=8)[facorder]
+  facpct<-formatC(round(100*factab/length(x),2),width=8)[facorder]
+  for(facval in 1:maxtab) {
+   cat(faclabels[facval],faccounts[facval],facpct[facval],"\n")
+  }
  }
  cat("mode = ",modex,"  Valid n = ",vnx,sep="")
  if(maxtab<tablen) cat("  ",tablen,"categories - only first",maxfac,"shown")
- cat("\n\n")
+ cat("\n")
  return(c(modex,vnx))
 }
 
 describe.logical<-function(x,varname="",vname.space=10,show.pc=TRUE) {
  cat(formatC(varname,width=-vname.space),sep="")
  nmiss<-sum(is.na(x))
- logjam<-c(as.numeric(table(x)))
+ if(all(is.na(x))) {
+  logjam<-c(0,0)
+  pctrue<-0
+ }
+ else {
+  logjam<-c(as.numeric(table(x)))
+  pctrue<-100*logjam[2]/sum(logjam)
+ }
  cat(formatC(logjam,width=10))
- if(show.pc) cat(formatC(100*logjam[2]/sum(logjam),width=10))
+ if(show.pc) cat(formatC(pctrue,width=10))
  cat(formatC(nmiss,width=10),"\n")
  return(c(logjam,nmiss))
 }
 
 describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
- xname=NA,maxfac=8,show.pc=TRUE) {
+ xname=NA,maxfac=10,show.pc=TRUE,horizontal=FALSE) {
 
  if(missing(x)) stop("Usage: describe(x,...)\n\twhere x is a vector, data frame or matrix")
  if(!is.data.frame(x)) x<-as.data.frame(x)
@@ -107,8 +127,8 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
    cat("\nFactor\n")
    for(col in 1:nfac)
     fac.result[col,]<-describe.factor(x[[fac.index[col]]],
-     varname=varnames[fac.index[col]],
-     vname.space=vname.space,maxfac=maxfac,show.pc=show.pc)
+     varname=varnames[fac.index[col]],vname.space=vname.space,
+     maxfac=maxfac,show.pc=show.pc,horizontal=horizontal)
   }
   else fac.result<-NULL
   log.index<-which(sapply(x,is.logical))

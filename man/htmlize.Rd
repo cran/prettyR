@@ -75,7 +75,7 @@
  
  \samp{R2html} does not require commands for graphic devices, just 
  comments at the end of any line that requires graphic output to the HTML
- file. It color samps commands and output and is more careful about the 
+ file. It color codes commands and output and is more careful about the 
  content of lines it writes.
 }
 \value{nil}

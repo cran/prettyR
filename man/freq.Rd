@@ -8,11 +8,11 @@
  freq(x,variable.labels=NULL,display.na=TRUE)
 }
 \arguments{
-  \item{x}{a vector, matrix or data frame.}
-  \item{variable.labels}{optional labels for the variables. The default is
-   the name of the variable passed or the \samp{names} attribute if the
-   variable has more than 1 dimension.}
-  \item{display.na}{logical - whether to display counts of NAs.}
+ \item{x}{a vector, matrix or data frame.}
+ \item{variable.labels}{optional labels for the variables. The default is
+  the name of the variable passed or the \samp{names} attribute if the
+  variable has more than 1 dimension.}
+ \item{display.na}{logical - whether to display counts of NAs.}
 }
 \details{
  \samp{freq} calls \samp{table} to get the frequency counts and builds a

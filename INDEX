@@ -11,6 +11,7 @@ StartList		Initialize the HTML listing file for htmlize
 StartNav		Initialize the HTML navigation file for htmlize
 brkdn			Calculate mean, variance & valid n by factor groups
 calculate.xtab		Get a table and calculate the marginals and names
+decimal.align		Convert decimal numbers to decimal aligned strings
 describe		Display descriptive stats
 describe.factor		Display descriptive stats for a factor object
 describe.logical	Display descriptive stats for a logical object

@@ -32,5 +32,5 @@ xtab<-function(formula,data,varnames=NULL,or=TRUE,chisq=FALSE,phi=FALSE) {
   else xt<-calculate.xtab(data[,ft[1]],data[,ft[2]],varnames=varnames)
   print.xtab(xt,chisq=chisq,phi=phi)
  }
- return(xt)
+ invisible(xt)
 }
