@@ -7,11 +7,11 @@ print.xtab<-function(x,col.width=8,or=TRUE,chisq=FALSE,phi=FALSE,...) {
  maxcolab<-max(nchar(names(x$col.margin)))
  if(maxcolab>col.width) col.width<-maxcolab+1
  col.labels<-formatC(names(x$col.margin),width=col.width)
- cat(formatC(x$varnames[1],width=-rowname.width),col.labels,"\n")
+ cat(chopString(x$varnames[1]),col.labels,"\n")
  tdim<-dim(x$counts)
  gt<-sum(x$counts)
  for(i in 1:tdim[1]) {
-  cat(row.labels[i],formatC(c(x$counts[i,],x$row.margin[i]),width=col.width),"\n")
+  cat(row.labels[i],chopString(c(x$counts[i,],x$row.margin[i])),"\n")
   cat(rowname.space,formatC(100*c(x$counts[i,]/x$row.margin[i],x$row.margin[i]/gt),width=col.width),"\n")
   cat(rowname.space,formatC(100*x$counts[i,]/x$col.margin,width=col.width),"\n\n")
  }

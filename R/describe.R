@@ -10,11 +10,11 @@ valid.n<-function(x,na.rm=TRUE) {
 }
 
 describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
- varname="",vname.space=10,fname.space=10) {
+ varname="",vname.space=20,fname.space=10) {
 
  desclen<-length(num.desc)
  desc.vector<-rep(0,desclen)
- if(vname.space) cat(formatC(varname,width=-vname.space))
+ if(vname.space) cat(chopString(varname,maxlen=vname.space))
  for(i in 1:desclen) {
   if(valid.n(x))
    desc.vector[i]<-do.call(num.desc[i],list(x,na.rm=TRUE))
@@ -24,36 +24,36 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
  return(desc.vector)
 }
 
-describe.factor<-function(x,varname="",vname.space=10,maxfac=10,show.pc=TRUE,
- horizontal=FALSE) {
+describe.factor<-function (x,varname="",vname.space=10,
+ fname.space=20,maxfac=10,show.pc=TRUE,horizontal=FALSE) {
 
- lenx<-length(x)
- factab<-table(x)
- tablen<-length(factab)
- vnx<-valid.n(x)
- maxtab<-ifelse(tablen>maxfac,maxfac,tablen)
+ lenx <- length(x)
+ factab <- table(x)
+ tablen <- length(factab)
+ vnx <- valid.n(x)
+ maxtab <- ifelse(tablen > maxfac, maxfac, tablen)
  if(lenx > vnx) {
-  NAtab<-lenx-vnx
-  names(NAtab)<-"NA"
-  factab<-c(factab,NAtab)
-  maxtab<-maxtab+1
+  NAtab <- lenx - vnx
+  names(NAtab) <- "NA"
+  factab <- c(factab, NAtab)
+  maxtab <- maxtab + 1
  }
- fname.space<-max(nchar(names(factab)[1:maxtab]))+1
- if(fname.space<8) fname.space<-8
  modex <- Mode(x)
  if(horizontal) {
-  cat(paste(rep(" ",vname.space),sep="",collapse=""), 
-   formatC(names(factab)[1:maxtab],width=fname.space),"\n",sep="")
-  cat(formatC(varname,width=-vname.space),sep="")
+  cat(paste(rep(" ", vname.space), sep = "", collapse = ""), 
+   chopString(names(factab)[1:maxtab],fname.space), 
+   "\n", sep = "")
+  cat(formatC(varname, width = -vname.space), sep = "")
   cat(formatC(factab[1:maxtab],width=fname.space),"\n",sep="")
-  if(show.pc) {
-   cat(formatC("Percent",width=-vname.space),sep="")
-   cat(formatC(round(100*factab[1:maxtab]/length(x),2),width=fname.space),"\n",sep="")
+  if (show.pc) {
+   cat(formatC("Percent", width = -vname.space), sep = "")
+   cat(formatC(round(100 * factab[1:maxtab]/length(x), 2), 
+    width = fname.space), "\n", sep = "")
   }
  }
  else {
   facorder<-order(factab,decreasing=TRUE)
-  faclabels<-format(names(factab))[facorder]
+  faclabels<-chopString(names(factab),fname.space)[facorder]
   cat("\n",varname,"\nValue",rep(" ",nchar(faclabels[1])),"   Count Percent\n",sep="")
   faccounts<-formatC(factab,width=8)[facorder]
   facpct<-formatC(round(100*factab/length(x),2),width=8)[facorder]
@@ -62,7 +62,8 @@ describe.factor<-function(x,varname="",vname.space=10,maxfac=10,show.pc=TRUE,
   }
  }
  cat("mode = ",modex,"  Valid n = ",vnx,sep="")
- if(maxtab<tablen) cat("  ",tablen,"categories - only first",maxfac,"shown")
+ if(maxtab < tablen) 
+  cat("  ",tablen,"categories - only first",maxfac,"shown")
  cat("\n")
  return(c(modex,vnx))
 }
@@ -116,7 +117,7 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
    options(digits=nopdigits)
   }
   else num.result<-NULL
-  fac.index<-which(sapply(x,is.factor))
+  fac.index<-c(which(sapply(x,is.factor)),which(sapply(x,is.character)))
   nfac<-length(fac.index)
   if(nfac) {
    fac.result<-matrix(NA,nrow=nfac,ncol=2)

@@ -7,14 +7,15 @@
  Describes a factor variable.
 }
 \usage{
- describe.factor(x,varname="",vname.space=10,maxfac=10,show.pc=TRUE,
-  horizontal=FALSE)
+ describe.factor(x,varname="",vname.space=10,fname.space=20,
+  maxfac=10,show.pc=TRUE,horizontal=FALSE)
 }
 \arguments{
  \item{x}{A factor.}
  \item{varname}{A name for the variable. \samp{describe} always passes
   the name.}
  \item{vname.space}{The width of the variable name display.}
+ \item{fname.space}{The width of the factor label display.}
  \item{maxfac}{The maximum number of factors to display.}
  \item{show.pc}{Whether to show the percentages for each level.}
  \item{horizontal}{Whether to display the results across the page (TRUE)

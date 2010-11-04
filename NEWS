@@ -1,3 +1,7 @@
+version 1.8-4
+
+	rewriting of the describe family for better formatting
+
 version 1.8-3
 
 	added vertical list output in the describe functions
