@@ -1,4 +1,4 @@
-chopString<-function(x,maxlen=20) {
+truncString<-function(x,maxlen=20) {
  ncharx<-nchar(x)
  toolong<-ncharx>maxlen
  maxwidth<-ifelse(toolong,maxlen-3,maxlen)

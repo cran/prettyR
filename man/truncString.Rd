@@ -1,14 +1,14 @@
-\name{chopString}
-\alias{chopString}
+\name{truncString}
+\alias{truncString}
 \title{
- Truncate a string and add an ellipsis
+ Truncate a string and add an ellipsis.
 }
 \description{
  Truncates one or more strings to a specified length, adding an ellipsis (...)
- to those strings that are truncated.
+ to those strings that have been truncated.
 }
 \usage{
- chopString(x,maxlen=20)
+ truncString(x,maxlen=20)
 }
 \arguments{
  \item{x}{An object.}

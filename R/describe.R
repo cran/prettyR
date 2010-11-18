@@ -14,7 +14,7 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
 
  desclen<-length(num.desc)
  desc.vector<-rep(0,desclen)
- if(vname.space) cat(chopString(varname,maxlen=vname.space))
+ if(vname.space) cat(truncString(varname,maxlen=vname.space))
  for(i in 1:desclen) {
   if(valid.n(x))
    desc.vector[i]<-do.call(num.desc[i],list(x,na.rm=TRUE))
@@ -41,7 +41,7 @@ describe.factor<-function (x,varname="",vname.space=10,
  modex <- Mode(x)
  if(horizontal) {
   cat(paste(rep(" ", vname.space), sep = "", collapse = ""), 
-   chopString(names(factab)[1:maxtab],fname.space), 
+   truncString(names(factab)[1:maxtab],fname.space), 
    "\n", sep = "")
   cat(formatC(varname, width = -vname.space), sep = "")
   cat(formatC(factab[1:maxtab],width=fname.space),"\n",sep="")
@@ -53,7 +53,7 @@ describe.factor<-function (x,varname="",vname.space=10,
  }
  else {
   facorder<-order(factab,decreasing=TRUE)
-  faclabels<-chopString(names(factab),fname.space)[facorder]
+  faclabels<-truncString(names(factab),fname.space)[facorder]
   cat("\n",varname,"\nValue",rep(" ",nchar(faclabels[1])),"   Count Percent\n",sep="")
   faccounts<-formatC(factab,width=8)[facorder]
   facpct<-formatC(round(100*factab/length(x),2),width=8)[facorder]
