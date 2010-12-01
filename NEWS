@@ -1,3 +1,13 @@
+version 1.8-6
+
+	fixed the formatting bug in print.xtab that I introduced in version 1.8-5
+	added the skew function
+
+version 1.8-5
+
+	More rewriting of the describe family
+	added the truncString function
+
 version 1.8-4
 
 	rewriting of the describe family for better formatting

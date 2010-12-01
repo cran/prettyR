@@ -22,5 +22,6 @@ htmlize			Convert R output into HTML
 print.freq		Print a frequency table
 print.xtab		Print a conventional crosstabulation
 toNA			Recode one or more values as NA
+truncString		Truncate string(s) to a specified length
 valid.n			Calculate the number of valid (NOT NA) values
 xtab			Build and display crosstabulations

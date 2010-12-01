@@ -4,7 +4,8 @@
 \description{Displays a 2D crosstabulation with optional chi-squared test,
  odds ratio/relative risk and phi coefficient.}
 \usage{
- \method{print}{xtab}(x,col.width=8,or=TRUE,chisq=FALSE,phi=FALSE,...)
+ \method{print}{xtab}(x,col.width=10,or=TRUE,chisq=FALSE,phi=FALSE,
+  rowname.width=NA,...)
 }
 \arguments{
  \item{x}{The list returned by \samp{calculate.xtab}.}
@@ -14,6 +15,8 @@
  \item{chisq}{Whether to call \samp{chisq.test} and display the result.}
  \item{phi}{Whether to calculate and display the phi coefficient
   (only for 2x2 tables).}
+ \item{rowname.width}{Optional width for the rownames. Mostly useful for
+  truncating very long rownames.}
  \item{...}{additional arguments passed to \samp{chisq.test}.}
 }
 \details{
