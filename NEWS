@@ -1,3 +1,16 @@
+Version 1.8-9
+
+	finally fixed the spacing in the column names in print.xtab
+
+version 1.8-8
+
+	added the fname.space argument to the describe function
+
+version 1.8-7
+
+	added truncation for long column labels in print.xtab
+	added the addxtabs function
+
 version 1.8-6
 
 	fixed the formatting bug in print.xtab that I introduced in version 1.8-5

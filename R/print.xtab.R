@@ -10,10 +10,8 @@ print.xtab<-function (x,col.width=10,or=TRUE,chisq=FALSE,phi=FALSE,
  rowname.space<-paste(rep(" ",rowname.width),sep="",collapse="")
  cat(rowname.space,x$varnames[2],"\n")
  col.labels<-names(x$col.margin)
- if(any(nchar(col.labels) > col.width)) truncString(col.labels,col.width)
- col.labels<-formatC(col.labels,width=col.width)
  varname1<-formatC(x$varnames[1],width=-rowname.width)
- cat(varname1,formatC(col.labels,width=-col.width),"\n")
+ cat(varname1,truncString(col.labels,maxlen=col.width,justify="right"),"\n")
  tdim <- dim(x$counts)
  gt <- sum(x$counts)
  for(i in 1:tdim[1]) {

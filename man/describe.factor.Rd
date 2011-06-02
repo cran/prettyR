@@ -7,7 +7,7 @@
  Describes a factor variable.
 }
 \usage{
- describe.factor(x,varname="",vname.space=10,fname.space=20,
+ describe.factor(x,varname="",vname.space=10,fname.space=30,
   maxfac=10,show.pc=TRUE,horizontal=FALSE)
 }
 \arguments{

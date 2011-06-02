@@ -79,7 +79,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
     }
     cat(eor,file=con)
    }
-   cat(tablend,eor,file=con)
+   cat(tablend,ifelse(html,"",eor),file=con)
   }
  }
  if(open.con) {

@@ -1,14 +1,9 @@
-truncString<-function(x,maxlen=20) {
+truncString<-function(x,maxlen=20,justify="left") {
  ncharx<-nchar(x)
  toolong<-ncharx>maxlen
  maxwidth<-ifelse(toolong,maxlen-3,maxlen)
  chopx<-substr(x,1,maxwidth)
  lenx<-length(x)
- tooshort<-rep("",lenx)
- for(i in 1:lenx) {
-  if(ncharx[i] < maxlen)
-   tooshort[i]<-paste(rep(" ",maxlen-ncharx[i]),collapse="")
- }
- suffix<-ifelse(toolong,"...",tooshort)
- return(paste(chopx,suffix,sep=""))
+ for(i in 1:length(x)) if(toolong[i]) chopx[i]<-paste(chopx[i],"...",sep="")
+ return(format(chopx,justify=justify))
 }

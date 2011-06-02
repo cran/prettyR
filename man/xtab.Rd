@@ -39,5 +39,9 @@
  names(attr(test.df$social.type,"value.labels"))<-
   c("Gregarious","Mixer","Aloof","Hermit")
  xtab(sex~suburb+social.type,test.df)
+ # now have some fun with ridiculously long factor labels
+ testxtab<-data.frame(firstbit=sample(c("Ecomaniacs","Redneck rogues"),50,TRUE),
+  secondbit=sample(c("Macho bungy jumpers","Wimpy quiche munchers"),50,TRUE))
+ xtab(secondbit~firstbit,testxtab)
 }
 \keyword{misc}

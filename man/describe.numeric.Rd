@@ -8,7 +8,7 @@
 }
 \usage{
  describe.numeric(x,num.desc=c("mean","median","var","sd","valid.n"),
- varname="",vname.space=20,fname.space=10)
+ varname="",vname.space=20,fname.space=20)
 }
 \arguments{
   \item{x}{A numeric vector.}

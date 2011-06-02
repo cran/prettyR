@@ -9,6 +9,7 @@ Mode			Find the modal value
 R2html			A more refined version of htmlize
 StartList		Initialize the HTML listing file for htmlize
 StartNav		Initialize the HTML navigation file for htmlize
+addxtabs		Sum the corresponding cells of matched xtab objects
 brkdn			Calculate mean, variance & valid n by factor groups
 calculate.xtab		Get a table and calculate the marginals and names
 decimal.align		Convert decimal numbers to decimal aligned strings
@@ -21,6 +22,7 @@ freq			Calculate a frequency table
 htmlize			Convert R output into HTML
 print.freq		Print a frequency table
 print.xtab		Print a conventional crosstabulation
+skew			Calculates the skew of a vector of numeric values
 toNA			Recode one or more values as NA
 truncString		Truncate string(s) to a specified length
 valid.n			Calculate the number of valid (NOT NA) values

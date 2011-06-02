@@ -10,7 +10,7 @@ valid.n<-function(x,na.rm=TRUE) {
 }
 
 describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
- varname="",vname.space=20,fname.space=10) {
+ varname="",vname.space=20,fname.space=20) {
 
  desclen<-length(num.desc)
  desc.vector<-rep(0,desclen)
@@ -25,7 +25,7 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
 }
 
 describe.factor<-function (x,varname="",vname.space=10,
- fname.space=20,maxfac=10,show.pc=TRUE,horizontal=FALSE) {
+ fname.space=30,maxfac=10,show.pc=TRUE,horizontal=FALSE) {
 
  lenx <- length(x)
  factab <- table(x)
@@ -69,6 +69,7 @@ describe.factor<-function (x,varname="",vname.space=10,
 }
 
 describe.logical<-function(x,varname="",vname.space=10,show.pc=TRUE) {
+
  cat(formatC(varname,width=-vname.space),sep="")
  nmiss<-sum(is.na(x))
  if(all(is.na(x))) {
@@ -86,7 +87,7 @@ describe.logical<-function(x,varname="",vname.space=10,show.pc=TRUE) {
 }
 
 describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
- xname=NA,maxfac=10,show.pc=TRUE,horizontal=FALSE) {
+ xname=NA,fname.space=30,maxfac=10,show.pc=TRUE,horizontal=FALSE) {
 
  if(missing(x)) stop("Usage: describe(x,...)\n\twhere x is a vector, data frame or matrix")
  if(!is.data.frame(x)) x<-as.data.frame(x)
@@ -129,7 +130,8 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
    for(col in 1:nfac)
     fac.result[col,]<-describe.factor(x[[fac.index[col]]],
      varname=varnames[fac.index[col]],vname.space=vname.space,
-     maxfac=maxfac,show.pc=show.pc,horizontal=horizontal)
+     fname.space=fname.space,maxfac=maxfac,show.pc=show.pc,
+     horizontal=horizontal)
   }
   else fac.result<-NULL
   log.index<-which(sapply(x,is.logical))

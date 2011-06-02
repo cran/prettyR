@@ -4,7 +4,7 @@
 \description{Describes a vector or the columns in a matrix or data frame.}
 \usage{
  describe(x,num.desc=c("mean","median","var","sd","valid.n"),xname=NA,
-  maxfac=10,show.pc=TRUE,horizontal=FALSE)
+  fname.space=30,maxfac=10,show.pc=TRUE,horizontal=FALSE)
 }
 \arguments{
  \item{x}{A vector, matrix or data frame.}
@@ -12,6 +12,7 @@
  \item{xname}{A name for the object \samp{x}, mostly where this would be
   a very long string describing its structure (e.g. if it was extracted
   by name from a data frame).}
+ \item{fname.space}{Maximum space for the factor names.}
  \item{maxfac}{The maximum number of factors for \samp{describe.factor} to
   display.}
  \item{show.pc}{Whether to show percentages of factor and logical values.}
@@ -28,6 +29,9 @@
  that call \samp{quantile} with the appropriate type or probabilities and use
  the names of the wrapper functions in \samp{num.desc}. Remember that any
  function called by \samp{describe} must have an \samp{na.rm} argument.
+
+ When factor values are longer than \samp{fname.space}, they are truncated with
+ the \samp{truncString} function.
 }
 \value{
  A list with three components:
