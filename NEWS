@@ -1,6 +1,10 @@
-Version 1.8-9
+version 1.9
 
 	finally fixed the spacing in the column names in print.xtab
+
+version 1.8-9
+
+	I think I've finally fixed the justification in truncString
 
 version 1.8-8
 

@@ -5,5 +5,5 @@ truncString<-function(x,maxlen=20,justify="left") {
  chopx<-substr(x,1,maxwidth)
  lenx<-length(x)
  for(i in 1:length(x)) if(toolong[i]) chopx[i]<-paste(chopx[i],"...",sep="")
- return(format(chopx,justify=justify))
+ return(formatC(chopx,width=maxlen,flag=ifelse(justify=="left","-"," ")))
 }
