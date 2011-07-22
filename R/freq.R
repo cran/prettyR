@@ -18,14 +18,16 @@ freq<-function(x,variable.labels=NULL,display.na=TRUE) {
   nna<-sum(is.na(x[[i]]))
   names(nna)<-"NA"
   freqs<-table(x[[i]])
+  freqorder<-order(freqs,decreasing=TRUE)
   vl<-attr(x[[i]],"value.labels")
   if(!is.null(vl) & length(vl)) {
-   vlabels<-sort(attr(x[[i]],"value.labels"))
+   vlabels<-attr(x[[i]],"value.labels")
    if(length(names(freqs)) < length(vlabels))
     vlabels<-vlabels[vlabels%in%names(freqs)]
    names(freqs)<-names(vlabels)
   }
-  if(display.na) freqs<-c(freqs,nna)
+  if(display.na) freqs<-c(freqs[freqorder],nna)
+  else freqs<-freqs[freqorder]
   freq.list[[i]]<-freqs
  }
  names(freq.list)<-variable.labels

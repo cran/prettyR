@@ -7,7 +7,7 @@
  Describes a logical variable.
 }
 \usage{
- describe.logical(x,varname="",vname.space=10,show.pc=TRUE)
+ describe.logical(x,varname="",vname.space=20,show.pc=TRUE)
 }
 \arguments{
  \item{x}{A logical.}

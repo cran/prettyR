@@ -1,32 +1,78 @@
-print.xtab<-function (x,col.width=10,or=TRUE,chisq=FALSE,phi=FALSE,
- rowname.width=NA,...) {
- cat("\nCrosstabulation of",x$varnames[1],"by",x$varnames[2],"\n")
+print.xtab<-function (x,col.width=9,or=TRUE,chisq=FALSE,phi=FALSE,
+ rowname.width=NA,html=FALSE,bgcol="lightgray",...) {
+
+ tdim <- dim(x$counts)
+ ncols<-tdim[2]+2
  row.labels<-names(x$row.margin)
  if(is.na(rowname.width))
   rowname.width<-max(nchar(c(x$varnames[1],names(x$row.margin))))
  if(any(nchar(row.labels) > rowname.width))
   truncString(row.labels,rowname.width)
- row.labels<-formatC(row.labels,width=-rowname.width)
  rowname.space<-paste(rep(" ",rowname.width),sep="",collapse="")
- cat(rowname.space,x$varnames[2],"\n")
+ if(html)
+  cat("<table border=1 relief=\"flat\" style=\"background-color:",bgcol,
+   "\">\n<tr>\n<td colspan=",ncols,">\n",sep="")
+ cat("Crosstabulation of",x$varnames[1],"by",x$varnames[2],"\n")
+ if(html) cat("<tr><td><td colspan=",ncols-2," align=center>",sep="")
+ else cat("\t")
+ cat(x$varnames[2])
  col.labels<-names(x$col.margin)
- varname1<-formatC(x$varnames[1],width=-rowname.width)
- cat(varname1,truncString(col.labels,maxlen=col.width,justify="right"),"\n")
- tdim <- dim(x$counts)
+ if(max(nchar(col.labels)) > col.width)
+  col.labels<-truncString(col.labels,maxlen=col.width,justify="right")
+ if(html) cat("<tr><td>")
+ else cat("\n")
+ cat(x$varnames[1],"\t")
+ for(i in 1:length(col.labels)) {
+  if(html) cat("<td>")
+  else cat("\t")
+  cat(col.labels[i])
+ }
+ cat("\n")
  gt <- sum(x$counts)
  for(i in 1:tdim[1]) {
-  cat(row.labels[i],
-   formatC(c(x$counts[i, ],x$row.margin[i]),width=col.width),"\n")
-  cat(rowname.space,formatC(100 * c(x$counts[i, ]/x$row.margin[i], 
-   x$row.margin[i]/gt),width = col.width),"\n")
-  cat(rowname.space,formatC(100*x$counts[i,]/x$col.margin, 
-    width=col.width),"\n\n")
+  if(html) cat("<tr><td>")
+  cat(row.labels[i])
+  if(html) {
+   for(j in 1:tdim[2]) {
+    if(html) cat("<td>")
+    cat(x$counts[i,j])
+    if(html) cat("<br>")
+    cat(round(100*x$counts[i,j]/x$row.margin[i],2))
+    if(html) cat("<br>")
+    cat(round(100*x$counts[i,j]/x$col.margin[j],2))
+   }
+   if(html) cat("<td>")
+   cat(x$row.margin[i])
+   if(html) cat("<br>-<br>")
+   cat(round(100*x$row.margin[i]/gt,2),"\n")
+  }
+  else {
+   cat("\t",paste("\t",x$counts[i,],sep=""),"\t",x$row.margin[i],"\n")
+   cat("\t",paste("\t",round(100*x$counts[i,]/x$row.margin[i],2),sep=""),
+    "\t -\n")
+   cat("\t",paste("\t",round(100*x$counts[i,]/x$col.margin,2),sep=""),"\t",
+    round(100*x$row.margin[i]/gt,2),"\n\n")
+  }
  }
- cat(rowname.space,formatC(c(x$col.margin,gt),width=col.width),"\n")
- cat(rowname.space,formatC(100*x$col.margin/gt,width=col.width),"\n\n")
+ if(html) {
+  cat("<tr><td>\n")
+  for(i in 1:tdim[2]) {
+   if(html) cat("<td>")
+   cat(x$col.margin[i])
+   if(html) cat("<br>")
+   cat(round(100*x$col.margin[i]/gt,2))
+  }
+  cat("<td>",gt,"<br>100\n")
+ }
+ else {
+  cat("\t",paste("\t",x$col.margin,sep=""),"\t",gt,"\n")
+  cat("\t",paste("\t",round(100*x$col.margin/gt,2),sep=""),"\t 100\n")
+ }
  if(chisq) {
   x2<-chisq.test(x$counts, ...)
-  cat("X2[",x2$parameter,"]=",x2$statistic,",p=",x2$p.value,"\n\n",sep = "")
+  if(html) cat("<tr><td colspan=",ncols,">",sep="")
+  cat("X2[",x2$parameter,"]=",round(x2$statistic,3),", p=",
+   x2$p.value,"\n\n",sep = "")
  }
  if(tdim[1]==2 && tdim[2]==2) {
   logical.names<-function(x,names1=c("FALSE","0","N","NO"),
@@ -38,19 +84,26 @@ print.xtab<-function (x,col.width=10,or=TRUE,chisq=FALSE,phi=FALSE,
     return(FALSE)
   }
   if(or) {
-   cat("odds ratio =",round(x$counts[1,1]*x$counts[2,2]/(x$counts[1, 2]*x$counts[2,1]),2),"\n")
-   if(logical.names(names(x$col.margin))) 
+   if(html) cat("<tr><td colspan=",ncols,">",sep="")
+   cat("odds ratio =",
+    round(x$counts[1,1]*x$counts[2,2]/(x$counts[1, 2]*x$counts[2,1]),2),"\n")
+   if(logical.names(names(x$col.margin))) {
+    if(html) cat("<tr><td colspan=",ncols,">",sep="")
     cat("relative risk (",x$varnames[1],"-",names(x$row.margin)[2], 
      ") = ",round((x$counts[2,2]/x$row.margin[2])/
      (x$counts[1,2]/x$row.margin[1]),2),"\n",sep="")
-  }
-  if(phi) {
-   num<-x$counts[1,1]*x$counts[2,2]-x$counts[1,2]*x$counts[2,1]
-   denom<-sqrt(as.numeric(x$row.margin[1])*
-    as.numeric(x$row.margin[2])*as.numeric(x$col.margin[1])*
-    as.numeric(x$col.margin[2]))
-   cat("phi =", num/denom, "\n")
+  
+   }
+   if(phi) {
+    num<-x$counts[1,1]*x$counts[2,2]-x$counts[1,2]*x$counts[2,1]
+    denom<-sqrt(as.numeric(x$row.margin[1])*
+     as.numeric(x$row.margin[2])*as.numeric(x$col.margin[1])*
+     as.numeric(x$col.margin[2]))
+    if(html) cat("<tr><td colspan=",ncols,">",sep="")
+    cat("phi =",round(num/denom,3),"\n")
+   }
   }
   else if(phi) cat("phi coefficient only valid for 2x2 table\n")
  }
+ if(html) cat("</table>\n")
 }

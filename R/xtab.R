@@ -1,4 +1,6 @@
-xtab<-function(formula,data,varnames=NULL,or=TRUE,chisq=FALSE,phi=FALSE) {
+xtab<-function(formula,data,varnames=NULL,or=TRUE,chisq=FALSE,phi=FALSE,
+ html=FALSE,bgcol="lightgray") {
+
  if(missing(formula)) 
   stop("Usage: xtab(formula,data,varnames=NULL,chisq=FALSE,phi=FALSE)\n")
  ft<-as.character(attr(terms(formula),"variables")[-1])
@@ -21,8 +23,8 @@ xtab<-function(formula,data,varnames=NULL,or=TRUE,chisq=FALSE,phi=FALSE) {
     currentcount,"(",round(100*currentcount/totalcount,1),"%)\n\n")
    rightside<-ifelse(nft > 3, paste(ft[2:(nft - 1)],sep="",collapse="+"),ft[2])
    next.formula<-as.formula(paste(ft[1],rightside,sep="~",collapse=""))
-   xt[[i]]<-
-    xtab(next.formula,data=currentdata,varnames=varnames,chisq=chisq,phi=phi)
+   xt[[i]]<-xtab(next.formula,data=currentdata,varnames=varnames,chisq=chisq,
+    phi=phi,html=html,bgcol=bgcol)
   }
  }
  else {
@@ -30,7 +32,7 @@ xtab<-function(formula,data,varnames=NULL,or=TRUE,chisq=FALSE,phi=FALSE) {
   if(missing(data)) 
    xt<-calculate.xtab(get(ft[1]),get(ft[2]),varnames==varnames)
   else xt<-calculate.xtab(data[,ft[1]],data[,ft[2]],varnames=varnames)
-  print.xtab(xt,chisq=chisq,phi=phi)
+  print.xtab(xt,chisq=chisq,phi=phi,html=html,bgcol=bgcol)
  }
  invisible(xt)
 }

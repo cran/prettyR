@@ -1,3 +1,13 @@
+version 2.0
+
+	added optional HTML formatting to the xtab function
+	added sorting to the freq function
+	added the rep_n_stack function to reshape data frames
+
+version 1.9-1
+
+	increased the default spacing for variable names to 20 in describe
+
 version 1.9
 
 	finally fixed the spacing in the column names in print.xtab

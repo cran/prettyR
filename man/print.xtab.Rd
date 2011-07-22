@@ -4,8 +4,8 @@
 \description{Displays a 2D crosstabulation with optional chi-squared test,
  odds ratio/relative risk and phi coefficient.}
 \usage{
- \method{print}{xtab}(x,col.width=10,or=TRUE,chisq=FALSE,phi=FALSE,
-  rowname.width=NA,...)
+ \method{print}{xtab}(x,col.width=9,or=TRUE,chisq=FALSE,phi=FALSE,
+  rowname.width=NA,html=FALSE,bgcol="lightgray",...)
 }
 \arguments{
  \item{x}{The list returned by \samp{calculate.xtab}.}
@@ -17,11 +17,14 @@
   (only for 2x2 tables).}
  \item{rowname.width}{Optional width for the rownames. Mostly useful for
   truncating very long rownames.}
+ \item{html}{Whether to format the table with HTML tags.}
+ \item{bgcol}{Background color for the table.}
  \item{...}{additional arguments passed to \samp{chisq.test}.}
 }
 \details{
  \samp{print.xtab} displays a crosstabulation in a fairly conventional style with
- row, column and marginal percentages.
+ row, column and marginal percentages. If \samp{html} is TRUE, the formatting will
+ use HTML tags and will only be useful if viewed in an HTML browser.
 
  If \samp{or} is \samp{TRUE} and the resulting table is 2x2, the odds ratio will
  be displayed below the table. If the function \samp{logical.names} within

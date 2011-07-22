@@ -24,7 +24,7 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
  return(desc.vector)
 }
 
-describe.factor<-function (x,varname="",vname.space=10,
+describe.factor<-function (x,varname="",vname.space=20,
  fname.space=30,maxfac=10,show.pc=TRUE,horizontal=FALSE) {
 
  lenx <- length(x)
@@ -68,7 +68,7 @@ describe.factor<-function (x,varname="",vname.space=10,
  return(c(modex,vnx))
 }
 
-describe.logical<-function(x,varname="",vname.space=10,show.pc=TRUE) {
+describe.logical<-function(x,varname="",vname.space=20,show.pc=TRUE) {
 
  cat(formatC(varname,width=-vname.space),sep="")
  nmiss<-sum(is.na(x))
@@ -87,7 +87,8 @@ describe.logical<-function(x,varname="",vname.space=10,show.pc=TRUE) {
 }
 
 describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
- xname=NA,fname.space=30,maxfac=10,show.pc=TRUE,horizontal=FALSE) {
+ xname=NA,vname.space=20,fname.space=30,maxfac=10,show.pc=TRUE,
+ horizontal=FALSE) {
 
  if(missing(x)) stop("Usage: describe(x,...)\n\twhere x is a vector, data frame or matrix")
  if(!is.data.frame(x)) x<-as.data.frame(x)

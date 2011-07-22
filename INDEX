@@ -22,6 +22,7 @@ freq			Calculate a frequency table
 htmlize			Convert R output into HTML
 print.freq		Print a frequency table
 print.xtab		Print a conventional crosstabulation
+rep_n_stack		Reshape a data frame by stacking some columns
 skew			Calculates the skew of a vector of numeric values
 toNA			Recode one or more values as NA
 truncString		Truncate string(s) to a specified length
