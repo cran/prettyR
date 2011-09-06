@@ -1,16 +1,15 @@
-print.xtab<-function (x,col.width=9,or=TRUE,chisq=FALSE,phi=FALSE,
+print.xtab<-function (x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
  rowname.width=NA,html=FALSE,bgcol="lightgray",...) {
 
  tdim <- dim(x$counts)
  ncols<-tdim[2]+2
  row.labels<-names(x$row.margin)
- if(is.na(rowname.width))
-  rowname.width<-max(nchar(c(x$varnames[1],names(x$row.margin))))
+ if(is.na(rowname.width)) rowname.width<-max(nchar(row.labels))
  if(any(nchar(row.labels) > rowname.width))
   truncString(row.labels,rowname.width)
  rowname.space<-paste(rep(" ",rowname.width),sep="",collapse="")
  if(html)
-  cat("<table border=1 relief=\"flat\" style=\"background-color:",bgcol,
+  cat("<table border=0 relief=\"flat\" style=\"background-color:",bgcol,
    "\">\n<tr>\n<td colspan=",ncols,">\n",sep="")
  cat("Crosstabulation of",x$varnames[1],"by",x$varnames[2],"\n")
  if(html) cat("<tr><td><td colspan=",ncols-2," align=center>",sep="")
@@ -18,10 +17,9 @@ print.xtab<-function (x,col.width=9,or=TRUE,chisq=FALSE,phi=FALSE,
  cat(x$varnames[2])
  col.labels<-names(x$col.margin)
  if(max(nchar(col.labels)) > col.width)
-  col.labels<-truncString(col.labels,maxlen=col.width,justify="right")
- if(html) cat("<tr><td>")
- else cat("\n")
- cat(x$varnames[1],"\t")
+  col.labels<-truncString(col.labels,maxlen=col.width,justify="left")
+ if(html) cat("<tr><td>",x$varnames[1],sep="")
+ else cat("\n",truncString(x$varnames[1],rowname.width),sep="")
  for(i in 1:length(col.labels)) {
   if(html) cat("<td>")
   else cat("\t")
@@ -47,11 +45,11 @@ print.xtab<-function (x,col.width=9,or=TRUE,chisq=FALSE,phi=FALSE,
    cat(round(100*x$row.margin[i]/gt,2),"\n")
   }
   else {
-   cat("\t",paste("\t",x$counts[i,],sep=""),"\t",x$row.margin[i],"\n")
-   cat("\t",paste("\t",round(100*x$counts[i,]/x$row.margin[i],2),sep=""),
+   cat("\t",paste(x$counts[i,],"\t",sep=""),x$row.margin[i],"\n",sep="")
+   cat(rowname.space,paste("\t",round(100*x$counts[i,]/x$row.margin[i],2),sep=""),
     "\t -\n")
-   cat("\t",paste("\t",round(100*x$counts[i,]/x$col.margin,2),sep=""),"\t",
-    round(100*x$row.margin[i]/gt,2),"\n\n")
+   cat(rowname.space,"\t",paste(round(100*x$counts[i,]/x$col.margin,2),"\t",sep=""),
+    round(100*x$row.margin[i]/gt,2),"\n\n",sep="")
   }
  }
  if(html) {
@@ -65,8 +63,8 @@ print.xtab<-function (x,col.width=9,or=TRUE,chisq=FALSE,phi=FALSE,
   cat("<td>",gt,"<br>100\n")
  }
  else {
-  cat("\t",paste("\t",x$col.margin,sep=""),"\t",gt,"\n")
-  cat("\t",paste("\t",round(100*x$col.margin/gt,2),sep=""),"\t 100\n")
+  cat(rowname.space,paste("\t",x$col.margin,sep=""),"\t",gt,"\n")
+  cat(rowname.space,paste("\t",round(100*x$col.margin/gt,2),sep=""),"\t 100\n")
  }
  if(chisq) {
   x2<-chisq.test(x$counts, ...)

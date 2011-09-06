@@ -46,7 +46,7 @@
  # now have some fun with ridiculously long factor labels
  testxtab<-data.frame(firstbit=sample(c("Ecomaniacs","Redneck rogues"),50,TRUE),
   secondbit=sample(c("Macho bungy jumpers","Wimpy quiche munchers"),50,TRUE))
- # and format the table in HTML
- xtab(secondbit~firstbit,testxtab,html=TRUE)
+ # and format the table in HTML and add some tests
+ xtab(secondbit~firstbit,testxtab,html=TRUE,chisq=TRUE,phi=TRUE)
 }
 \keyword{misc}
