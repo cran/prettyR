@@ -54,7 +54,8 @@ describe.factor<-function (x,varname="",vname.space=20,
  else {
   facorder<-order(factab,decreasing=TRUE)
   faclabels<-truncString(names(factab),fname.space)[facorder]
-  cat("\n",varname,"\nValue",rep(" ",nchar(faclabels[1])),"   Count Percent\n",sep="")
+  cat("\n",varname,"\nValue",rep(" ",nchar(faclabels[1])),
+   "   Count Percent\n",sep="")
   faccounts<-formatC(factab,width=8)[facorder]
   facpct<-formatC(round(100*factab/length(x),2),width=8)[facorder]
   for(facval in 1:maxtab) {
@@ -90,7 +91,8 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
  xname=NA,vname.space=20,fname.space=30,maxfac=10,show.pc=TRUE,
  horizontal=FALSE) {
 
- if(missing(x)) stop("Usage: describe(x,...)\n\twhere x is a vector, data frame or matrix")
+ if(missing(x))
+  stop("Usage: describe(x,...)\n\twhere x is a vector, data frame or matrix")
  if(!is.data.frame(x)) x<-as.data.frame(x)
  varnames<-names(x)
  if(is.null(varnames)) varnames<-paste("V",1:dim(x)[2],sep="")
@@ -107,15 +109,14 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
    colnames(num.result)<-num.desc
    vname.space<-max(nchar(varnames[num.index]))+1
    if(vname.space<8) vname.space<-8
-   fname.space<-max(nchar(num.desc))+1
    # this allows for large numbers that will use scientific notation
-   if(fname.space<10) fname.space<-10
+   nfname.space<-max(c(nchar(num.desc)+1,10))
    cat("\nNumeric\n",paste(rep(" ",vname.space),sep="",collapse=""),
-    formatC(num.desc,width=fname.space),"\n",sep="")
+    formatC(num.desc,width=nfname.space),"\n",sep="")
    for(col in 1:nnum)
     num.result[col,]<-describe.numeric(x[[num.index[col]]],num.desc=num.desc,
      varname=varnames[num.index[col]],vname.space=vname.space,
-     fname.space=fname.space)
+     fname.space=nfname.space)
    options(digits=nopdigits)
   }
   else num.result<-NULL

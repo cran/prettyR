@@ -1,3 +1,12 @@
+version 2.0-3
+
+	removed the deprecated mean(data.frame) call by coercing to matrix
+	finally fixed the value name spacing in describe.factor
+
+version 2.0-2
+
+	made decreasing order in freq optional
+
 version 2.0-1
 
 	fixed the right alignment in the decimal.align function

@@ -1,6 +1,6 @@
 truncString<-function(x,maxlen=20,justify="left") {
  ncharx<-nchar(x)
- toolong<-ncharx>maxlen
+ toolong<-ncharx > maxlen
  maxwidth<-ifelse(toolong,maxlen-3,maxlen)
  chopx<-substr(x,1,maxwidth)
  lenx<-length(x)

@@ -5,7 +5,7 @@
  Calculates one or more frequency table(s) from a vector, matrix or data frame.
 }
 \usage{
- freq(x,variable.labels=NULL,display.na=TRUE)
+ freq(x,variable.labels=NULL,display.na=TRUE,decr.order=TRUE)
 }
 \arguments{
  \item{x}{a vector, matrix or data frame.}
@@ -13,6 +13,7 @@
   the name of the variable passed or the \samp{names} attribute if the
   variable has more than 1 dimension.}
  \item{display.na}{logical - whether to display counts of NAs.}
+ \item{decr.order}{Whether to order each frequency table in decreasing order.}
 }
 \details{
  \samp{freq} calls \samp{table} to get the frequency counts and builds a

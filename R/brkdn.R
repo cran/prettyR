@@ -27,8 +27,9 @@ brkdn<-function(formula,data,maxlevels=10,num.desc=c("mean","var","valid.n"),
     for(j in 1:dim(currentdata)[2])
      attr(currentdata[,j],"value.labels")<-attr(data[,j],"value.labels")
     cat(paste("\nVariable ",bn[1],sep="",collapse=""),"for",bn[nbn],"- level",factor.labels[i],"\n\n")
-    cat(formatC(num.desc,width=10),"\n")
-    junk<-describe.numeric(currentdata[bn[1]],num.desc=num.desc,fname.space=width,vname.space=0)
+    cat(formatC(num.desc,width=10),"\n",sep="")
+    junk<-describe.numeric(as.matrix(currentdata[bn[1]]),num.desc=num.desc,
+     fname.space=width,vname.space=0)
     next.formula<-as.formula(paste(paste(bn[1],"~"),paste(bn[2:(nbn-1)],collapse="+")))
     brkstats[[i]]<-brkdn(next.formula,currentdata,maxlevels=maxlevels,num.desc=num.desc)
     class(brkstats[[i]])<-"dstat"
@@ -59,7 +60,7 @@ brkdn<-function(formula,data,maxlevels=10,num.desc=c("mean","var","valid.n"),
     if(!is.na(npos)) round.ns[npos]<-0
     if(is.null(vname.width)) vname.width<-max(nchar(factor.labels))
     cat(formatC("Level",width=vname.width))
-    cat(formatC(num.desc,width=width),"\n")
+    cat(formatC(num.desc,width=width),"\n",sep="")
     for(i in 1:nlevels) {
      currentdata<-subset(data[[bn[1]]],by.factor==factor.levels[i])
      if(length(currentdata)){

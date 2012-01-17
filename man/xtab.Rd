@@ -29,7 +29,7 @@
  otherwise a nested list of tables.}
 \author{Jim Lemon}
 \seealso{
- link{table}, \link{calculate.xtab}, \link{print.xtab}
+ \link{table}, \link{calculate.xtab}, \link{print.xtab}
 }
 \examples{
  test.df<-data.frame(sex=sample(c("MALE","FEMALE"),1000,TRUE),

@@ -1,4 +1,4 @@
-freq<-function(x,variable.labels=NULL,display.na=TRUE) {
+freq<-function(x,variable.labels=NULL,display.na=TRUE,decr.order=TRUE) {
  if(missing(x)) stop("A vector, dataframe or matrix must be supplied")
  xdim<-dim(x)
  if(is.null(xdim)) {
@@ -18,7 +18,7 @@ freq<-function(x,variable.labels=NULL,display.na=TRUE) {
   nna<-sum(is.na(x[[i]]))
   names(nna)<-"NA"
   freqs<-table(x[[i]])
-  freqorder<-order(freqs,decreasing=TRUE)
+  freqorder<-ifelse(decr.order,order(freqs,decreasing=TRUE),1:length(freqs))
   vl<-attr(x[[i]],"value.labels")
   if(!is.null(vl) & length(vl)) {
    vlabels<-attr(x[[i]],"value.labels")
