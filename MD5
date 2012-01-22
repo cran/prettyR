@@ -1,7 +1,7 @@
-03aa819d07199d6001fc67f9821f1a34 *DESCRIPTION
+ea0494ed952a4aeffd9cff67eb10a324 *DESCRIPTION
 c88c2fbda3651bb028fe2f9a09c37e54 *INDEX
 097282af1e2edb5b1b091c55627f68ae *NAMESPACE
-d8b83023ad92510eb7b29d31eeb7fc8b *NEWS
+f2f5119da4504f1a185c7d34d275278f *NEWS
 1d668f65ee0ae505647fefc0dd2d15b0 *R/R2html.R
 e04280ce32a17b8f0df869ffdae4b636 *R/add.value.labels.R
 5ee0cfbdd958aa623d53d0fb4a71e512 *R/addxtabs.R
@@ -10,7 +10,7 @@ e21b24ac20c2b9d69eba5beab50559b7 *R/calculate.xtab.R
 1d67ad74a087b9dc4414ad45863aebb4 *R/decimal.align.R
 de27dcfd681337fd9f60fe0f5a5944aa *R/delim.table.R
 243bbd1637c63e7fc322ccabcbd1914e *R/describe.R
-f54cf6c148aad8071a421bee31f27b57 *R/freq.R
+bb025a2b2a2f270642b7a46ce7b96cc1 *R/freq.R
 8dd41fc4dfe30aedb033f5a49e005c0c *R/htmlize.R
 23402bd3f0439d840042620b0e7218cd *R/print.freq.R
 635d04eae3bf49575409cfd3074c9371 *R/print.xtab.R

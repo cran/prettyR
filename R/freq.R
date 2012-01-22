@@ -18,7 +18,8 @@ freq<-function(x,variable.labels=NULL,display.na=TRUE,decr.order=TRUE) {
   nna<-sum(is.na(x[[i]]))
   names(nna)<-"NA"
   freqs<-table(x[[i]])
-  freqorder<-ifelse(decr.order,order(freqs,decreasing=TRUE),1:length(freqs))
+  if(decr.order) freqorder<-order(freqs,decreasing=TRUE)
+  else freqorder<-1:length(freqs)
   vl<-attr(x[[i]],"value.labels")
   if(!is.null(vl) & length(vl)) {
    vlabels<-attr(x[[i]],"value.labels")
