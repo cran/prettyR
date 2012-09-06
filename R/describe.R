@@ -70,7 +70,6 @@ describe.factor<-function (x,varname="",vname.space=20,
 }
 
 describe.logical<-function(x,varname="",vname.space=20,show.pc=TRUE) {
-
  cat(formatC(varname,width=-vname.space),sep="")
  nmiss<-sum(is.na(x))
  if(all(is.na(x))) {
@@ -78,11 +77,19 @@ describe.logical<-function(x,varname="",vname.space=20,show.pc=TRUE) {
   pctrue<-0
  }
  else {
-  logjam<-c(as.numeric(table(x)))
+  logjam<-table(x)
+  if(length(logjam) == 1) {
+   # all TRUE or FALSE
+   lgnames<-names(logjam)
+   if(lgnames == "FALSE") logjam<-c(logjam,0)
+   else logjam<-c(0,logjam)
+   names(logjam)<-c("FALSE","TRUE")
+  }
   pctrue<-100*logjam[2]/sum(logjam)
  }
  cat(formatC(logjam,width=10))
- if(show.pc) cat(formatC(pctrue,width=10))
+ if(show.pc)
+  cat(formatC(pctrue,width=10))
  cat(formatC(nmiss,width=10),"\n")
  return(c(logjam,nmiss))
 }

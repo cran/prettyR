@@ -1,3 +1,8 @@
+version 2.0-5
+
+	added the ability to stack a matrix of values to rep_n_stack
+	fixed the bug in describe.logical when all values were either TRUE or FALSE
+
 version 2.0-4
 
 	fixed the freq function that I totally screwed up in 2.0-2

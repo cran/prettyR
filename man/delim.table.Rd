@@ -61,10 +61,17 @@
   start and end a row, and a command to start a new cell.
 
  \samp{delim.table} is consistent with the default CSV arguments, adding an
- extra comma to the first line if there are row names. The user should set
+ extra delimiter to the first line if there are row names. The user should set
  \samp{leading.delim} to FALSE for a table without the empty cell at the upper
  left. When \samp{delim.table} is used to format tables for \samp{htmlize}, it
  should not attempt to open a new connection.
+
+ An unexpected use of \samp{delim.table} is producing tables that can be imported
+ into OpenOffice Writer and most other word processors. While the tables in an HTML
+ listing can be imported directly, the formatting is usually not suitable. If a
+ table is output to an HTML or text document formatted with TAB characters as the
+ delimiter as in the third example, the output can be copied and pasted into the
+ word processor document and then converted to a table. 
 }
 \author{Jim Lemon}
 \seealso{\link{htmlize}}
@@ -77,6 +84,9 @@
  # add a background color different from the default
  delim.table(testglm,"testglm.html",header="<html><body bgcolor=\"#ffaaff\">",
   html=TRUE)
- # to clean up, delete the files "testglm.csv" and "testglm.html"
+ # these tables can be pasted into a word processor and converted
+ # using "Insert|Table" or similar commands
+ delim.table(testglm,"testglm.tab",delim="\t",leading.delim=FALSE)
+ # to clean up, delete the files "testglm.csv", "testglm.tab" and "testglm.html"
 }
 \keyword{misc}

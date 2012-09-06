@@ -59,10 +59,11 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
  if(missing(HTMLbase)) {
   HTMLbase<-unlist(strsplit(basename(Rfile),"\\."))
   HTMLbase<-HTMLbase[1:(length(HTMLbase)-1)]
-  if(missing(title)) {
-   if(charmatch("#title~",Rcommands[1],0)) title<-strsplit(Rcommands[1],"~")[[1]][2]
-   else title<-paste("Listing of",HTMLbase)
-  }
+ }
+ if(missing(title)) {
+  if(charmatch("#title~",Rcommands[1],0))
+   title<-strsplit(Rcommands[1],"~")[[1]][2]
+  else title<-paste("Listing of",HTMLbase)
  }
  # If there is no HTML directory, use the path on the Rfile
  if(missing(HTMLdir)) {

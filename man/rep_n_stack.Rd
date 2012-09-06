@@ -26,6 +26,9 @@
  If \samp{to.stack} is a matrix of names or column numbers, \samp{rep_n_stack}
  will stack each row into two new columns, allowing multiple related sets of
  values to be stacked in one operation. 
+
+ A matrix or data frame of values can now be stacked so that the values can be
+ displayed by a function like \samp{barNest} in the \pkg{plotrix} package.
 }
 \note{
  \samp{rep_n_stack} only does what other reshaping functions can do, but may
@@ -43,5 +46,11 @@
  # now stack two sets of related measures and pass names for the stacks
  rep_n_stack(wide.data,to.stack=matrix(3:8,nrow=2,byrow=TRUE),
   stack.names=c("Limit_F","Value_F","Limit_G","Value_G"))
+ # finally stack a matrix of means into a single column with the
+ # row and column names becoming "factor" variables
+ meanmat<-matrix(runif(16,10,20),nrow=4)
+ rownames(meanmat)<-c("Plunderers","Storers","Refusers","Jokers")
+ colnames(meanmat)<-c("Week1","Week2","Week3","Week4")
+ rep_n_stack(meanmat,to.stack=1:4)
 }
 \keyword{misc}

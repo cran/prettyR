@@ -51,7 +51,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
    }
   }
   else {
-   cat(label,eor,tabegin,eor,sep="",file=con)
+   cat(label,"\n",tabegin,"\n",sep="",file=con)
    if(show.rownames) row.names<-rownames(x)
    else row.names<-NULL
    col.names<-names(x)
