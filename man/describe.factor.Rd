@@ -8,7 +8,7 @@
 }
 \usage{
  describe.factor(x,varname="",vname.space=20,fname.space=30,
-  maxfac=10,show.pc=TRUE,horizontal=FALSE)
+  maxfac=NA,show.pc=TRUE,horizontal=FALSE,delim="\t",decr.order=TRUE)
 }
 \arguments{
  \item{x}{A factor.}
@@ -20,12 +20,14 @@
  \item{show.pc}{Whether to show the percentages for each level.}
  \item{horizontal}{Whether to display the results across the page (TRUE)
   or down the page (FALSE).}
+ \item{delim}{The delimiter to put between columns of the display.}
+ \item{decr.order}{Whether to order the rows by decreasing frequency.}
 }
 \details{
  \samp{describe.factor} displays the name of the factor, a table of its 
- values with up to \samp{maxfac} entries, the modal value of the factor, the 
- number of valid (not NA) values and the number of values not displayed 
- if it contained more than \samp{maxfac} levels.
+ values, the modal value of the factor, the number of valid (not NA) values
+ and the number of values not displayed if it contained more than \samp{maxfac}
+ levels. If \samp{maxfac} is NA (the default), all levels are displayed.
 }
 \value{nil}
 \author{Jim Lemon}

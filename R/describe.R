@@ -24,46 +24,59 @@ describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
  return(desc.vector)
 }
 
-describe.factor<-function (x,varname="",vname.space=20,
- fname.space=30,maxfac=10,show.pc=TRUE,horizontal=FALSE) {
+describe.factor<-function (x,varname="",vname.space=20,fname.space=30,
+maxfac=NA,show.pc=TRUE,horizontal=FALSE,delim="\t",decr.order=TRUE) {
 
- lenx <- length(x)
- factab <- table(x)
- tablen <- length(factab)
- vnx <- valid.n(x)
- maxtab <- ifelse(tablen > maxfac, maxfac, tablen)
+ if(nchar(varname) == 0) varname=deparse(substitute(x))
+ lenx<-length(x)
+ factab<-table(x)
+ tablen<-length(factab)
+ vnx<-valid.n(x)
+ # limiting the table width is now an opt-in
+ maxtab<-ifelse(is.na(maxfac),tablen,ifelse(tablen > maxfac,maxfac,tablen))
  if(lenx > vnx) {
-  NAtab <- lenx - vnx
-  names(NAtab) <- "NA"
-  factab <- c(factab, NAtab)
-  maxtab <- maxtab + 1
+   NAtab<-lenx - vnx
+   names(NAtab)<-"NA"
+   factab<-c(factab,NAtab)
+   maxtab<-maxtab + 1
  }
- modex <- Mode(x)
+ modex<-Mode(x)
  if(horizontal) {
-  cat(paste(rep(" ", vname.space), sep = "", collapse = ""), 
-   truncString(names(factab)[1:maxtab],fname.space), 
-   "\n", sep = "")
-  cat(formatC(varname, width = -vname.space), sep = "")
+  cat(paste(rep(" ",vname.space),sep="",collapse=""),
+  truncString(names(factab)[1:maxtab],fname.space),"\n",sep="")
+  cat(formatC(varname,width=-vname.space),sep="")
   cat(formatC(factab[1:maxtab],width=fname.space),"\n",sep="")
   if (show.pc) {
-   cat(formatC("Percent", width = -vname.space), sep = "")
-   cat(formatC(round(100 * factab[1:maxtab]/length(x), 2), 
-    width = fname.space), "\n", sep = "")
+   cat(formatC("Percent",width=-vname.space),sep="")
+   cat(formatC(round(100 * factab[1:maxtab]/length(x),2),
+    width=fname.space),"\n",sep="")
   }
  }
  else {
-  facorder<-order(factab,decreasing=TRUE)
+  if(decr.order) facorder<-order(factab,decreasing=TRUE)
+  else facorder<-1:tablen
   faclabels<-truncString(names(factab),fname.space)[facorder]
-  cat("\n",varname,"\nValue",rep(" ",nchar(faclabels[1])),
-   "   Count Percent\n",sep="")
-  faccounts<-formatC(factab,width=8)[facorder]
-  facpct<-formatC(round(100*factab/length(x),2),width=8)[facorder]
-  for(facval in 1:maxtab) {
-   cat(faclabels[facval],faccounts[facval],facpct[facval],"\n")
+  if(is.na(delim)) {
+   cat("\n",varname,"\nValue",rep(" ",nchar(faclabels[1])),
+    " Count Percent\n",sep="")
+   faccounts<-formatC(factab,width=8)[facorder]
+   facpct<-formatC(round(100 * factab/length(x),2),width=8)[facorder]
+   for(facval in 1:maxtab) {
+    cat(faclabels[facval],faccounts[facval],facpct[facval],
+     "\n")
+   }
+  }
+  else {
+   faclabels<-names(factab)
+   cat("\n",varname,"\nValue",delim,"Count",delim,"Percent\n",sep="")
+   for(facval in facorder[1:maxtab]) {
+    cat(faclabels[facval],delim,factab[facval],delim,
+    round(100*factab[facval]/length(x),2),"\n",sep="")
+   }
   }
  }
- cat("mode = ",modex,"  Valid n = ",vnx,sep="")
- if(maxtab < tablen) 
+ cat("mode=",modex,"  Valid n=",vnx,sep="")
+ if(maxtab < tablen)
   cat("  ",tablen,"categories - only first",maxfac,"shown")
  cat("\n")
  return(c(modex,vnx))
