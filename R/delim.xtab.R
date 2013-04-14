@@ -13,7 +13,7 @@ delim.xtab<-function(x,pct=c("row","column","cell"),coltot=TRUE,rowtot=TRUE,
  if(!is.na(pct)) {
   xtotal<-sum(x$row.margin)
   dimx<-dim(xmat)
-  if(pct == "row") {
+  if(pct[1] == "row") {
    xpctmat<-
     matrix(paste(round(100*x$counts/x$row.margin,ndec),"%",
     sep=""),nrow=dimx[1]-1)
@@ -21,7 +21,7 @@ delim.xtab<-function(x,pct=c("row","column","cell"),coltot=TRUE,rowtot=TRUE,
     paste(round(100*x$col.margin/xtotal,ndec),"%",sep=""))
    xpctmat<-cbind(xpctmat,rep("100%",dimx[1]))
   }
-  if(pct == "column") {
+  if(pct[1] == "column") {
    xpctmat<-
     matrix(paste(round(t(t(100*x$counts)/x$col.margin),ndec),"%",
     sep=""),ncol=dimx[2]-1)
@@ -29,7 +29,7 @@ delim.xtab<-function(x,pct=c("row","column","cell"),coltot=TRUE,rowtot=TRUE,
     paste(round(100*x$row.margin/xtotal,ndec),"%",sep=""))
    xpctmat<-rbind(xpctmat,rep("100%",dimx[2]))
   }
-  if(pct == "cell") {
+  if(pct[1] == "cell") {
    xpctmat<-
     matrix(paste(round(100*x$counts/xtotal,ndec),"%",sep=""),ncol=dimx[2]-1)
    xpctmat<-rbind(xpctmat,

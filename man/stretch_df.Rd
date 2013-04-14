@@ -9,10 +9,10 @@
  out the variables that are not repeated within each case.
 }
 \usage{
- stretch_df(data,idvar,to.stretch,ordervar,include.ordervar=TRUE)
+ stretch_df(x,idvar,to.stretch,ordervar=NA,include.ordervar=TRUE)
 }
 \arguments{
- \item{data}{A data frame.}
+ \item{x}{A data frame.}
  \item{idvar}{A variable that identifies instances (cases or objects).}
  \item{to.stretch}{Which variables are to be stretched out in the single row.}
  \item{ordervar}{Variable that gives the order of the stretched variables.}

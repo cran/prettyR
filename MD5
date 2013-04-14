@@ -1,7 +1,7 @@
-5d461f2b9a11021d5fa46b2f060afa63 *DESCRIPTION
+ece6adc9b4dc900ee5c81b5f8f493ca7 *DESCRIPTION
 6873444ea7020bd569e0d5b9be99b0b2 *INDEX
 8592da89f152b38f5c4ea3ba7765409b *NAMESPACE
-04bd8d13321a3387820aaa95486d07c4 *NEWS
+d15d8b86732ed8b2837714ed5cdba3b5 *NEWS
 1d668f65ee0ae505647fefc0dd2d15b0 *R/R2html.R
 e04280ce32a17b8f0df869ffdae4b636 *R/add.value.labels.R
 5ee0cfbdd958aa623d53d0fb4a71e512 *R/addxtabs.R
@@ -9,7 +9,7 @@ a573fef0e4f12d067c241e4a0621e624 *R/brkdn.R
 e21b24ac20c2b9d69eba5beab50559b7 *R/calculate.xtab.R
 1d67ad74a087b9dc4414ad45863aebb4 *R/decimal.align.R
 fffa3fc631386bcd2f5886fe582e1888 *R/delim.table.R
-635a41635c55b2106d2035c2e3e32786 *R/delim.xtab.R
+9ff9d9462a235213b316c25ccb481433 *R/delim.xtab.R
 b90b12185dfbd97728df0aa8ec5f674d *R/describe.R
 bb025a2b2a2f270642b7a46ce7b96cc1 *R/freq.R
 f22dd4d789c3a2aee8652fcc35addb08 *R/htmlize.R
@@ -17,7 +17,7 @@ f22dd4d789c3a2aee8652fcc35addb08 *R/htmlize.R
 635d04eae3bf49575409cfd3074c9371 *R/print.xtab.R
 c4e8ea81471c7ddf807a3d33683972e5 *R/rep_n_stack.R
 55dc4ae197aeefb2ba18ebe85d4ea3d1 *R/skew.R
-964b16fcf3067096c53034d6828a7bf5 *R/stretch_df.R
+62c7080ff0c9e5a08fe9d97024e16736 *R/stretch_df.R
 da77e12b1ed1172d657d1a5c91e41aa6 *R/toNA.R
 ab2f229e5add7e713b3f78b5e96dc0c6 *R/truncString.R
 38b293a1909710d86941ff32661c1267 *R/xtab.R
@@ -49,7 +49,7 @@ a91bd1314d5b79f697cb875603428153 *man/htmlize.Rd
 570cb1308d258a3eb25698dde5149856 *man/print.xtab.Rd
 4a7c74825aad658747e0743183410e36 *man/rep_n_stack.Rd
 a59a6c86c117342872ca40cf02531a9e *man/skew.Rd
-a33cd900b922adf06da1bbf8fd9cf9f8 *man/stretch_df.Rd
+29a8d2d5a5692dd81378909f727c7d31 *man/stretch_df.Rd
 28f5860c412bed50457f0e19640e3159 *man/toNA.Rd
 31bfde7e849a6a11503c2ea3c037d969 *man/truncString.Rd
 fe2f7025e7eab7f8f49136537cfac8fd *man/valid.n.Rd
