@@ -93,7 +93,7 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
   close(listcon)
  })
  forbidden <- c("connection","fifo","file","sink")
- GraphicDevices<-c("bitmap","bmp","jpeg","png")
+ GraphicDevices<-c("bitmap","bmp","jpeg","png","tiff")
  thiscommand<-""
  navindex<-1
  for(i in 1:length(Rcommands)) {

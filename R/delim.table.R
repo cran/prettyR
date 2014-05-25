@@ -28,6 +28,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
   for(component in 1:length(x))
    delim.table(x[[component]],filename="",delim=delim,tabegin=tabegin,bor=bor,
     eor=eor,tablend=tablend,label=names(x[component]),html=FALSE,
+    show.rownames=show.rownames,leading.delim=leading.delim,
     show.all=show.all,con=con)
  }
  else {
@@ -66,15 +67,11 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
     if(nchar(bor)) cat(bor,file=con)
     if(show.rownames && !is.null(row.names))
      cat(row.names[row],delim,file=con)
-    if(!is.na(x[row,1])) cat(x[row,1],sep="",file=con)
+    if(!is.na(x[row,1])) cat(as.character(x[row,1]),sep="",file=con)
     if(xdim[2] > 1) {
      for(column in 2:xdim[2]) {
       if(is.na(x[row,column])) cat(delim,file=con)
-      else {
-       if(is.numeric(x[row,column]) && !is.factor(x[row,column]))
-        cat(delim,x[row,column],sep="",file=con)
-       else cat(delim,as.character(x[row,column]),sep="",file=con)
-      }
+      else cat(delim,as.character(x[row,column]),sep="",file=con)
      }
     }
     cat(eor,file=con)

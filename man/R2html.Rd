@@ -64,6 +64,7 @@
  # if you want to see the output, use the following line
  # system(paste(options("browser")," file:",getwd(),"/testR2html.html",sep="",collapse=""))
  # to clean up, use the following line
- # system("rm testR2html.R testR2html.html testR2html_nav.html testR2html_list.html hista.png plotcd.png")
+ # system("rm testR2html.R testR2html.html testR2html_nav.html")
+ # system("rm testR2html_list.html hista.png plotcd.png")
 }
 \keyword{misc}
