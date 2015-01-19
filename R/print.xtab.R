@@ -3,7 +3,7 @@ print.xtab<-function (x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
 
  tdim <- dim(x$counts)
  ncols<-tdim[2]+2
- row.labels<-names(x$row.margin)
+ row.labels<-format(names(x$row.margin))
  if(is.na(rowname.width)) rowname.width<-max(nchar(row.labels))
  if(any(nchar(row.labels) > rowname.width))
   truncString(row.labels,rowname.width)
@@ -19,11 +19,10 @@ print.xtab<-function (x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
  if(max(nchar(col.labels)) > col.width)
   col.labels<-truncString(col.labels,maxlen=col.width,justify="left")
  if(html) cat("<tr><td>",x$varnames[1],sep="")
- else cat("\n",truncString(x$varnames[1],rowname.width),sep="")
+ else cat("\n",format(x$varnames[1],width=rowname.width),sep="")
  for(i in 1:length(col.labels)) {
   if(html) cat("<td>")
-  else cat("\t")
-  cat(col.labels[i])
+  cat(format(col.labels[i],width=col.width,justify="right"))
  }
  cat("\n")
  gt <- sum(x$counts)
@@ -45,11 +44,12 @@ print.xtab<-function (x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
    cat(round(100*x$row.margin[i]/gt,2),"\n")
   }
   else {
-   cat("\t",paste(x$counts[i,],"\t",sep=""),x$row.margin[i],"\n",sep="")
-   cat(rowname.space,paste("\t",round(100*x$counts[i,]/x$row.margin[i],2),sep=""),
-    "\t -\n")
-   cat(rowname.space,"\t",paste(round(100*x$counts[i,]/x$col.margin,2),"\t",sep=""),
-    round(100*x$row.margin[i]/gt,2),"\n\n",sep="")
+   cat(format(c(x$counts[i,],x$row.margin[i]),width=col.width),
+    "\n",sep="")
+   cat(rowname.space,format(c(round(100*x$counts[i,]/x$row.margin[i],2),"-"),
+    width=col.width,justify="right"),"\n",sep="")
+   cat(rowname.space,format(round(c(100*x$counts[i,]/x$col.margin,
+    100*x$row.margin[i]/gt),2),width=col.width),"\n\n",sep="")
   }
  }
  if(html) {
@@ -63,8 +63,9 @@ print.xtab<-function (x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
   cat("<td>",gt,"<br>100\n")
  }
  else {
-  cat(rowname.space,paste("\t",x$col.margin,sep=""),"\t",gt,"\n")
-  cat(rowname.space,paste("\t",round(100*x$col.margin/gt,2),sep=""),"\t 100\n")
+  cat(rowname.space,format(c(x$col.margin,gt),width=col.width),"\n",sep="")
+  cat(rowname.space,
+   format(c(round(100*x$col.margin/gt,2),100),width=col.width),"\n",sep="")
  }
  if(chisq) {
   x2<-chisq.test(x$counts, ...)

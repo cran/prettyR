@@ -35,3 +35,4 @@ export(
 # methods
 S3method(print,freq)
 S3method(print,xtab)
+S3method(print,desc)

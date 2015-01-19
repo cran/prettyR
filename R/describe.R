@@ -1,5 +1,5 @@
-Mode<-function(x,na.rm) {
- xtab<-table(x)
+Mode<-function(x,na.rm=FALSE) {
+ xtab<-table(x,useNA=ifelse(na.rm,"no","ifany"))
  xmode<-names(which(xtab == max(xtab)))
  if(length(xmode) > 1) xmode<-">1 mode"
  return(xmode)
@@ -9,107 +9,47 @@ valid.n<-function(x,na.rm=TRUE) {
  return(ifelse(na.rm,sum(!is.na(x)),length(x)))
 }
 
-describe.numeric<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
- varname="",vname.space=20,fname.space=20) {
+describe.numeric<-function(x,varname="",
+ num.desc=c("mean","median","var","sd","valid.n")) {
 
  desclen<-length(num.desc)
  desc.vector<-rep(0,desclen)
- if(vname.space) cat(truncString(varname,maxlen=vname.space))
+ if(nchar(varname) == 0) varname<-deparse(substitute(x))
  for(i in 1:desclen) {
   if(valid.n(x))
    desc.vector[i]<-do.call(num.desc[i],list(x,na.rm=TRUE))
   else desc.vector[i]<-NA
  }
- if(fname.space) cat(formatC(desc.vector,width=fname.space),"\n",sep="")
+ names(desc.vector)<-num.desc
  return(desc.vector)
 }
 
-describe.factor<-function (x,varname="",vname.space=20,fname.space=30,
-maxfac=NA,show.pc=TRUE,horizontal=FALSE,delim="\t",decr.order=TRUE) {
+describe.factor<-function(x,varname="",horizontal=FALSE,
+ decr.order=TRUE) {
 
- if(nchar(varname) == 0) varname=deparse(substitute(x))
+ if(nchar(varname) == 0) varname<-deparse(substitute(x))
  lenx<-length(x)
- factab<-table(x)
- tablen<-length(factab)
- vnx<-valid.n(x)
- # limiting the table width is now an opt-in
- maxtab<-ifelse(is.na(maxfac),tablen,ifelse(tablen > maxfac,maxfac,tablen))
- if(lenx > vnx) {
-   NAtab<-lenx - vnx
-   names(NAtab)<-"NA"
-   factab<-c(factab,NAtab)
-   maxtab<-maxtab + 1
- }
- modex<-Mode(x)
- if(horizontal) {
-  cat(paste(rep(" ",vname.space),sep="",collapse=""),
-  truncString(names(factab)[1:maxtab],fname.space),"\n",sep="")
-  cat(formatC(varname,width=-vname.space),sep="")
-  cat(formatC(factab[1:maxtab],width=fname.space),"\n",sep="")
-  if (show.pc) {
-   cat(formatC("Percent",width=-vname.space),sep="")
-   cat(formatC(round(100 * factab[1:maxtab]/length(x),2),
-    width=fname.space),"\n",sep="")
-  }
- }
- else {
-  if(decr.order) facorder<-order(factab,decreasing=TRUE)
-  else facorder<-1:tablen
-  faclabels<-truncString(names(factab),fname.space)[facorder]
-  if(is.na(delim)) {
-   cat("\n",varname,"\nValue",rep(" ",nchar(faclabels[1])),
-    " Count Percent\n",sep="")
-   faccounts<-formatC(factab,width=8)[facorder]
-   facpct<-formatC(round(100 * factab/length(x),2),width=8)[facorder]
-   for(facval in 1:maxtab) {
-    cat(faclabels[facval],faccounts[facval],facpct[facval],
-     "\n")
-   }
-  }
-  else {
-   faclabels<-names(factab)
-   cat("\n",varname,"\nValue",delim,"Count",delim,"Percent\n",sep="")
-   for(facval in facorder[1:maxtab]) {
-    cat(faclabels[facval],delim,factab[facval],delim,
-    round(100*factab[facval]/length(x),2),"\n",sep="")
-   }
-  }
- }
- cat("mode=",modex,"  Valid n=",vnx,sep="")
- if(maxtab < tablen)
-  cat("  ",tablen,"categories - only first",maxfac,"shown")
- cat("\n")
- return(c(modex,vnx))
+ factab<-table(x,useNA="ifany")
+ factab<-rbind(factab,100*factab/sum(factab))
+ dimnames(factab)[[1]]<-c("Count","Percent")
+ names(dimnames(factab))<-c(varname,"")
+ if(decr.order) factab<-factab[,order(factab[1,],decreasing=TRUE)]
+ return(factab)
 }
 
-describe.logical<-function(x,varname="",vname.space=20,show.pc=TRUE) {
- cat(formatC(varname,width=-vname.space),sep="")
+describe.logical<-function(x,varname="") {
+ if(nchar(varname) == 0) varname<-deparse(substitute(x))
+ cat(varname,"\n")
  nmiss<-sum(is.na(x))
- if(all(is.na(x))) {
-  logjam<-c(0,0)
-  pctrue<-0
- }
- else {
-  logjam<-table(x)
-  if(length(logjam) == 1) {
-   # all TRUE or FALSE
-   lgnames<-names(logjam)
-   if(lgnames == "FALSE") logjam<-c(logjam,0)
-   else logjam<-c(0,logjam)
-   names(logjam)<-c("FALSE","TRUE")
-  }
-  pctrue<-100*logjam[2]/sum(logjam)
- }
- cat(formatC(logjam,width=10))
- if(show.pc)
-  cat(formatC(pctrue,width=10))
- cat(formatC(nmiss,width=10),"\n")
- return(c(logjam,nmiss))
+ if(all(is.na(x))) logjam<-c(0,0)
+ else logjam<-table(x,useNA="ifany")
+ logjam<-rbind(logjam,100*logjam[2]/sum(logjam))
+ dimnames(logjam)[[1]]<-c("Count","Percent")
+ return(logjam)
 }
 
 describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
- xname=NA,vname.space=20,fname.space=30,maxfac=10,show.pc=TRUE,
- horizontal=FALSE) {
+ xname=NA,horizontal=FALSE) {
 
  if(missing(x))
   stop("Usage: describe(x,...)\n\twhere x is a vector, data frame or matrix")
@@ -121,60 +61,65 @@ describe<-function(x,num.desc=c("mean","median","var","sd","valid.n"),
   cat("Description of",xname,"\n")
   num.index<-which(sapply(x,is.numeric))
   nnum<-length(num.index)
+  num.result<-list()
   if(nnum) {
-   nopdigits<-options("digits")$digits
-   options(digits=4)
-   num.result<-matrix(NA,nrow=nnum,ncol=length(num.desc))
-   rownames(num.result)<-varnames[num.index]
-   colnames(num.result)<-num.desc
-   vname.space<-max(nchar(varnames[num.index]))+1
-   if(vname.space<8) vname.space<-8
-   # this allows for large numbers that will use scientific notation
-   nfname.space<-max(c(nchar(num.desc)+1,10))
-   cat("\nNumeric\n",paste(rep(" ",vname.space),sep="",collapse=""),
-    formatC(num.desc,width=nfname.space),"\n",sep="")
-   for(col in 1:nnum)
-    num.result[col,]<-describe.numeric(x[[num.index[col]]],num.desc=num.desc,
-     varname=varnames[num.index[col]],vname.space=vname.space,
-     fname.space=nfname.space)
-   options(digits=nopdigits)
+   for(numres in 1:nnum)
+    num.result[[numres]]<-
+     describe.numeric(x[[num.index[numres]]],num.desc=num.desc,
+     varname=varnames[num.index[numres]])
+   names(num.result)<-varnames[num.index]
   }
-  else num.result<-NULL
   fac.index<-c(which(sapply(x,is.factor)),which(sapply(x,is.character)))
   nfac<-length(fac.index)
+  fac.result<-list()
   if(nfac) {
-   fac.result<-matrix(NA,nrow=nfac,ncol=2)
-   rownames(fac.result)<-varnames[fac.index]
-   colnames(fac.result)<-c("Mode","N")
-   vname.space<-max(nchar(varnames[fac.index]))+1
-   if(vname.space<8) vname.space<-8
-   cat("\nFactor\n")
-   for(col in 1:nfac)
-    fac.result[col,]<-describe.factor(x[[fac.index[col]]],
-     varname=varnames[fac.index[col]],vname.space=vname.space,
-     fname.space=fname.space,maxfac=maxfac,show.pc=show.pc,
-     horizontal=horizontal)
+   for(facres in 1:nfac)
+    fac.result[[facres]]<-describe.factor(x[[fac.index[facres]]],
+     varname=varnames[fac.index[facres]],horizontal=horizontal)
+   names(fac.result)<-varnames[fac.index]
   }
-  else fac.result<-NULL
   log.index<-which(sapply(x,is.logical))
   nlog<-length(log.index)
+  log.result<-list()
   if(nlog) {
-   vname.space<-max(nchar(varnames[log.index]))+1
-   if(vname.space<8) vname.space<-8
-   cat("\nLogical\n",paste(rep(" ",vname.space),sep="",collapse=""))
-   cat("    FALSE       TRUE")
-   if(show.pc) cat("     %TRUE")
-   cat("        NA\n")
-   log.result<-matrix(NA,nrow=nlog,ncol=3)
-   rownames(log.result)<-varnames[log.index]
-   colnames(log.result)<-c("False","True","Missing")
-   for(col in 1:nlog)
-    log.result[col,]<-describe.logical(x[[log.index[col]]],
-     varname=varnames[log.index[col]],vname.space=vname.space,
-     show.pc=show.pc)
+   for(logres in 1:nlog)
+    log.result[[logres]]<-describe.logical(x[[log.index[logres]]],
+     varname=varnames[log.index[logres]])
+   names(log.result)<-varnames[log.index]
   }
-  else log.result<-NULL
-  invisible(list(Numeric=num.result,Factor=fac.result,Logical=log.result))
+  desc.list<-list(Numeric=num.result,Factor=fac.result,Logical=log.result)
+  class(desc.list)<-"desc"
+  return(desc.list)
  }
  else cat("describe: x must be a vector, matrix or data frame\n")
+}
+
+print.desc<-function(x,ndec=2,...) {
+ desclen<-length(x)
+ descnames<-names(x)
+ for(desctype in 1:desclen) {
+  typelen<-length(x[[desctype]])
+  if(typelen) {
+   cat("\n",descnames[desctype],"\n")
+   nvar<-length(x[[desctype]])
+   if(descnames[desctype] == "Numeric") {
+    nrows<-length(x[[desctype]])
+    ncols<-length(x[[desctype]][[1]])
+    xmat<-matrix(round(unlist(x[[desctype]]),ndec),
+     nrow=nrows,ncol=ncols,byrow=TRUE)
+    colnames(xmat)<-names(x[[desctype]][[1]])
+    rownames(xmat)<-names(x[[desctype]])
+    print(xmat)
+   }
+   else {
+    for(descvar in 1:nvar) {
+     print(round(x[[desctype]][[descvar]],2))
+     xmax<-max(x[[desctype]][[descvar]][1,])
+     nmax<-sum(x[[desctype]][[descvar]][1,]==xmax)
+     cat("Mode",ifelse(nmax > 1,">1 mode",
+      names(which.max(x[[desctype]][[descvar]][1,]))),"\n")
+    }
+   }
+  }
+ }
 }

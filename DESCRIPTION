@@ -1,15 +1,15 @@
 Package: prettyR
-Version: 2.0-8
-Title: Pretty descriptive stats.
-Date: 2014-05-25
-Author: Jim Lemon <jim@bitwrit.com.au>,
+Version: 2.1
+Title: Pretty Descriptive Stats
+Date: 2015-01-19
+Author: Jim Lemon <drjimlemon@gmail.com>,
  Philippe Grosjean <phgrosjean@sciviews.org>
-Maintainer: Jim Lemon <jim@bitwrit.com.au>
+Maintainer: Jim Lemon <drjimlemon@gmail.com>
 Description: Functions for conventionally formatting descriptive stats,
  reshaping data frames and formatting R output as HTML.
 Depends:
 License: GPL (>= 2)
-Packaged: 2014-05-25 09:51:49 UTC; root
+Packaged: 2015-01-19 04:11:25 UTC; root
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-05-25 12:50:47
+Date/Publication: 2015-01-20 12:41:04

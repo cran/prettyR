@@ -7,19 +7,17 @@
  Describes a logical variable.
 }
 \usage{
- describe.logical(x,varname="",vname.space=20,show.pc=TRUE)
+ describe.logical(x,varname="")
 }
 \arguments{
  \item{x}{A logical.}
  \item{varname}{An optional name for the variable. \samp{describe}
   always passes the name of the variable.}
- \item{vname.space}{The width of the variable name display.}
- \item{show.pc}{Whether to show the percentage of TRUE values.}
 }
 \details{
  \samp{describe.logical} displays the name of the logical, a table 
- of counts of its two values (TRUE, FALSE), optionally the percentage
- of TRUE values and the number of NAs.
+ of counts of its two values (TRUE, FALSE) and the percentage
+ of TRUE values.
 }
 \value{nil}
 \author{Jim Lemon}

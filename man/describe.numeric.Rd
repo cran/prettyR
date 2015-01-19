@@ -7,15 +7,13 @@
  Describes a numeric variable.
 }
 \usage{
- describe.numeric(x,num.desc=c("mean","median","var","sd","valid.n"),
- varname="",vname.space=20,fname.space=20)
+ describe.numeric(x,varname="",
+  num.desc=c("mean","median","var","sd","valid.n"))
 }
 \arguments{
   \item{x}{A numeric vector.}
-  \item{num.desc}{The names of the functions to apply to the vector.}
   \item{varname}{The variable name to display.}
-  \item{vname.space}{The width of the variable name display.}
-  \item{fname.space}{The width of the descriptive columns.}
+  \item{num.desc}{The names of the functions to apply to the vector.}
 }
 \details{
  \samp{describe.numeric} displays the name of the vector and the
