@@ -14,7 +14,7 @@ describe.numeric<-function(x,varname="",
 
  desclen<-length(num.desc)
  desc.vector<-rep(0,desclen)
- if(nchar(varname) == 0) varname<-deparse(substitute(x))
+ if(nzchar(varname) == 0) varname<-deparse(substitute(x))
  for(i in 1:desclen) {
   if(valid.n(x))
    desc.vector[i]<-do.call(num.desc[i],list(x,na.rm=TRUE))
@@ -27,7 +27,7 @@ describe.numeric<-function(x,varname="",
 describe.factor<-function(x,varname="",horizontal=FALSE,
  decr.order=TRUE) {
 
- if(nchar(varname) == 0) varname<-deparse(substitute(x))
+ if(nzchar(varname) == 0) varname<-deparse(substitute(x))
  lenx<-length(x)
  factab<-table(x,useNA="ifany")
  factab<-rbind(factab,100*factab/sum(factab))
@@ -38,7 +38,7 @@ describe.factor<-function(x,varname="",horizontal=FALSE,
 }
 
 describe.logical<-function(x,varname="") {
- if(nchar(varname) == 0) varname<-deparse(substitute(x))
+ if(nzchar(varname) == 0) varname<-deparse(substitute(x))
  cat(varname,"\n")
  nmiss<-sum(is.na(x))
  if(all(is.na(x))) logjam<-c(0,0)

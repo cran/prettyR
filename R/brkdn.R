@@ -57,7 +57,7 @@ brkdn<-function(formula,data,maxlevels=10,num.desc=c("mean","var","valid.n"),
     round.ns<-rep(round.n,length(num.desc))
     npos<-match("valid.n",num.desc)
     if(!is.na(npos)) round.ns[npos]<-0
-    vwidth<-max(nchar(factor.labels))
+    vwidth<-max(nzchar(factor.labels))
     cat(formatC("Level",width=vwidth))
     cat(formatC(num.desc,width=width),"\n",sep="")
     for(i in 1:nlevels) {

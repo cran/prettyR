@@ -26,7 +26,7 @@ function(navcon, title = "R listing", bgcolor = "#dddddd") {
 AddNav <- 
 function(navcon, Rcommand, listname) {
 	# Add an entry in the nav file
-	if (nchar(Rcommand) > 20)
+	if (nzchar(Rcommand) > 20)
 		Rcommand <- paste(substring(Rcommand, 1, 18), "...", sep = "")
 	nametag <- make.names(paste("ni", Rcommand, sep = ""))
 	cat(" <a href=\"", listname, "#", nametag, "\" target=\"list\">\n",

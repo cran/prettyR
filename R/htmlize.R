@@ -12,7 +12,7 @@ CreateIndexFile<-function(HTMLbase,HTMLdir,title="R listing") {
 }
 
 AddNavItem<-function(Rcommand,navcon,listname,navindex) {
- navitem<-ifelse(nchar(Rcommand)>20,
+ navitem<-ifelse(nzchar(Rcommand)>20,
   paste(paste(unlist(strsplit(Rcommand,""))[1:18],sep="",collapse=""),
    "...",sep="",collapse=""),
   Rcommand)
@@ -104,7 +104,7 @@ htmlize<-function(Rfile,HTMLbase,HTMLdir,title,
   if(length(commentpos)) Rcommands[i]<-strsplit(Rcommands[i],"#")[[1]][1]
   commexp<-try(parse(text=Rcommands[i]),silent=TRUE)
   # if this line is a complete command and thiscommand is not
-  if(is.expression(commexp) && nchar(thiscommand) > 0)
+  if(is.expression(commexp) && nzchar(thiscommand) > 0)
    # add a semicolon in case we're in braces
    Rcommands[i]<-paste(Rcommands[i],";",sep="",collapse="")
   thiscommand<-paste(thiscommand,Rcommands[i],sep="",collapse="")

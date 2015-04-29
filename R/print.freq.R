@@ -3,7 +3,7 @@ print.freq<-function(x,show.pc=TRUE,cum.pc=FALSE,show.total=FALSE,...) {
  variable.labels <- names(x)
  for(i in 1:nfreq) {
   categories<-names(x[[i]])
-  maxchar<-max(c(nchar(categories),4))
+  maxchar<-max(c(nzchar(categories),4))
   cat("\nFrequencies for", variable.labels[i],"\n")
   cat("    ", formatC(ifelse(categories == "","Missing",categories),
    width=maxchar))

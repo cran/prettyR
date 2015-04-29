@@ -12,7 +12,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
   if(is.null(trailer)) trailer="</body></html>\n"
  }
  if(missing(con)) {
-  if(nchar(filename)) {
+  if(nzchar(filename)) {
    con<-file(filename,"w")
    # only this invocation knows that it has to close con
    open.con<-TRUE
@@ -64,7 +64,7 @@ delim.table<-function(x,filename="",delim=",",tabegin="",bor="",eor="\n",
     cat(eor,file=con)
    }
    for(row in 1:xdim[1]) {
-    if(nchar(bor)) cat(bor,file=con)
+    if(nzchar(bor)) cat(bor,file=con)
     if(show.rownames && !is.null(row.names))
      cat(row.names[row],delim,file=con)
     if(!is.na(x[row,1])) cat(as.character(x[row,1]),sep="",file=con)
