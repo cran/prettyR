@@ -1,4 +1,7 @@
 # created 6/9/2011 - Jim Lemon,
+ importFrom("grDevices", "bmp", "graphics.off", "jpeg", "png")
+ importFrom("stats", "as.formula", "chisq.test", "terms")
+ importFrom("utils", "browseURL")
 export(
  add.value.labels,
  AddNav,

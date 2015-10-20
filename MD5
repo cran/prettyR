@@ -1,6 +1,6 @@
-a2efdd21acee9c966845807cc452c9cb *DESCRIPTION
-c6f9dd991685a2082dd6a71c60351a72 *NAMESPACE
-5e99da4e9c5ba2d4580f37058859e81b *NEWS
+10d7cd9bf5cb5c051d6e6110e24a1d8d *DESCRIPTION
+4344408c77dd5ab26de4f504e08487bc *NAMESPACE
+fc5e92e573ea75a0eec52fccf3099c7a *NEWS
 32ec70553bfbe79d1d1a931cea6ccafd *R/R2html.R
 e04280ce32a17b8f0df869ffdae4b636 *R/add.value.labels.R
 5ee0cfbdd958aa623d53d0fb4a71e512 *R/addxtabs.R
@@ -47,7 +47,7 @@ a91bd1314d5b79f697cb875603428153 *man/htmlize.Rd
 2d944445e7fba3c6a2bc692ce9159fd3 *man/print.desc.Rd
 2747c61b2b6b2f1a1f13ca0ef4691fa9 *man/print.freq.Rd
 570cb1308d258a3eb25698dde5149856 *man/print.xtab.Rd
-4a7c74825aad658747e0743183410e36 *man/rep_n_stack.Rd
+5a8a3227382a03f11942d32704065675 *man/rep_n_stack.Rd
 a59a6c86c117342872ca40cf02531a9e *man/skew.Rd
 29a8d2d5a5692dd81378909f727c7d31 *man/stretch_df.Rd
 28f5860c412bed50457f0e19640e3159 *man/toNA.Rd

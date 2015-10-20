@@ -51,6 +51,7 @@
  meanmat<-matrix(runif(16,10,20),nrow=4)
  rownames(meanmat)<-c("Plunderers","Storers","Refusers","Jokers")
  colnames(meanmat)<-c("Week1","Week2","Week3","Week4")
- rep_n_stack(meanmat,to.stack=1:4)
+ rep_n_stack(meanmat,to.stack=1:4,
+  stack.names=c("Returns","Occasion","Strategy"))
 }
 \keyword{misc}

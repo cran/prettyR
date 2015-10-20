@@ -1,3 +1,7 @@
+version 2.2
+
+	added imports for R CMD check
+
 version 2.1-1
 
 	changed all instances of nchar() to nzchar()
