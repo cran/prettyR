@@ -1,5 +1,6 @@
-delim.xtab<-function(x,pct=c("row","column","cell"),coltot=TRUE,rowtot=TRUE,
- ndec=1,delim="\t",interdigitate=TRUE,label=deparse(substitute(x))) {
+delim.xtab<-function(x,pct=c("row","column","cell"),coltot=TRUE,
+ rowtot=TRUE,ndec=1,delim="\t",interdigitate=TRUE,
+ label=deparse(substitute(x))) {
 
  xmat<-x$counts
  if(coltot) {
@@ -10,7 +11,7 @@ delim.xtab<-function(x,pct=c("row","column","cell"),coltot=TRUE,rowtot=TRUE,
   xmat<-cbind(xmat,c(x$row.margin,sum(x$row.margin)))
   colnames(xmat)<-c(colnames(x$counts),"Total")
  }
- if(!is.na(pct)) {
+ if(!is.na(pct[1])) {
   xtotal<-sum(x$row.margin)
   dimx<-dim(xmat)
   if(pct[1] == "row") {
@@ -49,5 +50,6 @@ delim.xtab<-function(x,pct=c("row","column","cell"),coltot=TRUE,rowtot=TRUE,
   }
  }
  delim.table(xmat,delim=delim,leading.delim=FALSE,label=label)
- if(!is.na(pct)) delim.table(xpctmat,delim=delim,leading.delim=FALSE,label=label)
+ if(!is.na(pct[1]))
+  delim.table(xpctmat,delim=delim,leading.delim=FALSE,label=label)
 }

@@ -1,3 +1,7 @@
+version 2.2-1
+
+	fixed column spacing in print.xtab
+
 version 2.2
 
 	added imports for R CMD check

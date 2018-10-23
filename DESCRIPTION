@@ -1,7 +1,7 @@
 Package: prettyR
-Version: 2.2
+Version: 2.2-2
 Title: Pretty Descriptive Stats
-Date: 2015-10-20
+Date: 2018-09-20
 Author: Jim Lemon <drjimlemon@gmail.com>,
  Philippe Grosjean <phgrosjean@sciviews.org>
 Maintainer: Jim Lemon <drjimlemon@gmail.com>
@@ -10,6 +10,6 @@ Description: Functions for conventionally formatting descriptive stats,
 Imports: grDevices, stats, utils
 License: GPL (>= 2)
 NeedsCompilation: no
-Packaged: 2015-10-20 03:23:17 UTC; root
+Packaged: 2018-10-03 09:47:47 UTC; root
 Repository: CRAN
-Date/Publication: 2015-10-20 07:37:09
+Date/Publication: 2018-10-23 10:40:04 UTC

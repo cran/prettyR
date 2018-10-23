@@ -14,7 +14,8 @@ addxtabs<-function(x) {
    whichrow<-rowlabels%in%currowlab[row]
    for(column in 1:length(curcollab)) {
     whichcol<-collabels%in%curcollab[column]
-    outmat[whichrow,whichcol]<-outmat[whichrow,whichcol]+x[[xt]]$counts[row,column]
+    outmat[whichrow,whichcol]<-
+     outmat[whichrow,whichcol]+x[[xt]]$counts[row,column]
    }
   }
  }

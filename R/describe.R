@@ -37,14 +37,14 @@ describe.factor<-function(x,varname="",horizontal=FALSE,
  return(factab)
 }
 
-describe.logical<-function(x,varname="") {
- if(nzchar(varname) == 0) varname<-deparse(substitute(x))
- cat(varname,"\n")
- nmiss<-sum(is.na(x))
- if(all(is.na(x))) logjam<-c(0,0)
- else logjam<-table(x,useNA="ifany")
- logjam<-rbind(logjam,100*logjam[2]/sum(logjam))
- dimnames(logjam)[[1]]<-c("Count","Percent")
+describe.logical<-function (x, varname = "") {
+ if (nzchar(varname) == 0) varname <- deparse(substitute(x))
+ cat(varname, "\n")
+ nmiss <- sum(is.na(x))
+ if (all(is.na(x))) logjam <- c(0, 0)
+ else logjam <- table(x, useNA = "ifany")
+ logjam <- rbind(logjam, 100 * logjam/sum(logjam))
+ dimnames(logjam)[[1]] <- c("Count", "Percent")
  return(logjam)
 }
 

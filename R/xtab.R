@@ -28,7 +28,7 @@ xtab<-function(formula,data,varnames=NULL,or=TRUE,chisq=FALSE,phi=FALSE,
   }
  }
  else {
-  if(is.null(varnames)) varnames<-ft
+  if(is.null(varnames)) names(varnames[ft])
   if(missing(data)) 
    xt<-calculate.xtab(get(ft[1]),get(ft[2]),varnames==varnames)
   else xt<-calculate.xtab(data[,ft[1]],data[,ft[2]],varnames=varnames)

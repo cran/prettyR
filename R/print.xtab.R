@@ -3,8 +3,8 @@ print.xtab<-function (x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
 
  tdim <- dim(x$counts)
  ncols<-tdim[2]+2
- row.labels<-format(names(x$row.margin))
- if(is.na(rowname.width)) rowname.width<-max(nzchar(row.labels))
+ row.labels<-format(names(x$row.margin),width=col.width)
+ if(is.na(rowname.width)) rowname.width<-max(nzchar(row.labels),col.width)
  if(any(nzchar(row.labels) > rowname.width))
   truncString(row.labels,rowname.width)
  rowname.space<-paste(rep(" ",rowname.width),sep="",collapse="")
@@ -44,7 +44,7 @@ print.xtab<-function (x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
    cat(round(100*x$row.margin[i]/gt,2),"\n")
   }
   else {
-   cat(format(c(x$counts[i,],x$row.margin[i]),width=col.width),
+   cat(format(c(x$counts[i,],x$row.margin[i]),width=col.width,justify="right"),
     "\n",sep="")
    cat(rowname.space,format(c(round(100*x$counts[i,]/x$row.margin[i],2),"-"),
     width=col.width,justify="right"),"\n",sep="")

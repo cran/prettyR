@@ -29,6 +29,7 @@ brkdn<-function(formula,data,maxlevels=10,num.desc=c("mean","var","valid.n"),
     cat(paste("\nVariable ",bn[1],sep="",collapse=""),"for",bn[nbn],"- level",factor.labels[i],"\n\n")
     cat(formatC(num.desc,width=10),"\n",sep="")
     junk<-describe.numeric(as.matrix(currentdata[bn[1]]),num.desc=num.desc)
+    cat(formatC(round(junk,round.n), width = 10), "\n", sep = "") 
     next.formula<-as.formula(paste(paste(bn[1],"~"),paste(bn[2:(nbn-1)],collapse="+")))
     brkstats[[i]]<-brkdn(next.formula,currentdata,maxlevels=maxlevels,num.desc=num.desc)
     class(brkstats[[i]])<-"dstat"
