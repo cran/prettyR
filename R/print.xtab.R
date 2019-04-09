@@ -1,12 +1,13 @@
-print.xtab<-function (x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
+print.xtab<-function (x,col.width=8,or=TRUE,chisq=TRUE,phi=TRUE,
  rowname.width=NA,html=FALSE,bgcol="lightgray",...) {
 
  tdim <- dim(x$counts)
  ncols<-tdim[2]+2
  row.labels<-format(names(x$row.margin),width=col.width)
- if(is.na(rowname.width)) rowname.width<-max(nzchar(row.labels),col.width)
+ if(is.na(rowname.width[1]))
+  rowname.width<-ifelse(html,max(nzchar(row.labels),col.width),col.width)
  if(any(nzchar(row.labels) > rowname.width))
-  truncString(row.labels,rowname.width)
+  truncString(row.labels,ifelse(html,rowname.width,col.width))
  rowname.space<-paste(rep(" ",rowname.width),sep="",collapse="")
  if(html)
   cat("<table border=0 relief=\"flat\" style=\"background-color:",bgcol,
@@ -19,16 +20,16 @@ print.xtab<-function (x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
  if(max(nzchar(col.labels)) > col.width)
   col.labels<-truncString(col.labels,maxlen=col.width,justify="left")
  if(html) cat("<tr><td>",x$varnames[1],sep="")
- else cat("\n",format(x$varnames[1],width=rowname.width),sep="")
+ else cat("\n",truncString(x$varnames[1],maxlen=rowname.width-1),"\t",sep="")
  for(i in 1:length(col.labels)) {
   if(html) cat("<td>")
-  cat(format(col.labels[i],width=col.width,justify="right"))
+  cat("",truncString(col.labels[i],maxlen=col.width))
  }
  cat("\n")
  gt <- sum(x$counts)
  for(i in 1:tdim[1]) {
   if(html) cat("<tr><td>")
-  cat(row.labels[i])
+  cat(ifelse(html,row.labels[i],truncString(row.labels[i],maxlen=col.width)))
   if(html) {
    for(j in 1:tdim[2]) {
     if(html) cat("<td>")

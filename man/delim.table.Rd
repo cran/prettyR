@@ -5,7 +5,8 @@
 \usage{
  delim.table(x,filename="",delim=",",tabegin="",bor="",eor="\n",tablend="",
   label=deparse(substitute(x)),header=NULL,trailer=NULL,html=FALSE,
-  show.rownames=TRUE,leading.delim=TRUE,show.all=FALSE,con,open.con=FALSE)
+  show.rownames=TRUE,leading.delim=FALSE,show.all=FALSE,nsignif=4,
+  con,open.con=FALSE)
 }
 \arguments{
  \item{x}{A list, matrix or data frame that is to be formatted.}
@@ -27,6 +28,7 @@
   the table. See Details.}
  \item{show.all}{Whether to show all the components of a list. The default
   FALSE is to show only those components that look like 2D tables.}
+ \item{nsignif}{Number of significant digits for numeric display.}
  \item{con}{A connection to which the output will be written. If a filename
   is passed, it will be ignored if \samp{con} is not missing.}
  \item{open.con}{A flag for an open connection. This argument is used by

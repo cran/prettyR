@@ -4,7 +4,7 @@
 \description{Displays a 2D crosstabulation with optional chi-squared test,
  odds ratio/relative risk and phi coefficient.}
 \usage{
- \method{print}{xtab}(x,col.width=7,or=TRUE,chisq=FALSE,phi=FALSE,
+ \method{print}{xtab}(x,col.width=8,or=TRUE,chisq=TRUE,phi=TRUE,
   rowname.width=NA,html=FALSE,bgcol="lightgray",...)
 }
 \arguments{
@@ -25,7 +25,8 @@
  \samp{print.xtab} displays a crosstabulation in a fairly conventional style
  with row, column and marginal percentages. If \samp{html} is TRUE, the
  formatting will use HTML tags and will only be useful if viewed in an HTML
- browser.
+ browser. In order to get HTML formatting, save, the output of \samp{xtab} and
+ print with the argument \samp{html=TRUE}.
 
  If \samp{or} is \samp{TRUE} and the resulting table is 2x2, the odds ratio will
  be displayed below the table. If the function \samp{logical.names} within

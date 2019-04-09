@@ -4,7 +4,7 @@
 \description{Crosstabulates variables with small numbers of unique values.}
 \usage{
  xtab(formula,data,varnames=NULL,or=TRUE,chisq=FALSE,phi=FALSE,html=FALSE,
-  bgcol="lightgray")
+  bgcol="lightgray",lastone=TRUE)
 }
 \arguments{
  \item{formula}{a formula containing the variables to be crosstabulated}
@@ -16,6 +16,7 @@
   of association - only for 2x2 tables}
  \item{html}{whether to format the resulting table with HTML tags.}
  \item{bgcol}{background color for the table if html=TRUE.}
+ \item{lastone}{A flag that controls the names of the returned list.}
 }
 \details{
  \samp{xtab} will accept a formula referring to columns in a data frame or two explicit
@@ -23,6 +24,7 @@
  It calls \samp{calculate.xtab} for the calculations and displays one or more tables of
  results by calling \samp{print.xtab}.
  If \samp{html} is TRUE, the resulting table will be formatted with HTML tags.
+ The default value of \samp{lastone} should not be changed.
 }
 \value{
  The result of \samp{calculate.xtab} if there is only one table to display, 
